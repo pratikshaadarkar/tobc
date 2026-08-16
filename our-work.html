@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Work — TOBC Entertainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0A0A0A; color: #fff; overflow-x: hidden; }
+
+    :root {
+      --red: #E31B1B;
+      --dark-red: #CC0000;
+      --near-black: #0a0a0a;
+    }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ══════════════════════════════════════
+       NAV
+    ══════════════════════════════════════ */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 30px;
+      margin-bottom: -25px;
+      transition: background 0.3s, backdrop-filter 0.3s, transform 0.3s ease-in-out;
+      transform: translateY(0);
+    }
+    #nav.scrolled {
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 30px;
+    }
+    #nav.nav-hidden {
+      transform: translateY(-100%);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; transform: translateY(0px); margin-left: 30px; }
+    .nav-wordmark { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: #fff; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; height: 100%; }
+    .nav-links a {
+      font-family: 'Inter', sans-serif; font-size: 15px;
+      letter-spacing: 1px; color: #fff; text-decoration: none; opacity: 0.75;
+      transition: opacity 0.2s, text-decoration 0.2s;
+      line-height: 1;
+      transform: translateY(2px);
+      display: flex;
+      align-items: center;
+    }
+    .nav-links a:hover { opacity: 1; text-decoration: underline; }
+    .nav-cta {
+      padding: 12px 26px; border: 1.5px solid #fff; border-radius: 999px;
+      background: transparent; color: #fff; font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      transform: translateY(2px);
+      margin-right: 40px;
+    }
+    .nav-cta:hover { background: rgba(0,0,0,0.3); border-color: #fff; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    #mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(10,10,10,0.97); flex-direction: column;
+      align-items: center; justify-content: center; gap: 32px;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px;
+      color: #fff; text-decoration: none; transition: color 0.2s;
+    }
+    #mobile-menu a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ══════════════════════════════════════
+       SECTION 1 — HEADLINE
+    ══════════════════════════════════════ */
+    #work-headline {
+      padding: 140px 8% 60px;
+    }
+    .work-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(255,255,255,0.75);
+      margin-bottom: 16px;
+    }
+    .work-h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 10vw, 7rem);
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      text-transform: none;
+    }
+    .work-sub {
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 600px;
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    /* ══════════════════════════════════════
+       SECTION 2 — FILTER BUTTONS
+    ══════════════════════════════════════ */
+    #work-filters {
+      padding: 0 8% 50px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .filter-btn {
+      padding: 12px 32px;
+      border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.35);
+      background: transparent;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .filter-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: #fff;
+    }
+    .filter-btn.active {
+      background: #E31B1B;
+      border-color: #E31B1B;
+    }
+
+    /* ══════════════════════════════════════
+       SECTION 3 — PROJECTS GRID
+    ══════════════════════════════════════ */
+    #work-grids {
+      padding: 0 8% 80px;
+      background: #0a0a0a;
+      position: relative;
+      z-index: 4;
+      border-bottom-left-radius: 60px;
+      border-bottom-right-radius: 60px;
+    }
+    .work-grid {
+      display: none;
+      gap: 24px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .work-grid.active {
+      display: grid;
+    }
+    .work-grid.visible {
+      opacity: 1;
+    }
+    #grid-advertisement, #grid-music {
+      grid-template-columns: 1fr 1fr;
+    }
+    .project-card {
+      cursor: pointer;
+    }
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      display: block;
+      position: relative;
+    }
+    .project-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .project-card:hover .project-thumb img {
+      transform: scale(1.02);
+      filter: brightness(0.7);
+    }
+    .project-thumb iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+      display: block;
+    }
+    .play-button-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .project-card:hover .play-button-overlay {
+      opacity: 1;
+    }
+    .play-button-overlay::before {
+      content: '';
+      width: 70px;
+      height: 70px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .play-button-overlay::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 20px solid #E31B1B;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+    }
+
+    /* ══════════════════════════════════════
+       VIDEO MODAL
+    ══════════════════════════════════════ */
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      pointer-events: auto;
+    }
+    .video-modal.active {
+      display: flex;
+    }
+    .modal-content {
+      position: relative;
+      width: 90vw;
+      max-width: 1200px;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      pointer-events: auto;
+    }
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .iframe-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+      transition: background 0.2s, border-color 0.2s;
+      pointer-events: auto;
+    }
+    .modal-close:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .project-title {
+      margin-top: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+    }
+
+    /* ══════════════════════════════════════
+       VIEW MORE BUTTON
+    ══════════════════════════════════════ */
+    #view-more-wrap {
+      padding: 0 8% 80px;
+      display: flex;
+      justify-content: center;
+      background: #0a0a0a;
+      border-radius: 0 0 60px 60px;
+      position: relative;
+      z-index: 4;
+    }
+    #view-more-btn {
+      padding: 14px 48px;
+      border-radius: 50px;
+      border: 2px solid #fff;
+      background: transparent;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      margin-top: 48px;
+    }
+    #view-more-btn:hover {
+      background: #0A0A0A;
+      border-color: #0A0A0A;
+      color: #fff;
+    }
+
+    /* ══════════════════════════════════════
+       CTA
+    ══════════════════════════════════════ */
+    #cta {
+      background: var(--red);
+      padding: 80px 48px 20px;
+      text-align: center;
+      position: sticky;
+      bottom: 320px;
+      z-index: 2;
+      margin-top: -60px;
+      padding-top: 140px;
+    }
+    .cta-h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 96px); line-height: 0.95;
+      color: #fff; margin-bottom: 0;
+    }
+    .cta-h2-line3 { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .cta-go-btn {
+      display: inline-flex; align-items: center; padding: 14px 28px;
+      border: 2px solid #fff; border-radius: 999px;
+      background: #fff; color: var(--red);
+      font-family: 'Bebas Neue', sans-serif; font-size: 36px;
+      letter-spacing: 1px; text-decoration: none; cursor: pointer;
+      box-shadow: 0 0 0 0 rgba(227,27,27,0);
+      transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+    }
+    .cta-go-btn:hover {
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 0 24px 8px rgba(255,255,255,0.3), 0 0 50px 18px rgba(255,255,255,0.15);
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    #footer { background: var(--red); padding: 80px 40px 40px; position: sticky; bottom: 0; z-index: 1; }
+    #cta-footer-wrapper { overflow: visible; }
+    #cta { position: sticky; bottom: 0; z-index: 3; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 48px; }
+    .footer-address-title {
+      font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 700;
+      color: #fff; margin-top: 28px; margin-bottom: 12px; line-height: 1.7;
+      text-transform: uppercase;
+    }
+    .footer-address-text { font-size: 17px; color: #fff; line-height: 1.7; }
+    .address-line { white-space: nowrap; }
+    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; margin-top: -20px; margin-left: -15px; }
+    .footer-logo-row img { height: 80px; width: auto; display: block; }
+    .footer-tagline { font-size: 18px; color: #fff; line-height: 1.6; margin-bottom: 28px; }
+    .footer-contact a {
+      display: flex; align-items: center; gap: 8px;
+      color: #fff; text-decoration: none; font-size: 20px; font-weight: 400;
+      margin-bottom: 10px; transition: text-decoration 0.2s; line-height: 1;
+    }
+    .contact-icon { font-size: 32px; color: #fff; display: flex; align-items: center; }
+    .footer-contact a:nth-child(2) .contact-icon { font-size: 20px; filter: brightness(0) invert(1); }
+    .footer-contact a:hover { text-decoration: none; }
+    .footer-contact a:hover .footer-link-text { text-decoration: underline; }
+    .footer-links-grid { display: flex; flex-direction: column; gap: 20px; align-content: start; padding-top: 8px; }
+    .footer-links-grid a {
+      font-size: 18px; color: #fff; text-decoration: none;
+      transition: text-decoration 0.2s;
+    }
+    .footer-links-grid a:hover { text-decoration: underline; }
+    .footer-bottom {
+      margin: 0 -40px -40px; padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .social-icons { display: flex; gap: 10px; }
+    .social-icon {
+      width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.1);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      color: #fff; text-decoration: none; font-size: 16px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-icon:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
+    .footer-copy { font-size: 13px; color: #fff; text-align: center; }
+    .back-to-top {
+      padding: 10px 22px; border: 1.5px solid #fff;
+      border-radius: 999px; background: rgba(255,255,255,0.1); color: #fff;
+      font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    }
+    .back-to-top:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
+
+    /* ══════════════════════════════════════
+       FILMS SHOWCASE (ALTERNATING) — FILMS TAB ONLY
+    ══════════════════════════════════════ */
+    #grid-films.active {
+      display: flex !important;
+      flex-direction: column;
+      gap: 60px;
+      opacity: 1 !important;
+      padding: 0 5%;
+      padding-top: 40px;
+    }
+    #grid-films.active .film-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      width: 100%;
+    }
+    #grid-films.active .film-showcase.reverse {
+      margin-top: 40px;
+    }
+    #grid-films.active .film-showcase.reverse .film-text {
+      order: 1;
+    }
+    #grid-films.active .film-showcase.reverse .film-image-wrapper {
+      order: 2;
+    }
+    #grid-films.active .film-showcase .film-text {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 12vw, 8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      align-self: flex-start;
+    }
+    #grid-films.active .film-overlay {
+      display: none;
+    }
+    #grid-films.active .film-image-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    #grid-films.active .film-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    #grid-films.active .film-image-wrapper:hover img {
+      transform: scale(1.03);
+    }
+    #grid-films.active .film-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 150px;
+    }
+    #grid-films.active .film-showcase.reverse .film-overlay {
+      text-align: right;
+    }
+    #grid-films.active .film-showcase .film-image-wrapper {
+      margin-left: -40px;
+    }
+    #grid-films.active .film-showcase .film-text {
+      margin-right: -40px;
+    }
+    #grid-films.active .film-showcase.reverse .film-text {
+      margin-left: -40px;
+    }
+    #grid-films.active .film-showcase.reverse .film-image-wrapper {
+      margin-right: -40px;
+    }
+    #grid-films.active .film-title-overlay {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+      line-height: 1.2;
+    }
+    #grid-films.active .film-category-overlay {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-top: 8px;
+    }
+
+/* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      #nav { padding: 14px 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      #cta { padding: 0 20px 80px; }
+      .cta-h2 { font-size: clamp(40px, 10vw, 56px); }
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      #work-headline { padding: 120px 5% 48px; }
+      .work-h1 { font-size: 2.2rem; }
+      .work-sub { font-size: 1rem; }
+      #work-filters { padding: 0 5% 40px; justify-content: center; }
+      #work-grids { padding: 0 5% 60px; }
+      .work-grid { grid-template-columns: 1fr; }
+      #grid-films { gap: 40px; }
+      #grid-films .film-showcase {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      #grid-films .film-showcase.reverse {
+        direction: ltr;
+      }
+      #view-more-wrap { padding: 0 5% 60px; }
+      #footer { padding: 60px 20px 30px; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="logo/White logo.png" alt="TOBC Entertainment" style="height: 90px; width: auto;" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="our-work.html">Our Work</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">Contact Us</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- mobile menu -->
+<div id="mobile-menu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="about.html" class="mob-link">About</a>
+  <a href="our-work.html" class="mob-link">Our Work</a>
+  <a href="gallery.html" class="mob-link">Gallery</a>
+  <a href="blog.html" class="mob-link">Blog</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 1 — HEADLINE
+══════════════════════════════════════ -->
+<section id="work-headline">
+  <h1 class="work-h1 reveal">Explore Our Latest Work</h1>
+  <p class="work-sub reveal">Work that'll make you think "Why didn't I find them sooner?"</p>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 2 — FILTER BUTTONS
+══════════════════════════════════════ -->
+<div id="work-filters">
+  <button class="filter-btn active" data-filter="advertisement">Advertisement</button>
+  <button class="filter-btn" data-filter="music">Music</button>
+  <button class="filter-btn" data-filter="films">Films</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 3 — GRIDS
+══════════════════════════════════════ -->
+<div id="work-grids">
+
+  <!-- ADVERTISEMENT GRID -->
+  <div class="work-grid active" id="grid-advertisement">
+    <div class="project-card ad-card" data-video="1195985556">
+      <div class="project-thumb"><img src="https://vumbnail.com/1195985556.jpg" alt="Alia Bhatt With Chetak Screen Awards" loading="eager"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Alia Bhatt With Chetak Screen Awards</p>
+    </div>
+    <div class="project-card ad-card" data-video="1195981502">
+      <div class="project-thumb"><img src="images/chetak-sunil-grover.png" alt="Chetak Screen Awards Promo With Sunil Grover" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Chetak Screen Awards Promo With Sunil Grover</p>
+    </div>
+    <div class="project-card ad-card" data-video="1195978296">
+      <div class="project-thumb"><img src="images/chetak-zakir.png" alt="Zakir Khan And Saurabh Dwivedi With Chetak Screen Awards" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Zakir Khan And Saurabh Dwivedi With Chetak Screen Awards</p>
+    </div>
+    <div class="project-card ad-card" data-video="1190042551">
+      <div class="project-thumb"><img src="https://vumbnail.com/1190042551.jpg" alt="Brand Campaign" loading="eager"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Rapido</p>
+    </div>
+    <div class="project-card ad-card" data-video="1169556963">
+      <div class="project-thumb"><img src="https://vumbnail.com/1169556963.jpg" alt="Aviva Life Insurance" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Aviva Life Insurance</p>
+    </div>
+    <div class="project-card ad-card" data-video="1159688424">
+      <div class="project-thumb"><img src="https://vumbnail.com/1159688424.jpg" alt="Brave" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Brave</p>
+    </div>
+    <div class="project-card ad-card" data-video="1058910593">
+      <div class="project-thumb"><img src="https://vumbnail.com/1058910593.jpg" alt="Amazon Prime India" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Amazon Prime India</p>
+    </div>
+    <div class="project-card ad-card" data-video="1147627110">
+      <div class="project-thumb"><img src="https://vumbnail.com/1147627110.jpg" alt="Skyscanner" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Skyscanner</p>
+    </div>
+    <div class="project-card ad-card" data-video="1028327950">
+      <div class="project-thumb"><img src="https://vumbnail.com/1028327950.jpg" alt="ITC Maratha Hotel" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">ITC Maratha Hotel</p>
+    </div>
+    <div class="project-card ad-card" data-video="1020867798">
+      <div class="project-thumb"><img src="https://vumbnail.com/1020867798.jpg" alt="Philips With Varun Sharma" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Philips With Varun Sharma</p>
+    </div>
+    <div class="project-card ad-card" data-video="1143090932">
+      <div class="project-thumb"><img src="https://vumbnail.com/1143090932.jpg" alt="Philips" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Philips</p>
+    </div>
+    <div class="project-card ad-card" data-video="962289737">
+      <div class="project-thumb"><img src="https://vumbnail.com/962289737.jpg" alt="Bachpan Play School" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Bachpan Play School</p>
+    </div>
+    <div class="project-card ad-card" data-video="1110070118">
+      <div class="project-thumb"><img src="https://vumbnail.com/1110070118.jpg" alt="Nippon India Mutual Fund" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Nippon India Mutual Fund</p>
+    </div>
+  </div>
+
+  <!-- MUSIC GRID -->
+  <div class="work-grid" id="grid-music">
+    <div class="project-card music-card" data-video="1145954135">
+      <div class="project-thumb"><img src="https://vumbnail.com/1145954135.jpg" alt="Music Video" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Darham</p>
+    </div>
+    <div class="project-card music-card" data-video="1180265355">
+      <div class="project-thumb"><img src="https://vumbnail.com/1180265355.jpg" alt="Music Production" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Tera Ghata Acoustic</p>
+    </div>
+    <div class="project-card music-card" data-video="838546884">
+      <div class="project-thumb"><img src="https://vumbnail.com/838546884.jpg" alt="Music Video" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Muskurana Tera</p>
+    </div>
+    <div class="project-card music-card" data-video="834526037">
+      <div class="project-thumb"><img src="https://vumbnail.com/834526037.jpg" alt="Music Video" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Khayalat</p>
+    </div>
+    <div class="project-card music-card" data-video="831436257">
+      <div class="project-thumb"><img src="https://vumbnail.com/831436257.jpg" alt="Music Production" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Ab Kise Barbaad Karoge</p>
+    </div>
+    <div class="project-card music-card" data-video="838544425">
+      <div class="project-thumb"><img src="https://vumbnail.com/838544425.jpg" alt="Music Video" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Ex With Danish Alfaaz &amp; Daisy Shah</p>
+    </div>
+  </div>
+
+  <!-- FILMS GRID -->
+  <div class="work-grid" id="grid-films">
+    <div class="film-showcase">
+      <div class="film-image-wrapper" onclick="window.location.href='dilemma.html'">
+        <img src="input/films-images/Dilemma.jpg" alt="Ek Pal" loading="lazy"/>
+        <div class="film-overlay">
+        </div>
+      </div>
+      <div class="film-text">Dilemma (2025)</div>
+    </div>
+    <div class="film-showcase reverse">
+      <div class="film-text">Lehenga (2024)</div>
+      <div class="film-image-wrapper" onclick="window.location.href='lehenga.html'">
+        <img src="input/films-images/Lehenga.png" alt="Lehenga (2024)" loading="lazy"/>
+        <div class="film-overlay">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- VIEW MORE -->
+<div id="view-more-wrap">
+  <button id="view-more-btn" onclick="alert('More projects coming soon!')">View More Projects</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     CTA + FOOTER
+══════════════════════════════════════ -->
+<div id="cta-footer-wrapper">
+<section id="cta">
+  <h2 class="cta-h2">
+    WORK WITH TOBC.<br/>
+    CREATE THE MAGIC.<br/>
+    <span class="cta-h2-line3">PRESS THIS BUTTON.
+      <a href="contact.html" class="cta-go-btn">GO →</a>
+    </span>
+  </h2>
+</section>
+
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-row">
+          <img src="logo/White logo.png" alt="TOBC Entertainment" />
+        </div>
+        <p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
+        <div class="footer-contact">
+          <a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span><span class="footer-link-text"> info@tobcentertainment.com</span></a>
+          <a href="tel:+918077552630"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 80775 52630</span></a>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start;">
+        <div class="footer-links-grid">
+          <a href="index.html">Home</a>
+<a href="about.html">About</a>
+          <a href="our-work.html">Our Work</a>
+          <a href="blog.html">Blog</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+        <div style="margin-top: -20px;">
+          <p class="footer-address-title">Come say Hi!</p>
+          <p class="footer-address-text">
+            9th Floor, SMARTWORKS,<br/>
+            Wing A, Paradigm, Mindspace,<br/>
+            Malad (W), Mumbai,<br/>
+            Maharashtra 400064, India
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/tobcentertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@tobcmusic" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </a>
+        <a href="https://www.twitter.com/CreativesOfTOBC" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter / X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/TOBCEntertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+      <p class="footer-copy">Copyright © 2026 TOBC Entertainment (OPC) Pvt. Ltd. All rights reserved.</p>
+      <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top ↑</button>
+    </div>
+  </div>
+</footer>
+</div><!-- end cta-footer-wrapper -->
+
+<!-- Video Modal -->
+<div id="video-modal" class="video-modal">
+  <button id="modal-close" class="modal-close">&times;</button>
+  <div class="modal-content">
+    <div class="iframe-wrapper">
+      <iframe frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+  /* ── Nav scroll blur ── */
+  const nav = document.getElementById('nav');
+  let prevScrollPos = window.pageYOffset;
+  window.addEventListener('scroll', () => {
+    const currentScrollPos = window.pageYOffset;
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    if (currentScrollPos > 100) {
+      if (prevScrollPos < currentScrollPos) {
+        nav.style.transform = 'translateY(-100%)';
+      } else {
+        nav.style.transform = 'translateY(0)';
+      }
+    }
+    prevScrollPos = currentScrollPos;
+  }, { passive: true });
+
+  /* ── Hamburger menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  /* ── Reveal on scroll ── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ── Filter logic ── */
+  (function() {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const grids = document.querySelectorAll('.work-grid');
+    const viewMoreWrap = document.getElementById('view-more-wrap');
+    let current = 'advertisement';
+
+    function showGrid(filter) {
+      // fade out current
+      const currentGrid = document.getElementById('grid-' + current);
+      if (currentGrid) {
+        currentGrid.classList.remove('visible');
+        setTimeout(() => {
+          currentGrid.classList.remove('active');
+          // fade in new
+          const newGrid = document.getElementById('grid-' + filter);
+          if (newGrid) {
+            newGrid.classList.add('active');
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                newGrid.classList.add('visible');
+              });
+            });
+          }
+          current = filter;
+          viewMoreWrap.style.display = 'none';
+        }, 200);
+      }
+    }
+
+    // init: show first grid immediately
+    const initGrid = document.getElementById('grid-advertisement');
+    if (initGrid) {
+      requestAnimationFrame(() => { requestAnimationFrame(() => { initGrid.classList.add('visible'); }); });
+    }
+    viewMoreWrap.style.display = 'none';
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        if (filter === current) return;
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        showGrid(filter);
+      });
+    });
+  })();
+
+  /* ── Ad Video Modal ── */
+  const videoHashes = {
+    '1190042551': 'fd0844f0db',
+    '1169556963': 'a863e98589',
+    '1159688424': '380ba3c762',
+    '1058910593': 'd48e01b027',
+    '1147627110': 'e7d4c82728',
+    '1028327950': '073a98300d',
+    '1020867798': '1426889fb3',
+    '1143090932': '81f84a97ba',
+    '962289737': '4944077eba',
+    '1110070118': 'a891bf8127',
+    '1145954135': '4d3ca85e56',
+    '1180265355': 'ff812859f2',
+    '838546884': '82dcd61ad5',
+    '834526037': '10c4c5f307',
+    '831436257': '188b804735',
+    '838544425': '574463727c',
+    '1195985556': '2122cd2cb0',
+    '1195981502': 'b01837f6d3',
+    '1195978296': 'c1f9dad5ee'
+  };
+
+  document.querySelectorAll('.ad-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const videoId = card.dataset.video;
+      const hash = videoHashes[videoId];
+      if (!videoId || !hash) return;
+      const modal = document.getElementById('video-modal');
+      const iframe = modal.querySelector('iframe');
+      iframe.src = `https://player.vimeo.com/video/${videoId}?h=${hash}&badge=0&autopause=0&player_id=0&app_id=58479`;
+      modal.classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.music-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const videoId = card.dataset.video;
+      const hash = videoHashes[videoId];
+      if (!videoId || !hash) return;
+      const modal = document.getElementById('video-modal');
+      const iframe = modal.querySelector('iframe');
+      iframe.src = `https://player.vimeo.com/video/${videoId}?h=${hash}&badge=0&autopause=0&player_id=0&app_id=58479`;
+      modal.classList.add('active');
+    });
+  });
+
+  const modal = document.getElementById('video-modal');
+  const closeBtn = document.getElementById('modal-close');
+
+  function closeModal() {
+    modal.classList.remove('active');
+    modal.querySelector('iframe').src = '';
+  }
+
+  closeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeModal();
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal || e.target === closeBtn) {
+      closeModal();
+    }
+  });
+
+</script>
+
+</body>
+</html>

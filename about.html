@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — TOBC Entertainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0A0A0A; color: #fff; overflow-x: hidden; }
+
+    :root {
+      --red: #E31B1B;
+      --dark-red: #CC0000;
+      --near-black: #0A0A0A;
+      --card-bg: #111111;
+      --footer-bg: #0d0d0d;
+      --gradient: linear-gradient(180deg, #7A0000 0%, #CC0000 18%, #E50914 38%, #FF6060 58%, #FFD0D0 72%, #FFF1F1 85%, #FAFAFA 100%);
+    }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ══════════════════════════════════════
+       NAV (exact copy from index.html)
+    ══════════════════════════════════════ */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 30px;
+      margin-bottom: -25px;
+      transition: background 0.3s, backdrop-filter 0.3s, transform 0.3s ease-in-out;
+      transform: translateY(0);
+    }
+    #nav.scrolled {
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 30px;
+    }
+    #nav.nav-hidden {
+      transform: translateY(-100%);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; transform: translateY(0px); margin-left: 30px; }
+    .nav-wordmark { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: #fff; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; height: 100%; }
+    .nav-links a {
+      font-family: 'Inter', sans-serif; font-size: 15px;
+      letter-spacing: 1px; color: #fff; text-decoration: none; opacity: 0.75;
+      transition: opacity 0.2s, text-decoration 0.2s;
+      line-height: 1;
+      transform: translateY(2px);
+      display: flex;
+      align-items: center;
+    }
+    .nav-links a:hover { opacity: 1; text-decoration: underline; }
+    .nav-cta {
+      padding: 12px 26px; border: 1.5px solid #fff; border-radius: 999px;
+      background: transparent; color: #fff; font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      transform: translateY(2px);
+      margin-right: 40px;
+    }
+    .nav-cta:hover { background: var(--red); border-color: var(--red); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    #mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(10,10,10,0.97); flex-direction: column;
+      align-items: center; justify-content: center; gap: 32px;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px;
+      color: #fff; text-decoration: none; transition: color 0.2s;
+    }
+    #mobile-menu a:hover { color: var(--red); }
+
+    /* ══════════════════════════════════════
+       SECTION 1 — HERO CAROUSEL
+    ══════════════════════════════════════ */
+    #hero-carousel {
+      position: relative;
+      height: 100vh;
+      background: #080808;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Radial glow in center */
+    #hero-carousel::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(100,100,120,0.18) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-headline-block {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: 120px;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .hero-main-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      letter-spacing: 2px;
+      color: #fff;
+      margin: 0 0 10px;
+      line-height: 1;
+    }
+    .hero-sub-headline {
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.3px;
+      max-width: 520px;
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .carousel-scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1400px;
+    }
+
+    .carousel-cards {
+      position: relative;
+      width: 260px;
+      height: 420px;
+      transform-style: preserve-3d;
+    }
+
+    /* Outer card: handles carousel arc position only */
+    .c-card {
+      position: absolute;
+      top: 0; left: 0;
+      width: 260px;
+      height: 420px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+      transition: transform 0.8s cubic-bezier(0.075,0.82,0.165,1),
+                  opacity 0.8s ease,
+                  filter 0.8s ease;
+      will-change: transform, opacity;
+      transform-style: preserve-3d;
+    }
+
+    /* Inner wrapper: receives 3D mouse-tilt transform */
+    .c-card-inner {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.1s linear;
+    }
+
+    .c-card-inner img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .c-card:hover .c-card-inner img { transform: scale(1.04); }
+
+    /* gradient overlay */
+    .c-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.12) 0%,
+        rgba(0,0,0,0.05) 40%,
+        rgba(0,0,0,0.70) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Full card content layout */
+    .c-card-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px;
+    }
+
+    /* Header row: tag+title on left, arrow on right */
+    .c-card-header {
+      display: none;
+      align-items: flex-start;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateY(-6px) translateZ(30px);
+      transition: opacity 0.35s ease 0.3s, transform 0.35s ease 0.3s;
+    }
+    .c-card[data-pos="0"] .c-card-header {
+      opacity: 1;
+      transform: translateY(0) translateZ(30px);
+    }
+
+    .c-card-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.65);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .c-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      line-height: 1;
+      color: #fff;
+      text-transform: uppercase;
+      transform: translateZ(50px);
+    }
+
+    .c-card-subtitle {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      margin-top: 4px;
+      transform: translateZ(40px);
+    }
+
+    /* Arrow button top-right */
+    .c-card-arrow-btn {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      transform: translateZ(60px);
+      pointer-events: none;
+    }
+    .c-card[data-pos="0"] .c-card-arrow-btn { pointer-events: auto; }
+    .c-card-arrow-btn:hover { background: rgba(255,255,255,0.28); transform: translateZ(60px) scale(1.1) rotate(5deg); }
+    .c-card-arrow-btn svg { width: 16px; height: 16px; }
+
+    .c-card-action { display: none; }
+
+    /* Arc positions */
+    .c-card[data-pos="-2"] {
+      transform: translateX(-510px) rotateY(42deg) scale(0.46);
+      opacity: 0.35; z-index: 1;
+      filter: brightness(0.5) blur(0.5px);
+    }
+    .c-card[data-pos="-1"] {
+      transform: translateX(-275px) rotateY(22deg) scale(0.67);
+      opacity: 0.65; z-index: 2;
+      filter: brightness(0.72);
+    }
+    .c-card[data-pos="0"] {
+      transform: translateX(0) rotateY(0deg) scale(1);
+      opacity: 1; z-index: 5;
+      filter: brightness(1);
+    }
+    .c-card[data-pos="1"] {
+      transform: translateX(275px) rotateY(-22deg) scale(0.67);
+      opacity: 0.65; z-index: 2;
+      filter: brightness(0.72);
+    }
+    .c-card[data-pos="2"] {
+      transform: translateX(510px) rotateY(-42deg) scale(0.46);
+      opacity: 0.35; z-index: 1;
+      filter: brightness(0.5) blur(0.5px);
+    }
+
+    /* Arrows */
+    .c-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 20; background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: #fff; width: 44px; height: 44px;
+      border-radius: 50%; font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .c-arrow:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.5); }
+    .c-arrow-left { left: 40px; }
+    .c-arrow-right { right: 40px; }
+
+    /* Dots */
+    .c-dots {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 10px; z-index: 20;
+    }
+    .c-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      cursor: pointer; transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+    .c-dot.active {
+      background: #fff; border-color: #fff;
+      transform: scale(1.3);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .c-card[data-pos="-2"],
+      .c-card[data-pos="2"] { opacity: 0; pointer-events: none; }
+      .c-card[data-pos="-1"] { transform: translateX(-180px) rotateY(22deg) scale(0.67); }
+      .c-card[data-pos="1"]  { transform: translateX(180px) rotateY(-22deg) scale(0.67); }
+      .c-arrow-left { left: 12px; }
+      .c-arrow-right { right: 12px; }
+    }
+
+    /* ══════════════════════════════════════
+       SECTION 2 — ABOUT TEXT BLOCK
+    ══════════════════════════════════════ */
+    #about-text {
+      background: #ffffff;
+      padding: 100px 8%;
+    }
+
+    .about-cols {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-left {}
+
+    .about-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #E31B1B;
+      margin-bottom: 20px;
+    }
+
+    .about-headline {
+      font-family: 'Inter', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #111111;
+      margin-bottom: 18px;
+    }
+
+    .about-headline .highlight {
+      color: #E31B1B;
+    }
+
+    .about-red-line {
+      width: 60px; height: 2px;
+      background: #E31B1B;
+      margin-bottom: 28px;
+    }
+
+    .about-body-text {
+      font-size: 1.1rem;
+      color: #444444;
+      line-height: 1.85;
+      max-width: 750px;
+    }
+
+    .about-body-text p + p { margin-top: 1.2em; }
+
+    /* RIGHT SIDE — styled like WRM reference */
+    .about-right {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .about-quote-block {
+      position: relative;
+      width: 350px;
+      margin-left: -80px;
+      margin-right: auto;
+    }
+
+    .about-big-quote {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 180px;
+      line-height: 0.8;
+      color: #E31B1B;
+      text-align: right;
+      user-select: none;
+      pointer-events: none;
+      display: block;
+      margin-bottom: -50px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-img-placeholder {
+      background: #1a1a1a;
+      border-radius: 12px;
+      width: 100%;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .about-img-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    }
+
+    .about-img-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .about-img-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 4px;
+      color: #fff;
+      display: block;
+    }
+
+    .about-img-sub {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      #about-text { padding: 60px 6%; }
+      .about-cols { grid-template-columns: 1fr; gap: 40px; }
+      .about-headline { font-size: 1.8rem; }
+      .about-big-quote { font-size: 120px; margin-bottom: -36px; }
+    }
+
+    /* ══════════════════════════════════════
+       SECTION 3 — TEAM
+    ══════════════════════════════════════ */
+    #team {
+      background: #ffffff;
+      padding: 30px 8% 100px 8%;
+    }
+
+    .team-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .team-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #111111;
+      margin-bottom: 60px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      align-items: start;
+    }
+
+    .team-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .team-card-img {
+      width: 100%;
+      aspect-ratio: 0.85;
+      border-radius: 16px;
+      background: #1a1a1a;
+      margin-bottom: 20px;
+      object-fit: cover;
+    }
+
+    .team-card-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 6px;
+    }
+
+    .team-card-role {
+      font-size: 0.9rem;
+      color: #666666;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      #team { padding: 60px 6%; }
+      .team-heading { font-size: 1.8rem; margin-bottom: 40px; }
+      .team-grid { gap: 30px; }
+    }
+
+    /* ══════════════════════════════════════
+       SECTION 4 — STATS OVER IMAGE
+    ══════════════════════════════════════ */
+    #stats {
+      background: #ffffff;
+      padding: 0 8% 80px;
+    }
+
+    .stats-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      max-width: 1200px;
+      margin: 0 auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    }
+
+    .stats-bg-img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      height: 360px;
+    }
+
+    .stats-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right,
+        rgba(0,0,0,0.92) 0%,
+        rgba(0,0,0,0.78) 50%,
+        rgba(0,0,0,0.65) 100%);
+    }
+
+    .stats-content {
+      position: absolute;
+      inset: 0;
+      padding: 0 6%;
+      display: flex;
+      align-items: center;
+    }
+
+    .stats-row {
+      display: flex;
+      width: 100%;
+      align-items: center;
+    }
+
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .stat-item + .stat-item {
+      border-left: none;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #E31B1B;
+      margin-bottom: 8px;
+      font-weight: 900;
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+    }
+
+    @media (max-width: 768px) {
+      #stats { padding: 0 5% 60px; }
+      .stats-bg-img { height: 560px; }
+      .stats-content { padding: 0 5%; align-items: flex-start; padding-top: 40px; }
+      .stats-row { flex-wrap: wrap; }
+      .stat-item {
+        flex: 0 0 50%;
+        padding: 20px 10px;
+        border-left: none !important;
+        border-bottom: 1px solid rgba(255,255,255,0.12);
+      }
+      .stat-number { font-size: 3.5rem; }
+    }
+
+    /* ══════════════════════════════════════
+       SECTION 4 — AWARDS & RECOGNITION
+    ══════════════════════════════════════ */
+    #awards {
+      background: #0A0A0A;
+      padding: 100px 8%;
+      border-radius: 0 0 60px 60px;
+      position: relative;
+      z-index: 4;
+    }
+
+    .awards-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 40fr 60fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .awards-left {}
+
+    .awards-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #E31B1B;
+      margin-bottom: 16px;
+    }
+
+    .awards-headline {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.8rem, 4.5vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 16px;
+      overflow: hidden;
+      white-space: normal;
+    }
+
+    .awards-body {
+      font-size: 1rem;
+      color: #fff;
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 340px;
+    }
+
+    /* right col container */
+    .awards-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* outer wrapper — grows when expanded */
+    .award-single-stack {
+      position: relative;
+      width: 260px;
+      height: 390px; /* collapsed: front card (346px) + 3 cards peeking below */
+      cursor: pointer;
+      transition: height 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+    .award-single-stack.expanded {
+      height: 1480px; /* 4 × 346px + 3 × 16px gaps */
+      cursor: default;
+    }
+
+    /* individual card — square (400 × 400) */
+    .aw-card {
+      position: absolute;
+      left: 0;
+      width: 400px;
+      height: 400px;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0;
+      text-align: left;
+      transition: top 0.9s cubic-bezier(0.075, 0.82, 0.165, 1),
+                  border-color 0.3s ease,
+                  transform 0.3s ease,
+                  box-shadow 0.3s ease;
+    }
+
+    /* background image fills the whole card */
+    .aw-card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .aw-card:hover .aw-card-img { transform: scale(1.04); }
+
+
+    /* text sits above overlay */
+    .aw-content {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      transition: opacity 0.2s ease;
+    }
+
+    /* collapsed positions — cards peek below */
+    .aw-card:nth-child(1) { top: 0;    z-index: 4; border: 1px solid #444; }
+    .aw-card:nth-child(2) { top: 18px; z-index: 3; border: 1px solid #333; }
+    .aw-card:nth-child(3) { top: 28px; z-index: 2; border: 1px solid #2a2a2a; }
+    .aw-card:nth-child(4) { top: 36px; z-index: 1; border: 1px solid #2a2a2a; }
+
+    /* collapsed — hide content on non-front cards */
+    .aw-card:not(:nth-child(1)) .aw-content { opacity: 0; }
+
+    /* expanded positions — 346px card + 16px gap */
+    .award-single-stack.expanded .aw-card:nth-child(1) { top: 0; }
+    .award-single-stack.expanded .aw-card:nth-child(2) { top: 362px; }
+    .award-single-stack.expanded .aw-card:nth-child(3) { top: 724px; }
+    .award-single-stack.expanded .aw-card:nth-child(4) { top: 1086px; }
+
+    /* show content on all cards when expanded */
+    .award-single-stack.expanded .aw-card .aw-content {
+      opacity: 1;
+      transition: opacity 0.4s ease 0.5s;
+    }
+
+    /* hover on front card when collapsed */
+    .award-single-stack:not(.expanded) .aw-card:nth-child(1):hover {
+      transform: translateY(-8px);
+      border-color: #E31B1B;
+      box-shadow: 0 20px 48px rgba(227,27,27,0.25);
+    }
+
+    /* hover any card when expanded */
+    .award-single-stack.expanded .aw-card:hover {
+      border-color: #E31B1B;
+      box-shadow: 0 12px 36px rgba(227,27,27,0.2);
+    }
+
+    .aw-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.1;
+    }
+
+    .aw-sub {
+      font-size: 10px;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+
+    .aw-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      margin-top: 20px;
+      line-height: 1.4;
+      opacity: 0;
+      transition: opacity 0.4s ease 0.7s;
+      max-width: 260px;
+    }
+
+    /* hint text below collapsed stack */
+    .aw-hint {
+      margin-top: 48px;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: #fff;
+      text-align: center;
+      transition: opacity 0.3s ease;
+      font-weight: 700;
+    }
+    .award-single-stack.expanded ~ .aw-hint { opacity: 0; pointer-events: none; }
+
+    /* show less button */
+    .aw-show-less {
+      margin-top: 16px;
+      padding: 8px 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      color: #fff;
+      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease 0.8s, background 0.2s;
+    }
+    .aw-show-less:hover { background: rgba(255,255,255,0.12); }
+    .award-single-stack.expanded ~ .aw-show-less {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @media (max-width: 768px) {
+      #awards { padding: 60px 6%; }
+      .awards-inner { grid-template-columns: 1fr; gap: 48px; }
+      .awards-headline { font-size: 2.2rem; }
+      .award-single-stack { width: 220px; height: 348px; }
+      .aw-card { width: 220px; height: 293px; }
+      .award-single-stack.expanded { height: 1253px; }
+      .award-single-stack.expanded .aw-card:nth-child(2) { top: 309px; }
+      .award-single-stack.expanded .aw-card:nth-child(3) { top: 618px; }
+      .award-single-stack.expanded .aw-card:nth-child(4) { top: 927px; }
+      .award-single-stack.expanded { height: 888px; }
+    }
+
+    /* ══════════════════════════════════════
+       CTA (exact from index.html)
+    ══════════════════════════════════════ */
+    #cta {
+      background: var(--red);
+      padding: 80px 48px 20px;
+      text-align: center;
+      position: sticky;
+      bottom: 320px;
+      z-index: 2;
+      margin-top: -60px;
+      padding-top: 140px;
+    }
+    .cta-h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 96px); line-height: 0.95;
+      color: #fff; margin-bottom: 0;
+    }
+    .cta-h2-line3 { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .cta-go-btn {
+      display: inline-flex; align-items: center; padding: 14px 28px;
+      border: 2px solid #fff; border-radius: 999px;
+      background: #fff; color: var(--red);
+      font-family: 'Bebas Neue', sans-serif; font-size: 36px;
+      letter-spacing: 1px; text-decoration: none; cursor: pointer;
+      box-shadow: 0 0 0 0 rgba(227,27,27,0);
+      transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+    }
+    .cta-go-btn:hover {
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 0 24px 8px rgba(255,255,255,0.3), 0 0 50px 18px rgba(255,255,255,0.15);
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    #footer { background: var(--red); padding: 80px 40px 40px; position: sticky; bottom: 0; z-index: 1; }
+    #cta-footer-wrapper { overflow: visible; }
+    #cta { position: sticky; bottom: 0; z-index: 3; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 48px; }
+    .footer-address-title {
+      font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 700;
+      color: #fff; margin-top: 28px; margin-bottom: 12px; line-height: 1.7;
+      text-transform: uppercase;
+    }
+    .footer-address-text { font-size: 17px; color: #fff; line-height: 1.7; }
+    .address-line { white-space: nowrap; }
+    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; margin-top: -20px; margin-left: -15px; }
+    .footer-logo-row img { height: 80px; width: auto; display: block; }
+    .footer-tagline { font-size: 18px; color: #fff; line-height: 1.6; margin-bottom: 28px; }
+    .footer-contact a {
+      display: flex; align-items: center; gap: 8px;
+      color: #fff; text-decoration: none; font-size: 20px; font-weight: 400;
+      margin-bottom: 10px; transition: text-decoration 0.2s; line-height: 1;
+    }
+    .contact-icon { font-size: 32px; color: #fff; display: flex; align-items: center; }
+    .footer-contact a:nth-child(2) .contact-icon { font-size: 20px; filter: brightness(0) invert(1); }
+    .footer-contact a:hover { text-decoration: none; }
+    .footer-contact a:hover .footer-link-text { text-decoration: underline; }
+    .footer-links-grid { display: flex; flex-direction: column; gap: 20px; align-content: start; padding-top: 8px; }
+    .footer-links-grid a {
+      font-size: 18px; color: #fff; text-decoration: none;
+      transition: text-decoration 0.2s;
+    }
+    .footer-links-grid a:hover { text-decoration: underline; }
+    .footer-bottom {
+      margin: 0 -40px -40px; padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .social-icons { display: flex; gap: 10px; }
+    .social-icon {
+      width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.1);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      color: #fff; text-decoration: none; font-size: 16px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-icon:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
+    .footer-copy { font-size: 13px; color: #fff; text-align: center; }
+    .back-to-top {
+      padding: 10px 22px; border: 1.5px solid #fff;
+      border-radius: 999px; background: rgba(255,255,255,0.1); color: #fff;
+      font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    }
+    .back-to-top:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
+
+    @media (max-width: 768px) {
+      #nav { padding: 14px 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      #cta { padding: 60px 20px 80px; }
+      #footer { padding: 60px 20px 30px; }
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV (exact copy from index.html)
+══════════════════════════════════════ -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="logo/White logo.png" alt="TOBC Entertainment" style="height: 90px; width: auto;" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="our-work.html">Our Work</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">Contact Us</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- mobile menu -->
+<div id="mobile-menu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="about.html" class="mob-link">About</a>
+  <a href="our-work.html" class="mob-link">Our Work</a>
+  <a href="gallery.html" class="mob-link">Gallery</a>
+  <a href="blog.html" class="mob-link">Blog</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 1 — HERO CAROUSEL
+══════════════════════════════════════ -->
+<section id="hero-carousel">
+  <div class="hero-headline-block">
+    <h1 class="hero-main-headline">We'd Rather Show You Than Tell You</h1>
+    <p class="hero-sub-headline">But here's the story anyway</p>
+  </div>
+  <div class="carousel-scene">
+    <div class="carousel-cards" id="carousel-cards">
+
+      <!-- Card 1 -->
+      <div class="c-card" data-index="0">
+        <div class="c-card-inner">
+          <img src="/Users/pratikshadarkar/Documents/TOBC Entertainment/input/about-images/DSC00265.JPG" alt="Film Production" loading="eager" />
+          <div class="c-card-overlay"></div>
+          <div class="c-card-content">
+            <div class="c-card-header">
+              <div>
+                <div class="c-card-tag">#Production</div>
+                <div class="c-card-title">FILM<br/>PRODUCTION</div>
+                <div class="c-card-subtitle">We bring scripts to life</div>
+              </div>
+              <a href="#" class="c-card-arrow-btn" tabindex="-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </a>
+            </div>
+            <button class="c-card-action">Explore Work →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="c-card" data-index="1">
+        <div class="c-card-inner">
+          <img src="/Users/pratikshadarkar/Documents/TOBC Entertainment/input/about-images/DSC00783.JPG" alt="Music Videos" loading="lazy" />
+          <div class="c-card-overlay"></div>
+          <div class="c-card-content">
+            <div class="c-card-header">
+              <div>
+                <div class="c-card-tag">#SoundMeetsVision</div>
+                <div class="c-card-title">MUSIC<br/>VIDEOS</div>
+                <div class="c-card-subtitle">Sound meets vision</div>
+              </div>
+              <a href="#" class="c-card-arrow-btn" tabindex="-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </a>
+            </div>
+            <button class="c-card-action">Explore Work →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="c-card" data-index="2">
+        <div class="c-card-inner">
+          <img src="/Users/pratikshadarkar/Documents/TOBC Entertainment/input/about-images/DSC01280.JPG" alt="Brand Campaigns" loading="lazy" />
+          <div class="c-card-overlay"></div>
+          <div class="c-card-content">
+            <div class="c-card-header">
+              <div>
+                <div class="c-card-tag">#BrandCulture</div>
+                <div class="c-card-title">BRAND<br/>CAMPAIGNS</div>
+                <div class="c-card-subtitle">Brands that move culture</div>
+              </div>
+              <a href="#" class="c-card-arrow-btn" tabindex="-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </a>
+            </div>
+            <button class="c-card-action">Explore Work →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="c-card" data-index="3">
+        <div class="c-card-inner">
+          <img src="/Users/pratikshadarkar/Documents/TOBC Entertainment/input/about-images/DSC01503.JPG" alt="Celebrity Casting" loading="lazy" />
+          <div class="c-card-overlay"></div>
+          <div class="c-card-content">
+            <div class="c-card-header">
+              <div>
+                <div class="c-card-tag">#Casting</div>
+                <div class="c-card-title">CELEBRITY<br/>CASTING</div>
+                <div class="c-card-subtitle">The right face for your story</div>
+              </div>
+              <a href="#" class="c-card-arrow-btn" tabindex="-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </a>
+            </div>
+            <button class="c-card-action">Explore Work →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="c-card" data-index="4">
+        <div class="c-card-inner">
+          <img src="/Users/pratikshadarkar/Documents/TOBC Entertainment/input/about-images/IMG_6556.png" alt="Live Events" loading="lazy" />
+          <div class="c-card-overlay"></div>
+          <div class="c-card-content">
+            <div class="c-card-header">
+              <div>
+                <div class="c-card-tag">#LiveEvents</div>
+                <div class="c-card-title">LIVE<br/>EVENTS</div>
+                <div class="c-card-subtitle">Moments that last forever</div>
+              </div>
+              <a href="#" class="c-card-arrow-btn" tabindex="-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </a>
+            </div>
+            <button class="c-card-action">Explore Work →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Arrows -->
+    <button class="c-arrow c-arrow-left" id="c-prev" aria-label="Previous">&#8249;</button>
+    <button class="c-arrow c-arrow-right" id="c-next" aria-label="Next">&#8250;</button>
+  </div>
+
+  <!-- Dots -->
+  <div class="c-dots" id="c-dots">
+    <div class="c-dot active" data-i="0"></div>
+    <div class="c-dot" data-i="1"></div>
+    <div class="c-dot" data-i="2"></div>
+    <div class="c-dot" data-i="3"></div>
+    <div class="c-dot" data-i="4"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 2 — ABOUT TEXT BLOCK
+══════════════════════════════════════ -->
+<section id="about-text">
+  <div class="about-cols">
+    <div class="about-left reveal">
+      <h2 class="about-headline">
+        <span style="white-space: nowrap;">We're The <span class="highlight">Out Of Box Creators</span> Entertainment,</span><br/>
+        <span style="white-space: nowrap;">And Our Friends Call Us TOBC</span>
+      </h2>
+      <div class="about-red-line"></div>
+      <div class="about-body-text">
+        <p>TOBC started the way most real things do. Not with a business plan, but with a dream.</p>
+        <p>Shivam Singh wanted to make a film. So he started where every good story starts, with a song. Tum Mere Paas was TOBC's first music video, and it opened a door that hasn't closed since.</p>
+        <p>From that first shoot, TOBC grew into something nobody handed us. A Mumbai-based production house trusted by brands like Philips, PolicyBazaar, Rapido, ITC Hotels, and Skyscanner, and agencies like Tring, The Minimalist, IndieVisual, Colatch and Dentsu. We've stood on set with Alia Bhatt, Tamannah Bhatia, Saina Nehwal, Ali Fazal and Sunil Grover.</p>
+        <p>None of it was handed to us. Every client came back because we showed up. On time, on budget, and at a quality they didn't expect for the margins we work with. Repeat clients aren't a metric at TOBC. They're proof.</p>
+        <p>Today, TOBC is a full service Mumbai based production house with 5+ years of experience, 200+ projects, 100+ clients and 100+ campaigns delivered. From music videos and TVCs to ad films, we handle everything from pre-production to post-production and marketing. We work with brands, ad agencies, artists and creators, with everything managed in-house by one team to maintain a consistent standard across every project.</p>
+        <p>We make work worth remembering. And we make it on time.</p>
+      </div>
+    </div>
+    <div class="about-right reveal">
+      <div class="about-quote-block">
+        <img src="/Users/pratikshadarkar/Documents/TOBC Entertainment/input/ChatGPT Image Jun 28, 2026, 11_46_52 PM.png" alt="TOBC Creative Studio" style="width: 100%; border-radius: 12px;" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 3 — TEAM
+══════════════════════════════════════ -->
+<section id="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Meet Our Team</h2>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <img class="team-card-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop" alt="Shivam Singh" loading="lazy" />
+        <div class="team-card-name">Shivam Singh</div>
+        <div class="team-card-role">Founder & Producer</div>
+      </div>
+      <div class="team-card reveal">
+        <img class="team-card-img" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=700&fit=crop" alt="Shikha" loading="lazy" />
+        <div class="team-card-name">Shikha</div>
+        <div class="team-card-role">Head of Finance</div>
+      </div>
+      <div class="team-card reveal">
+        <img class="team-card-img" src="https://images.unsplash.com/photo-1519085360771-9852bda31c31?w=600&h=700&fit=crop" alt="Pratiksha" loading="lazy" />
+        <div class="team-card-name">Pratiksha</div>
+        <div class="team-card-role">Head of Operations</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 4 — STATS OVER IMAGE
+══════════════════════════════════════ -->
+<section id="stats">
+  <div class="stats-card">
+    <img class="stats-bg-img" src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1600" alt="Stats background" loading="lazy" />
+    <div class="stats-overlay"></div>
+    <div class="stats-content">
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-label">PROJECTS</div>
+          <div class="stat-number"><span class="counter" data-target="500" data-duration="2000">0</span>+</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">CLIENTS</div>
+          <div class="stat-number"><span class="counter" data-target="50" data-duration="1500">0</span>+</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">CAMPAIGNS</div>
+          <div class="stat-number"><span class="counter" data-target="200" data-duration="1800">0</span>+</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">YEARS IN THE GAME</div>
+          <div class="stat-number"><span class="counter" data-target="8" data-duration="1000">0</span>+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 4 — AWARDS & RECOGNITION
+══════════════════════════════════════ -->
+<section id="awards">
+  <div class="awards-inner">
+    <div class="awards-left reveal">
+      <h2 class="awards-headline" style="text-transform: none !important;">
+        <span style="display: block; white-space: nowrap;">Stories That Got</span>
+        <span style="display: block; white-space: nowrap;">The Industry's</span>
+        <span style="display: block; white-space: nowrap;">Attention.</span>
+      </h2>
+    </div>
+    <div class="awards-right reveal">
+      <div class="award-single-stack" id="award-stack">
+
+        <!-- Card 1 — front -->
+        <div class="aw-card">
+          <img class="aw-card-img" src="/Users/pratikshadarkar/Documents/TOBC Entertainment/input/about-images/ChatGPT Image Jul 3, 2026, 03_46_04 PM.png" alt="Award" loading="eager" />
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CTA + FOOTER
+══════════════════════════════════════ -->
+<div id="cta-footer-wrapper">
+<section id="cta">
+  <h2 class="cta-h2">
+    WORK WITH TOBC.<br/>
+    CREATE THE MAGIC.<br/>
+    <span class="cta-h2-line3">PRESS THIS BUTTON.
+      <a href="contact.html" class="cta-go-btn">GO →</a>
+    </span>
+  </h2>
+</section>
+
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-row">
+          <img src="logo/White logo.png" alt="TOBC Entertainment" />
+        </div>
+        <p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
+        <div class="footer-contact">
+          <a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span><span class="footer-link-text"> info@tobcentertainment.com</span></a>
+          <a href="tel:+918077552630"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 80775 52630</span></a>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start;">
+        <div class="footer-links-grid">
+          <a href="index.html">Home</a>
+<a href="about.html">About</a>
+          <a href="our-work.html">Our Work</a>
+          <a href="blog.html">Blog</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+        <div style="margin-top: -20px;">
+          <p class="footer-address-title">Come say Hi!</p>
+          <p class="footer-address-text">
+            9th Floor, SMARTWORKS,<br/>
+            Wing A, Paradigm, Mindspace,<br/>
+            Malad (W), Mumbai,<br/>
+            Maharashtra 400064, India
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/tobcentertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@tobcmusic" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </a>
+        <a href="https://www.twitter.com/CreativesOfTOBC" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter / X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/TOBCEntertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+      <p class="footer-copy">Copyright © 2026 TOBC Entertainment (OPC) Pvt. Ltd. All rights reserved.</p>
+      <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top ↑</button>
+    </div>
+  </div>
+</footer>
+</div><!-- end cta-footer-wrapper -->
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+  /* ── Nav scroll blur ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  /* ── Hamburger menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  /* ── Reveal on scroll ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ══════════════════════════════════════
+     HERO CAROUSEL
+  ══════════════════════════════════════ */
+  (function() {
+    const cards = Array.from(document.querySelectorAll('.c-card'));
+    const dots = Array.from(document.querySelectorAll('.c-dot'));
+    const total = cards.length;
+    let active = 0;
+    let autoTimer = null;
+
+    const positions = [-2, -1, 0, 1, 2];
+
+    function getPos(cardIndex, activeIndex) {
+      let diff = cardIndex - activeIndex;
+      // wrap around
+      if (diff > 2) diff -= total;
+      if (diff < -2) diff += total;
+      return diff;
+    }
+
+    function render() {
+      cards.forEach((card, i) => {
+        const pos = getPos(i, active);
+        if (Math.abs(pos) > 2) {
+          card.style.display = 'none';
+        } else {
+          card.style.display = '';
+          card.setAttribute('data-pos', pos);
+        }
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === active);
+      });
+    }
+
+    function goTo(index) {
+      active = (index + total) % total;
+      render();
+    }
+
+    function next() { goTo(active + 1); }
+    function prev() { goTo(active - 1); }
+
+    document.getElementById('c-next').addEventListener('click', () => { next(); resetAuto(); });
+    document.getElementById('c-prev').addEventListener('click', () => { prev(); resetAuto(); });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => { goTo(parseInt(dot.dataset.i)); resetAuto(); });
+    });
+
+    function startAuto() {
+      autoTimer = setInterval(next, 7000);
+    }
+
+    function resetAuto() {
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    // Pause on hover
+    const scene = document.querySelector('.carousel-scene');
+    scene.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    scene.addEventListener('mouseleave', () => startAuto());
+
+    // Touch swipe
+    let touchStartX = 0;
+    scene.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    scene.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); resetAuto(); }
+    }, { passive: true });
+
+    render();
+    startAuto();
+
+    /* ── Spring-physics 3D mouse tilt on active card ── */
+    (function() {
+      const STIFFNESS = 180, DAMPING = 18;
+      const MAX_TILT = 18; // degrees
+
+      // Spring for a single axis
+      function Spring() {
+        this.value = 0; this.velocity = 0; this.target = 0;
+      }
+      Spring.prototype.tick = function(dt) {
+        var force = -STIFFNESS * (this.value - this.target) - DAMPING * this.velocity;
+        this.velocity += force * dt;
+        this.value += this.velocity * dt;
+      };
+
+      var springX = new Spring(), springY = new Spring();
+      var rafId = null, lastTime = null;
+      var mouseInCard = false;
+
+      function getActiveInner() {
+        var c = document.querySelector('.c-card[data-pos="0"]');
+        return c ? c.querySelector('.c-card-inner') : null;
+      }
+
+      function loop(now) {
+        rafId = requestAnimationFrame(loop);
+        var dt = lastTime ? Math.min((now - lastTime) / 1000, 0.05) : 0.016;
+        lastTime = now;
+
+        springX.tick(dt);
+        springY.tick(dt);
+
+        var inner = getActiveInner();
+        if (inner) {
+          inner.style.transform =
+            'perspective(800px) rotateX(' + (-springY.value * MAX_TILT).toFixed(2) + 'deg) rotateY(' + (springX.value * MAX_TILT).toFixed(2) + 'deg)';
+        }
+
+        // stop RAF when springs have settled and mouse is out
+        if (!mouseInCard && Math.abs(springX.value) < 0.001 && Math.abs(springY.value) < 0.001 &&
+            Math.abs(springX.velocity) < 0.001 && Math.abs(springY.velocity) < 0.001) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+          lastTime = null;
+        }
+      }
+
+      scene.addEventListener('mousemove', function(e) {
+        var inner = getActiveInner();
+        if (!inner) return;
+        var rect = inner.getBoundingClientRect();
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
+        var distX = e.clientX - cx, distY = e.clientY - cy;
+        var halfW = rect.width / 2, halfH = rect.height / 2;
+        // only tilt when cursor is roughly over the active card area
+        if (Math.abs(distX) < halfW * 2.2 && Math.abs(distY) < halfH * 2.2) {
+          mouseInCard = true;
+          springX.target = Math.max(-1, Math.min(1, distX / halfW));
+          springY.target = Math.max(-1, Math.min(1, distY / halfH));
+        } else {
+          mouseInCard = false;
+          springX.target = 0; springY.target = 0;
+        }
+        if (!rafId) { lastTime = null; rafId = requestAnimationFrame(loop); }
+      }, { passive: true });
+
+      scene.addEventListener('mouseleave', function() {
+        mouseInCard = false;
+        springX.target = 0; springY.target = 0;
+        if (!rafId) { lastTime = null; rafId = requestAnimationFrame(loop); }
+      });
+    })();
+  })();
+
+  /* ══════════════════════════════════════
+     COUNTER ANIMATION
+  ══════════════════════════════════════ */
+  (function() {
+    const counters = document.querySelectorAll('.counter');
+
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target);
+      const duration = parseInt(el.dataset.duration);
+      const start = performance.now();
+
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        el.textContent = Math.floor(easeOut(progress) * target);
+        if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = target;
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          counters.forEach(c => animateCounter(c));
+          statsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsSection = document.getElementById('stats');
+    if (statsSection) statsObserver.observe(statsSection);
+  })();
+
+</script>
+
+<!-- CONNECT WITH US MODAL -->
+<div id="contact-modal" style="display:none; position:fixed; inset:0; z-index:2000; overflow-y:auto; background:#0a0a0a;">
+<style>
+#contact-modal {font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff;}
+:root {--red:#E31B1B;--red-hover:#c41515;--black:#0a0a0a;--white:#ffffff;--grey:#888888;--border:#222222;}
+#contact-modal a {color:inherit;}
+#contact-modal .modal-nav {position:sticky;top:0;z-index:2001;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(10,10,10,0.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #1a1a1a;}
+#contact-modal .modal-nav-logo {display:flex;align-items:center;gap:10px;text-decoration:none;}
+#contact-modal .modal-nav-logo img {height:28px;width:auto;display:block;}
+#contact-modal .modal-nav-wordmark {font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#fff;}
+#contact-modal .modal-nav-links {display:flex;gap:28px;list-style:none;margin:0;padding:0;}
+#contact-modal .modal-nav-links a {font-family:'Inter',sans-serif;font-size:13px;font-variant:small-caps;letter-spacing:1px;color:#fff;text-decoration:none;opacity:0.85;transition:opacity 0.2s;}
+#contact-modal .modal-nav-links a:hover {opacity:1;}
+#contact-modal .modal-close-btn {padding:10px 22px;border:1.5px solid #fff;border-radius:999px;background:transparent;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.2s,color 0.2s;flex-shrink:0;}
+#contact-modal .modal-close-btn:hover {background:#fff;color:#E31B1B;border-color:#fff;}
+#contact-modal #hook {background:var(--black);padding:80px 0 0;}
+#contact-modal .hook-form-inner {max-width:1400px;margin:0 auto;display:flex;align-items:flex-start;}
+#contact-modal .hook-left {width:50%;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-start;padding:15px 60px 80px 80px;position:sticky;top:120px;}
+#contact-modal .hook-h1 {font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5.5vw,72px);line-height:1.05;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:24px;}
+#contact-modal .hook-subline {font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.5vw,36px);color:var(--grey);text-transform:uppercase;letter-spacing:1px;line-height:1.2;}
+#contact-modal .hook-right {flex:1;min-width:0;}
+#contact-modal #contact-form {background:transparent;padding:80px 60px;}
+#contact-modal .form-section-title-row {display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+#contact-modal .form-section-title {font-family:'Bebas Neue',sans-serif;letter-spacing:0.5px;font-size:28px;font-weight:400;color:#fff;}
+#contact-modal .form-divider {border:none;border-top:1px solid #222;margin-bottom:36px;}
+#contact-modal .form-field {margin-bottom:30px;}
+#contact-modal .form-field label {display:block;font-size:18px;font-weight:600;color:#fff;margin-bottom:10px;}
+#contact-modal .form-field input,#contact-modal .form-field select,#contact-modal .form-field textarea {width:100%;background:transparent;border:none;border-bottom:1.5px solid #333;color:#fff;font-family:'Inter',sans-serif;font-size:17px;font-weight:500;padding:8px 2px;outline:none;transition:border-color 0.2s;}
+#contact-modal .form-field textarea {resize:vertical;min-height:90px;font-family:inherit;}
+#contact-modal .form-field input::placeholder,#contact-modal .form-field textarea::placeholder {color:#555;font-weight:400;}
+#contact-modal .form-field input:focus,#contact-modal .form-field select:focus,#contact-modal .form-field textarea:focus {border-bottom:1.5px solid var(--red);}
+#contact-modal .phone-field {display:flex;align-items:center;gap:8px;border-bottom:1.5px solid #333;padding-bottom:4px;}
+#contact-modal .phone-field:focus-within {border-bottom-color:var(--red);}
+#contact-modal .phone-prefix {font-size:15px;font-weight:500;color:#fff;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+#contact-modal .phone-field input {border-bottom:none;padding:8px 2px 4px;}
+#contact-modal .form-field select {appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%23ffffff' stroke-width='2' fill='none' fill-rule='evenodd'/></svg>");background-repeat:no-repeat;background-position:right 4px center;cursor:pointer;}
+#contact-modal .form-field select:invalid,#contact-modal .form-field select option[value=""] {color:#555;}
+#contact-modal .form-field select option {color:#111;}
+#contact-modal .submit-btn {display:inline-flex;align-items:center;gap:10px;padding:16px 36px;margin-top:8px;background:var(--red);color:#fff;border:none;border-radius:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:15px;letter-spacing:1px;cursor:pointer;transition:background 0.2s,transform 0.2s;}
+#contact-modal .submit-btn:hover {background:var(--red-hover);transform:translateY(-1px);}
+#contact-modal #email-row {background:var(--black);padding:80px 48px 80px;}
+#contact-modal .email-row-outer {max-width:1200px;margin:0 auto;display:grid;grid-template-columns:11fr 9fr;align-items:start;gap:60px;}
+#contact-modal .email-row-heading {font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:#fff;text-transform:uppercase;line-height:1.05;margin:0;}
+#contact-modal .email-row-inner {display:flex;flex-direction:column;gap:28px;}
+#contact-modal .email-col {display:flex;flex-direction:row;align-items:center;gap:18px;}
+#contact-modal .email-icon {width:48px;height:48px;border-radius:50%;flex-shrink:0;background:var(--red);display:flex;align-items:center;justify-content:center;}
+#contact-modal .email-icon svg {width:22px;height:22px;}
+#contact-modal .email-col-text {display:flex;flex-direction:column;gap:3px;}
+#contact-modal .email-heading {font-family:'Inter',sans-serif;font-size:19px;font-weight:700;color:#fff;text-transform:none;letter-spacing:0;}
+#contact-modal .email-link {font-size:17px;font-weight:400;color:var(--grey);text-decoration:none;transition:color 0.2s;}
+#contact-modal .email-link:hover {color:#fff;}
+#contact-modal #cta {background:var(--red);padding:80px 48px 20px;text-align:center;position:static;z-index:2;margin-top:0;padding-top:80px;}
+#contact-modal .cta-h2 {font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,96px);line-height:0.95;color:#fff;margin-bottom:0;}
+#contact-modal .cta-h2-line3 {display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;}
+#contact-modal .cta-go-btn {display:inline-flex;align-items:center;padding:14px 28px;border:2px solid #fff;border-radius:999px;background:#fff;color:var(--red);font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;text-decoration:none;cursor:pointer;box-shadow:0 0 0 0 rgba(227,27,27,0);transition:background 0.2s,color 0.2s,box-shadow 0.3s;}
+#contact-modal .cta-go-btn:hover {background:rgba(255,255,255,0.85);box-shadow:0 0 24px 8px rgba(255,255,255,0.3),0 0 50px 18px rgba(255,255,255,0.15);}
+#contact-modal #footer {background:var(--red);padding:80px 40px 40px;position:static;z-index:1;}
+#contact-modal .footer-inner {max-width:1200px;margin:0 auto;}
+#contact-modal .footer-top {display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:48px;}
+#contact-modal .footer-address-title {font-family:'Inter',sans-serif;font-size:17px;font-weight:700;color:#fff;margin-top:28px;margin-bottom:12px;line-height:1.7;text-transform:uppercase;}
+#contact-modal .footer-address-text {font-size:17px;color:#fff;line-height:1.7;}
+#contact-modal .address-line {white-space:nowrap;}
+#contact-modal .footer-logo-row {display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:-20px;margin-left:-15px;}
+#contact-modal .footer-logo-row img {height:80px;width:auto;display:block;}
+#contact-modal .footer-tagline {font-size:18px;color:#fff;line-height:1.6;margin-bottom:28px;}
+#contact-modal .footer-contact a {display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:20px;font-weight:700;margin-bottom:10px;transition:color 0.2s;line-height:1;}
+#contact-modal .contact-icon {font-size:32px;color:#fff;display:flex;align-items:center;}
+#contact-modal .footer-contact a:nth-child(2) .contact-icon {font-size:20px;filter:brightness(0) invert(1);}
+#contact-modal .footer-contact a:last-child {font-size:20px;font-weight:400;color:#fff;}
+#contact-modal .footer-contact a:hover {color:#fff;}
+#contact-modal .footer-links-grid {display:flex;flex-direction:column;gap:20px;align-content:start;padding-top:8px;}
+#contact-modal .footer-links-grid a {font-size:18px;color:#fff;text-decoration:none;transition:color 0.2s;}
+#contact-modal .footer-links-grid a:hover {color:#fff;}
+#contact-modal .footer-bottom {margin:0 -40px -40px;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+#contact-modal .social-icons {display:flex;gap:10px;}
+#contact-modal .social-icon {width:42px;height:42px;border:1.5px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:16px;transition:border-color 0.2s,color 0.2s,background 0.2s;}
+#contact-modal .social-icon:hover {border-color:#fff;background:rgba(255,255,255,0.2);}
+#contact-modal .footer-copy {font-size:16px;color:#fff;text-align:center;}
+#contact-modal .back-to-top {padding:10px 22px;border:1.5px solid #fff;border-radius:999px;background:rgba(255,255,255,0.1);color:#fff;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;cursor:pointer;transition:background 0.2s,border-color 0.2s;}
+#contact-modal .back-to-top:hover {border-color:#fff;background:rgba(255,255,255,0.2);}
+@media (max-width:768px) {#contact-modal .modal-nav {padding:14px 20px;}#contact-modal .modal-nav-links {display:none;}#contact-modal .hook-form-inner {flex-direction:column;}#contact-modal .hook-left {width:100%;position:static;padding:40px 20px;top:auto;}#contact-modal #contact-form {padding:20px 20px 60px;}#contact-modal #email-row {padding:32px 20px 10px;}#contact-modal .email-row-outer {grid-template-columns:1fr;gap:32px;}#contact-modal #cta {padding:0 20px 80px;}#contact-modal .cta-h2 {font-size:clamp(40px,10vw,56px);}#contact-modal #footer {padding:60px 20px 30px;}#contact-modal .footer-top {grid-template-columns:1fr;gap:40px;}#contact-modal .footer-bottom {flex-direction:column;align-items:center;text-align:center;margin:0 -20px -30px;padding:20px;}}
+</style>
+<nav class="modal-nav">
+<div style="max-width:1400px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;">
+<a href="index.html" class="modal-nav-logo"><img src="logo/White logo.png" alt="TOBC Entertainment"/><span class="modal-nav-wordmark">TOBC</span></a>
+<ul class="modal-nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="our-work.html">Our Work</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+<button class="modal-close-btn" onclick="closeContactModal()">Close</button>
+</div>
+</nav>
+<section id="hook">
+<div class="hook-form-inner">
+<div class="hook-left">
+<h1 class="hook-h1">GOT A BIG IDEA?<br/>LET'S MAKE IT REAL.</h1>
+<p class="hook-subline">We're listening,<br/>reach out anytime!</p>
+</div>
+<div class="hook-right" id="contact-form">
+<div class="form-section-title-row"><span class="form-section-title">Your Details</span><span>↓</span></div>
+<hr class="form-divider"/>
+<form>
+<div class="form-field"><label for="modal-name">Name</label><input type="text" id="modal-name" name="name" placeholder="Enter your name"/></div>
+<div class="form-field"><label for="modal-phone">Phone Number</label><div class="phone-field"><span class="phone-prefix">🇮🇳 +91</span><input type="tel" id="modal-phone" name="phone" placeholder="Enter your phone number"/></div></div>
+<div class="form-field"><label for="modal-email">Email</label><input type="email" id="modal-email" name="email" placeholder="Enter your email"/></div>
+<div class="form-field"><label for="modal-type">Are you an Agency or a Brand?</label><select id="modal-type" name="type" required><option value="" selected disabled hidden>Select option</option><option value="agency">Agency</option><option value="brand">Brand</option></select></div>
+<div class="form-field"><label for="modal-services">Which services are you interested in?</label><select id="modal-services" name="services" required><option value="" selected disabled hidden>Select a service</option><option value="Ad Film">Ad Film</option><option value="Video Production">Video Production</option><option value="Music Video">Music Video</option><option value="Celebrity Endorsement">Celebrity Endorsement</option><option value="Influencer Management">Influencer Management</option><option value="Digital Marketing">Digital Marketing</option><option value="Brand Campaign">Brand Campaign</option><option value="Casting">Casting</option><option value="Live Events">Live Events</option><option value="OTT / Web Series">OTT / Web Series</option><option value="Brand Partnerships">Brand Partnerships</option></select></div>
+<div class="form-field"><label for="modal-source">How did you hear about us?</label><select id="modal-source" name="source" required><option value="" selected disabled hidden>Select an option</option><option value="Referral">Referral</option><option value="Instagram / Facebook">Instagram / Facebook</option><option value="YouTube">YouTube</option><option value="LinkedIn">LinkedIn</option><option value="Search / Google">Search / Google</option><option value="Media & News">Media &amp; News</option><option value="Other">Other</option></select></div>
+<div class="form-field"><label for="modal-message">Tell us about your project</label><textarea id="modal-message" name="message" placeholder="What's on your mind?"></textarea></div>
+<button type="submit" class="submit-btn">SUBMIT</button>
+</form>
+</div>
+</div>
+</section>
+<section id="email-row">
+<div class="email-row-outer">
+<h2 class="email-row-heading">Drop us an email</h2>
+<div class="email-row-inner">
+<div class="email-col"><div class="email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7L22 6"/></svg></div><div class="email-col-text"><h3 class="email-heading">Business Inquiries</h3><a class="email-link" href="mailto:info@tobcentertainment.com">info@tobcentertainment.com</a></div></div>
+<div class="email-col"><div class="email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="email-col-text"><h3 class="email-heading">Music</h3><a class="email-link" href="mailto:music@tobcentertainment.com">music@tobcentertainment.com</a></div></div>
+<div class="email-col"><div class="email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M2 7l3-4h4l-3 4M9 7l3-4h4l-3 4M16 7l3-4h3l-3 4"/></svg></div><div class="email-col-text"><h3 class="email-heading">Casting</h3><a class="email-link" href="mailto:casting@tobcentertainment.com">casting@tobcentertainment.com</a></div></div>
+</div>
+</div>
+</section>
+<section id="cta">
+<h2 class="cta-h2">WORK WITH TOBC.<br/>CREATE THE MAGIC.<br/><span class="cta-h2-line3">PRESS THIS BUTTON.<button class="cta-go-btn" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">GO →</button></span></h2>
+</section>
+<footer id="footer">
+<div class="footer-inner">
+<div class="footer-top">
+<div>
+<div class="footer-logo-row"><img src="logo/White logo.png" alt="TOBC Entertainment"/></div>
+<p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
+<div class="footer-contact">
+<a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span> info@tobcentertainment.com</a>
+<a href="tel:+918077552630"><span class="contact-icon">📞</span> +91 80775 52630</a>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-start;">
+<div class="footer-links-grid">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="our-work.html">Our Work</a>
+<a href="index.html#footer">Blog</a>
+<a href="index.html#footer">Privacy Policy</a>
+</div>
+<div style="margin-top:-20px;">
+<p class="footer-address-title">Come say Hi!</p>
+<p class="footer-address-text"><span class="address-line">Platinum Heights, Andheri West,</span><br/>Mumbai, Maharashtra 400018</p>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="social-icons">
+<a href="https://www.instagram.com/tobcentertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+<a href="https://www.youtube.com/@tobcmusic" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+<a href="https://www.twitter.com/CreativesOfTOBC" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter / X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+<a href="https://www.facebook.com/TOBCEntertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+</div>
+<p class="footer-copy">Copyright © 2026 TOBC Entertainment (OPC) Pvt. Ltd. All rights reserved.</p>
+<button class="back-to-top" onclick="closeContactModal()">Close ✕</button>
+</div>
+</div>
+</footer>
+</div>
+<script>
+let prevScrollPos = window.pageYOffset;
+window.addEventListener('scroll', function() {
+  const currentScrollPos = window.pageYOffset;
+  const nav = document.getElementById('nav');
+  if (currentScrollPos > 100) {
+    if (prevScrollPos < currentScrollPos) {
+      nav.style.transform = 'translateY(-100%)';
+    } else {
+      nav.style.transform = 'translateY(0)';
+    }
+  }
+  prevScrollPos = currentScrollPos;
+});
+function openContactModal(){document.getElementById('contact-modal').style.display='block';document.body.style.overflow='hidden';}function closeContactModal(){document.getElementById('contact-modal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeContactModal();});document.querySelectorAll('#contact-modal form').forEach(f=>f.addEventListener('submit',(e)=>e.preventDefault()));
+</script>
+
+
+
+
+
+

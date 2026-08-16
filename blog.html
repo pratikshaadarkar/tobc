@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — TOBC Entertainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
+
+    :root {
+      --red: #E02020;
+      --dark-red: #CC0000;
+      --near-black: #0a0a0a;
+      --card-bg: #1a1a1a;
+      --footer-bg: #0d0d0d;
+    }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ══════════════════════════════════════
+       NAV (copied exactly from index.html)
+    ══════════════════════════════════════ */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 30px;
+      margin-bottom: -25px;
+      transition: background 0.3s, backdrop-filter 0.3s, transform 0.3s ease-in-out;
+      transform: translateY(0);
+    }
+    #nav.scrolled {
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 30px;
+    }
+    #nav.nav-hidden {
+      transform: translateY(-100%);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; transform: translateY(0px); margin-left: 30px; }
+    .nav-wordmark { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: #fff; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; height: 100%; }
+    .nav-links a {
+      font-family: 'Inter', sans-serif; font-size: 15px;
+      letter-spacing: 1px; color: #fff; text-decoration: none; opacity: 0.75;
+      transition: opacity 0.2s, text-decoration 0.2s;
+      transform: translateY(2px);
+      display: flex;
+      align-items: center;
+    }
+    .nav-links a:hover { opacity: 1; text-decoration: underline; }
+    .nav-cta {
+      padding: 12px 26px; border: 1.5px solid #fff; border-radius: 999px;
+      background: transparent; color: #fff; font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      transform: translateY(2px);
+      margin-right: 40px;
+    }
+    .nav-cta:hover { background: var(--red); border-color: var(--red); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    #mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(10,10,10,0.97); flex-direction: column;
+      align-items: center; justify-content: center; gap: 32px;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px;
+      color: #fff; text-decoration: none; transition: color 0.2s;
+    }
+    #mobile-menu a:hover { color: var(--red); }
+
+    /* ══════════════════════════════════════
+       SECTION 1 — HERO (red bg + featured card)
+    ══════════════════════════════════════ */
+    #blog-hero {
+      background: #E31B1B;
+      padding: 160px 60px 100px;
+      display: flex; flex-direction: column; align-items: flex-start;
+      max-width: 100%;
+    }
+    .blog-hero-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 8vw, 96px);
+      line-height: 1; color: #fff;
+      margin-bottom: 40px;
+      max-width: 1100px;
+      width: 100%;
+      margin-left: auto; margin-right: auto;
+    }
+    .blog-hero-headline span { color: #0a0a0a; }
+    .blog-badge {
+      display: inline-block; padding: 6px 18px;
+      background: transparent; border: 1.5px solid #fff; color: #fff;
+      border-radius: 999px; font-size: 12px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 40px;
+    }
+    .featured-card {
+      max-width: 1100px; width: 100%; margin: 0 auto;
+      background: #fff; border-radius: 12px; overflow: hidden;
+      display: grid; grid-template-columns: 55fr 45fr; align-items: stretch;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+    }
+    .featured-card-text {
+      padding: 56px; display: flex; flex-direction: column; justify-content: space-between;
+      min-height: 360px;
+    }
+    .featured-eyebrow {
+      font-size: 0.8rem; color: #999; text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 12px;
+    }
+    .featured-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 4rem;
+      color: #0A0A0A; line-height: 1.1; margin-bottom: 16px; font-weight: 900;
+    }
+    .featured-desc {
+      color: #555; font-size: 1rem; line-height: 1.6;
+      margin-bottom: 28px; max-width: 420px;
+    }
+    .featured-link {
+      color: #E31B1B; font-weight: 700; text-decoration: none;
+      font-size: 0.95rem; margin-bottom: 36px; margin-top: 100px; display: inline-block;
+    }
+    .featured-link:hover { text-decoration: underline; }
+    .featured-dots { display: flex; gap: 6px; align-items: center; }
+    .featured-dots .dot { width: 24px; height: 4px; border-radius: 2px; background: #eee; }
+    .featured-dots .dot.active { background: #E31B1B; width: 36px; }
+    .featured-card-img { position: relative; overflow: hidden; }
+    .featured-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .featured-card:hover .featured-card-img img { transform: scale(1.04); }
+
+    /* ══════════════════════════════════════
+       SECTION 1B — FEATURED STORY
+    ══════════════════════════════════════ */
+    #featured-story {
+      background: #fff;
+      padding: 80px 60px 60px;
+    }
+    .fs-inner {
+      max-width: 1200px; margin: 0 auto;
+    }
+    .fs-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: #888; margin-bottom: 24px;
+    }
+    .fs-card {
+      display: grid; grid-template-columns: 55fr 45fr;
+      gap: 0; border-radius: 20px; overflow: hidden;
+      border: 1px solid #eee;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+    }
+    .fs-img-wrap {
+      position: relative; overflow: hidden; height: 100%;
+    }
+    .fs-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease;
+    }
+    .fs-card:hover .fs-img-wrap img { transform: scale(1.04); }
+    .fs-img-badge {
+      position: absolute; top: 20px; left: 20px;
+      background: #E02020; color: #fff;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
+    }
+    .fs-read-time {
+      position: absolute; bottom: 16px; right: 16px;
+      background: rgba(0,0,0,0.55); color: #fff;
+      font-size: 0.78rem; font-weight: 500; padding: 5px 12px;
+      border-radius: 999px; display: flex; align-items: center; gap: 6px;
+    }
+    .fs-text {
+      padding: 52px 48px;
+      display: flex; flex-direction: column;
+      background: #fff;
+    }
+    .fs-category {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #888; margin-bottom: 14px;
+    }
+    .fs-title {
+      font-family: 'Inter', sans-serif; font-size: 2.8rem; font-weight: 900;
+      color: #0a0a0a; line-height: 1.3; margin-bottom: 16px;
+      letter-spacing: -0.3px;
+    }
+    .fs-desc {
+      font-size: 0.95rem; color: #666; line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .fs-author-row {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .fs-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--red); color: #fff;
+      font-size: 0.85rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .fs-author-meta { display: flex; flex-direction: column; }
+    .fs-author-name { font-size: 0.875rem; font-weight: 700; color: #0a0a0a; }
+    .fs-author-date { font-size: 0.8rem; color: #999; }
+    .fs-tag {
+      padding: 4px 14px; border: 1.5px solid #ddd; border-radius: 999px;
+      font-size: 0.78rem; color: #555; font-weight: 500;
+    }
+    .fs-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; background: #0a0a0a; color: #fff;
+      border-radius: 10px; font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; transition: background 0.2s; align-self: flex-start;
+    }
+    .fs-btn:hover { background: #222; }
+
+    @media (max-width: 768px) {
+      #featured-story { padding: 48px 20px 40px; }
+      .fs-card { grid-template-columns: 1fr; }
+      .fs-img-wrap { min-height: 240px; }
+      .fs-text { padding: 32px 24px; }
+      .fs-title { font-size: 1.4rem; }
+    }
+
+    /* ══════════════════════════════════════
+       SECTION 2 — BLOG GRID
+    ══════════════════════════════════════ */
+    #blog-grid {
+      background: #FFFFFF;
+      padding: 72px 60px 100px;
+      border-radius: 0 0 60px 60px;
+      position: relative;
+      z-index: 4;
+    }
+    .blog-grid-inner {
+      max-width: 1200px; margin: 0 auto;
+    }
+    .blog-grid-headline {
+      font-family: 'Inter', sans-serif; font-size: 2rem; font-weight: 700;
+      color: #0a0a0a; margin-bottom: 40px; letter-spacing: -0.5px;
+    }
+    .blog-cards-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px;
+    }
+    .blog-card { cursor: pointer; display: block; text-decoration: none; color: inherit; }
+    .blog-card-thumb {
+      width: 100%; aspect-ratio: 4/3; border-radius: 16px; overflow: hidden;
+    }
+    .blog-card-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .blog-card:hover .blog-card-thumb img { transform: scale(1.04); }
+    .blog-card-body { padding-top: 20px; }
+    .blog-card-badge {
+      display: inline-block; color: #999;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .blog-card-title {
+      font-weight: 700; color: #0A0A0A; font-size: 1.15rem; line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .blog-card-date { color: #aaa; font-size: 0.875rem; }
+
+    @media (max-width: 768px) {
+      #blog-grid { padding: 48px 20px 60px; }
+      .blog-cards-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .blog-cards-row { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════
+       CTA (copied exactly from index.html)
+    ══════════════════════════════════════ */
+    #cta {
+      background: var(--red);
+      padding: 80px 48px 20px;
+      text-align: center;
+      position: sticky;
+      bottom: 320px;
+      z-index: 2;
+      margin-top: -60px;
+      padding-top: 140px;
+    }
+    .cta-h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 96px); line-height: 0.95;
+      color: #fff; margin-bottom: 0;
+    }
+    .cta-h2-line3 { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .cta-go-btn {
+      display: inline-flex; align-items: center; padding: 14px 28px;
+      border: 2px solid #fff; border-radius: 999px;
+      background: #fff; color: var(--red);
+      font-family: 'Bebas Neue', sans-serif; font-size: 36px;
+      letter-spacing: 1px; text-decoration: none; cursor: pointer;
+      box-shadow: 0 0 0 0 rgba(227,27,27,0);
+      transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+    }
+    .cta-go-btn:hover {
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 0 24px 8px rgba(255,255,255,0.3), 0 0 50px 18px rgba(255,255,255,0.15);
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    #footer { background: var(--red); padding: 80px 40px 40px; position: sticky; bottom: 0; z-index: 1; }
+    #cta-footer-wrapper { overflow: visible; }
+    #cta { position: sticky; bottom: 0; z-index: 3; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 48px; }
+    .footer-address-title {
+      font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 700;
+      color: #fff; margin-top: 28px; margin-bottom: 12px; line-height: 1.7;
+      text-transform: uppercase;
+    }
+    .footer-address-text { font-size: 17px; color: #fff; line-height: 1.7; }
+    .address-line { white-space: nowrap; }
+    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; margin-top: -20px; margin-left: -15px; }
+    .footer-logo-row img { height: 80px; width: auto; display: block; }
+    .footer-tagline { font-size: 18px; color: #fff; line-height: 1.6; margin-bottom: 28px; }
+    .footer-contact a {
+      display: flex; align-items: center; gap: 8px;
+      color: #fff; text-decoration: none; font-size: 20px; font-weight: 400;
+      margin-bottom: 10px; transition: text-decoration 0.2s; line-height: 1;
+    }
+    .contact-icon { font-size: 32px; color: #fff; display: flex; align-items: center; }
+    .footer-contact a:nth-child(2) .contact-icon { font-size: 20px; filter: brightness(0) invert(1); }
+    .footer-contact a:hover { text-decoration: none; }
+    .footer-contact a:hover .footer-link-text { text-decoration: underline; }
+    .footer-links-grid { display: flex; flex-direction: column; gap: 20px; align-content: start; padding-top: 8px; }
+    .footer-links-grid a {
+      font-size: 18px; color: #fff; text-decoration: none;
+      transition: text-decoration 0.2s;
+    }
+    .footer-links-grid a:hover { text-decoration: underline; }
+    .footer-bottom {
+      margin: 0 -40px -40px; padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .social-icons { display: flex; gap: 10px; }
+    .social-icon {
+      width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.1);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      color: #fff; text-decoration: none; font-size: 16px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-icon:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
+    .footer-copy { font-size: 13px; color: #fff; text-align: center; }
+    .back-to-top {
+      padding: 10px 22px; border: 1.5px solid #fff;
+      border-radius: 999px; background: rgba(255,255,255,0.1); color: #fff;
+      font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    }
+    .back-to-top:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      #nav { padding: 14px 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      #blog-hero { padding: 100px 16px 60px; }
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-card-text { padding: 32px 24px; order: 2; }
+      .featured-card-img { height: 220px; order: 1; }
+      .featured-title { font-size: 2rem; }
+
+      #blog-grid { padding: 40px 20px 60px; }
+
+      #cta { padding: 0 20px 80px; }
+      .cta-h2 { font-size: clamp(40px, 10vw, 56px); }
+
+      #footer { padding: 60px 20px 30px; }
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <img src="logo/White logo.png" alt="TOBC Entertainment" style="height: 90px; width: auto;" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="our-work.html">Our Work</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="#footer">Blog</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">Contact Us</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- mobile menu -->
+<div id="mobile-menu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="about.html" class="mob-link">About</a>
+  <a href="our-work.html" class="mob-link">Our Work</a>
+  <a href="gallery.html" class="mob-link">Gallery</a>
+  <a href="#footer" class="mob-link">Blog</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 1 — HERO
+══════════════════════════════════════ -->
+<section id="blog-hero">
+  <h2 class="blog-hero-headline">Let's do <span>Entertainment Talk</span></h2>
+  <a class="featured-card" href="ai-generated-ads-indian-brands-need-to-know.html" style="max-width: 1100px; width: 100%; margin-left: auto; margin-right: auto; text-decoration: none; color: inherit;">
+    <div class="featured-card-text">
+      <h1 class="featured-title" style="margin-bottom: 75px;">AI-Generated Ads Are Here. Here's What Brands Need to Know</h1>
+      <div style="border-top: 1px solid #e0e0e0; padding-top: 16px; margin-top: auto;">
+        <span class="featured-link" style="margin-top: 0;">Read the article →</span>
+      </div>
+    </div>
+    <div class="featured-card-img">
+      <img src="images/blog-8-hero.png" alt="AI-Generated Ads" style="object-position: left center;" />
+      <span class="fs-img-badge" style="top: 20px; right: 20px; left: auto;">INDUSTRY INSIGHTS</span>
+    </div>
+  </a>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 1B — FEATURED STORY
+══════════════════════════════════════ -->
+<section id="featured-story">
+  <div class="fs-inner">
+    <a class="fs-card" href="how-to-get-your-music-placed-with-zee-music-sa-re-ga-ma-and-times-music.html" style="text-decoration: none; color: inherit;">
+      <div class="fs-img-wrap">
+        <img src="images/blog-1-hero2.png" alt="Music Placement Guide" style="object-position: center top;" />
+        <span class="fs-img-badge">Music Industry</span>
+      </div>
+      <div class="fs-text">
+        <h2 class="fs-title" style="margin-bottom: 75px; text-transform: uppercase; font-family: 'Bebas Neue', sans-serif; font-size: 3rem; letter-spacing: 1px;">How to Get Your Music Placed with Labels Like Zee Music, Sa Re Ga Ma &amp; Times Music</h2>
+        <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid #e5e5e5;">
+          <span class="fs-btn">Read Full Article →</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 2 — BLOG GRID
+══════════════════════════════════════ -->
+<section id="blog-grid">
+  <div class="blog-grid-inner">
+    <h2 class="blog-grid-headline">Latest Articles</h2>
+    <div class="blog-cards-row">
+    <a class="blog-card" href="influencer-marketing-vs-brand-ambassador.html">
+      <div class="blog-card-thumb">
+        <img src="images/blog-2-hero.png" alt="Influencer Marketing vs Brand Ambassador" loading="lazy" />
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-badge">Influencer Marketing</span>
+        <h3 class="blog-card-title">Influencer Marketing vs. Brand Ambassador: What's the Difference and Which One Does Your Brand Actually Need?</h3>
+        <p class="blog-card-date">June 15, 2026</p>
+      </div>
+    </a>
+
+    <a class="blog-card" href="why-your-last-brand-film-didnt-perform.html">
+      <div class="blog-card-thumb">
+        <img src="images/blog-3-hero.png" alt="Why Your Brand Film Didn't Perform" loading="lazy" style="object-position: 30% center;" />
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-badge">Brand Production</span>
+        <h3 class="blog-card-title">Why Your Last Brand Film Didn't Perform (And What to Fix Before the Next One)</h3>
+        <p class="blog-card-date">June 12, 2026</p>
+      </div>
+    </a>
+
+    <a class="blog-card" href="what-does-a-casting-director-actually-do.html">
+      <div class="blog-card-thumb">
+        <img src="images/blog-4-hero.png" alt="What Does a Casting Director Do" loading="lazy" />
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-badge">Casting &amp; Production</span>
+        <h3 class="blog-card-title">What Does a Casting Director Actually Do? A Guide for Brands and Independent Filmmakers in India</h3>
+        <p class="blog-card-date">June 8, 2026</p>
+      </div>
+    </a>
+
+    <a class="blog-card" href="ad-film-vs-brand-film-vs-content-series.html">
+      <div class="blog-card-thumb">
+        <img src="images/blog-5-hero.png" alt="Ad Film vs Brand Film vs Content Series" loading="lazy" />
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-badge">Brand Production</span>
+        <h3 class="blog-card-title">Ad Film vs. Brand Film vs. Content Series: Which Format Should Your Brand Invest In?</h3>
+        <p class="blog-card-date">June 5, 2026</p>
+      </div>
+    </a>
+
+    <a class="blog-card" href="how-to-brief-a-production-house.html">
+      <div class="blog-card-thumb">
+        <img src="images/blog-6-hero.png" alt="How to Brief a Production House" loading="lazy" />
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-badge">Company Insights</span>
+        <h3 class="blog-card-title">How to Brief a Production House: What to Send Before the First Meeting</h3>
+        <p class="blog-card-date">June 2, 2026</p>
+      </div>
+    </a>
+
+    <a class="blog-card" href="why-indian-brands-are-using-entertainment-to-market-products.html">
+      <div class="blog-card-thumb">
+        <img src="images/blog-7-hero.png" alt="Entertainment Marketing" loading="lazy" style="object-position: 5% center;" />
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-badge">Brand Production</span>
+        <h3 class="blog-card-title">Short Films and Music Videos: Why More Indian Brands Are Using Entertainment to Market Their Products</h3>
+        <p class="blog-card-date">May 28, 2026</p>
+      </div>
+    </a>
+    </div><!-- /.blog-cards-row -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CTA + FOOTER
+══════════════════════════════════════ -->
+<div id="cta-footer-wrapper">
+<section id="cta">
+  <h2 class="cta-h2">
+    WORK WITH TOBC.<br/>
+    CREATE THE MAGIC.<br/>
+    <span class="cta-h2-line3">PRESS THIS BUTTON.
+      <a href="contact.html" class="cta-go-btn">GO →</a>
+    </span>
+  </h2>
+</section>
+
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-row">
+          <img src="logo/White logo.png" alt="TOBC Entertainment" />
+        </div>
+        <p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
+        <div class="footer-contact">
+          <a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span><span class="footer-link-text"> info@tobcentertainment.com</span></a>
+          <a href="tel:+918077552630"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 80775 52630</span></a>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start;">
+        <div class="footer-links-grid">
+          <a href="index.html">Home</a>
+<a href="about.html">About</a>
+          <a href="our-work.html">Our Work</a>
+          <a href="blog.html">Blog</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+        <div style="margin-top: -20px;">
+          <p class="footer-address-title">Come say Hi!</p>
+          <p class="footer-address-text">
+            9th Floor, SMARTWORKS,<br/>
+            Wing A, Paradigm, Mindspace,<br/>
+            Malad (W), Mumbai,<br/>
+            Maharashtra 400064, India
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/tobcentertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@tobcmusic" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </a>
+        <a href="https://www.twitter.com/CreativesOfTOBC" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter / X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/TOBCEntertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+      <p class="footer-copy">Copyright © 2026 TOBC Entertainment (OPC) Pvt. Ltd. All rights reserved.</p>
+      <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top ↑</button>
+    </div>
+  </div>
+</footer>
+</div><!-- end cta-footer-wrapper -->
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+  /* ── Nav scroll blur ── */
+  const nav = document.getElementById('nav');
+  let prevScrollPos = window.pageYOffset;
+  window.addEventListener('scroll', () => {
+    const currentScrollPos = window.pageYOffset;
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    if (currentScrollPos > 100) {
+      if (prevScrollPos < currentScrollPos) {
+        nav.style.transform = 'translateY(-100%)';
+      } else {
+        nav.style.transform = 'translateY(0)';
+      }
+    }
+    prevScrollPos = currentScrollPos;
+  }, { passive: true });
+
+  /* ── Hamburger menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  /* ── IntersectionObserver for reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOBC Entertainment — India's Premier Entertainment Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
+
+    /* ─── DESIGN TOKENS ─── */
+    :root {
+      --red: #E02020;
+      --dark-red: #CC0000;
+      --near-black: #0a0a0a;
+      --card-bg: #1a1a1a;
+      --footer-bg: #0d0d0d;
+      --gradient: linear-gradient(180deg, #7A0000 0%, #CC0000 18%, #E50914 38%, #FF6060 58%, #FFD0D0 72%, #FFF1F1 85%, #FAFAFA 100%);
+    }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ══════════════════════════════════════
+       NAV
+    ══════════════════════════════════════ */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 30px;
+      margin-bottom: -25px;
+      transition: background 0.3s, backdrop-filter 0.3s, transform 0.3s ease-in-out;
+      transform: translateY(0);
+    }
+    #nav.scrolled {
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 30px;
+    }
+    #nav.nav-hidden {
+      transform: translateY(-100%);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; transform: translateY(0px); margin-left: 30px; }
+    .nav-wordmark { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: #fff; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; height: 100%; }
+    .nav-links a {
+      font-family: 'Inter', sans-serif; font-size: 15px;
+      letter-spacing: 1px; color: #fff; text-decoration: none; opacity: 0.75;
+      transition: opacity 0.2s, text-decoration 0.2s;
+      line-height: 1;
+      transform: translateY(2px);
+      display: flex;
+      align-items: center;
+    }
+    .nav-links a:hover { opacity: 1; text-decoration: underline; }
+    .nav-cta {
+      padding: 12px 26px; border: 1.5px solid #fff; border-radius: 999px;
+      background: transparent; color: #fff; font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      transform: translateY(2px);
+      margin-right: 40px;
+    }
+    .nav-cta:hover { background: var(--red); border-color: var(--red); }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* mobile overlay */
+    #mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(10,10,10,0.97); flex-direction: column;
+      align-items: center; justify-content: center; gap: 32px;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px;
+      color: #fff; text-decoration: none; transition: color 0.2s;
+    }
+    #mobile-menu a:hover { color: var(--red); }
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    .hero-flow { background: var(--gradient); }
+    #hero {
+      position: relative; min-height: 100vh;
+      background: transparent;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center;
+      padding: 120px 24px 200px;
+      overflow: visible;
+    }
+    .hero-eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 20px;
+    }
+    .hero-h1 {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 96px);
+      line-height: 1; color: #fff; max-width: 1200px; margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 18px; color: #fff; max-width: 950px;
+      line-height: 1.6; margin-bottom: 40px;
+    }
+    .btn-red {
+      display: inline-block; padding: 16px 36px; background: #fff;
+      color: #CC0000; border-radius: 999px; font-family: 'Inter', sans-serif;
+      font-size: 15px; font-weight: 700; text-decoration: none; letter-spacing: 0.5px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-red:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+
+    /* portrait strip */
+    .portrait-strip {
+      position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: -12px; align-items: flex-end;
+      width: max-content;
+    }
+    .portrait-card {
+      width: 190px; height: 280px; border-radius: 999px;
+      overflow: hidden; position: relative; flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+    .portrait-strip { gap: 30px; }
+    .portrait-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .portrait-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+    }
+
+    /* ══════════════════════════════════════
+       MARQUEE (Section 2)
+    ══════════════════════════════════════ */
+    #marquee-section {
+      background: transparent;
+      padding: 120px 0 60px;
+    }
+    .marquee-label {
+      text-align: center; font-size: 12px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); margin-bottom: 32px;
+    }
+    .marquee-wrap { overflow: hidden; }
+    .marquee-track {
+      display: flex; width: 200%; gap: 48px; align-items: center;
+      animation: scrollLeft 40s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused !important; }
+    .marquee-track:has(img:hover) { animation-play-state: paused !important; }
+    .marquee-half { display: flex; gap: 48px; align-items: center; flex-shrink: 0; }
+    .marquee-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px; letter-spacing: 2px;
+      color: rgba(255,255,255,0.7);
+      white-space: nowrap;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .marquee-brand:hover { color: #fff; }
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ══════════════════════════════════════
+       ABOUT (Section 3)
+    ══════════════════════════════════════ */
+    #about {
+      background: transparent;
+      padding: 80px 40px 120px 40px;
+    }
+    .about-inner .reveal {
+      margin-left: -40px;
+    }
+    .about-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 550px 190px 480px; gap: 0px; align-items: center;
+    }
+    .about-inner .reveal {
+      grid-column: 1;
+    }
+    .about-inner .about-img {
+      grid-column: 3;
+    }
+    .tag-pill {
+      display: inline-block; padding: 6px 18px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px; font-size: 12px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase; color: #fff;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+    }
+    .about-h2 {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 68px);
+      line-height: 1; color: #fff; margin-bottom: 24px; text-transform: uppercase; word-spacing: -0.05em;
+      max-width: 1400px; white-space: normal; width: 100%; display: block; overflow-wrap: break-word;
+    }
+    @media (max-width: 1199px) {
+      .about-h2 {
+        max-width: 100%;
+      }
+    }
+    .about-body { font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 12px; }
+    .btn-outline-white {
+      display: inline-block; padding: 14px 30px;
+      border: 1.5px solid #fff; border-radius: 999px;
+      color: #fff; font-family: 'Inter', sans-serif; font-size: 14px;
+      font-weight: 600; text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .about-inner .btn-outline-white {
+      margin-top: 24px;
+    }
+    .btn-outline-white:hover { background: #333; border-color: #333; }
+    .work-header-right .btn-outline-white:hover { background: #fff; border-color: #fff; color: #111; }
+    .about-img {
+      position: relative; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .about-img img { width: 100%; height: 480px; object-fit: cover; display: block; }
+    .about-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(204, 0, 0, 0.15);
+    }
+
+    /* ══════════════════════════════════════
+       OUR WORK (Section 4)
+    ══════════════════════════════════════ */
+    #our-work {
+      background: transparent;
+      padding: 100px 48px;
+      overflow: hidden;
+    }
+    .work-header { margin-bottom: 48px; display: flex; align-items: flex-start; justify-content: space-between; gap: 48px; }
+    .work-eyebrow { font-size: 14px; color: rgba(0,0,0,0.45); font-style: italic; margin-bottom: 8px; }
+    .section-h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5.5vw, 72px); color: #111; line-height: 1; max-width: 520px; }
+    .work-header-right { display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 20px; padding-top: 32px; max-width: 320px; }
+    .work-sub { font-size: 15px; color: rgba(0,0,0,0.55); line-height: 1.65; margin: 0; }
+    .link-red { color: var(--red); text-decoration: none; font-size: 14px; font-weight: 600; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+    .link-red::after { content: '→'; }
+    .link-red:hover { text-decoration: underline; }
+
+    .carousel-outer { position: relative; }
+    .carousel-viewport { overflow: hidden; border-radius: 0; }
+    .carousel-track {
+      display: flex; gap: 20px;
+      transition: transform 0.4s ease;
+      cursor: grab;
+    }
+    .carousel-track.dragging { cursor: grabbing; transition: none; }
+    .work-card {
+      flex: 0 0 39%; position: relative;
+      border-radius: 16px; overflow: hidden;
+      aspect-ratio: 4/3; min-width: 280px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
+      cursor: pointer;
+    }
+    .work-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease, filter 0.3s ease; }
+    .work-card:hover img { transform: scale(1.02); filter: brightness(0.7); }
+    .play-button-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+    .work-card:hover .play-button-overlay {
+      opacity: 1;
+    }
+    .play-button-overlay::before {
+      content: '';
+      width: 70px;
+      height: 70px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .play-button-overlay::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 20px solid #E02020;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+    }
+    .work-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 50%, transparent 100%);
+    }
+    .work-card-badge {
+      position: absolute; top: 16px; left: 16px;
+      padding: 4px 14px; background: var(--red); border-radius: 999px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #fff;
+    }
+    .work-card-title {
+      position: absolute; bottom: 40px; left: 20px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #fff;
+    }
+    .work-card-date {
+      position: absolute; bottom: 18px; right: 20px;
+      font-size: 12px; color: rgba(255,255,255,0.7);
+    }
+
+    .carousel-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,0.18); background: rgba(255,255,255,0.9);
+      color: #111; font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      backdrop-filter: blur(8px);
+      transition: border-color 0.2s, background 0.2s, color 0.2s; z-index: 10;
+    }
+    .carousel-btn:hover { border-color: var(--red); background: var(--red); color: #fff; box-shadow: 0 4px 20px rgba(204,0,0,0.3); }
+    .carousel-btn.prev { left: -24px; }
+    .carousel-btn.next { right: -24px; }
+
+    /* ══════════════════════════════════════
+       SERVICES — STICKY SCROLL (Section 5)
+    ══════════════════════════════════════ */
+    #services { background: var(--near-black); padding: 0; }
+    .services-title-wrap { padding: 80px 48px 56px; text-align: center; }
+    .services-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5.5vw, 72px); color: #fff; margin: 0; }
+
+    .services-stack { padding: 0 48px 200px; }
+    .service-sticky-card {
+      position: sticky; top: 88px;
+      height: 480px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 52% 48%;
+      cursor: pointer;
+    }
+    .service-sticky-card.s1 { z-index: 1; margin-bottom: 24px; }
+    .service-sticky-card.s2 { z-index: 2; margin-bottom: 24px; }
+    .service-sticky-card.s3 { z-index: 3; margin-bottom: 24px; }
+    .service-sticky-card.s4 { z-index: 4; margin-bottom: 24px; }
+    .service-sticky-card.s5 { z-index: 5; margin-bottom: 24px; }
+    .service-sticky-card.s6 { z-index: 6; margin-bottom: 24px; }
+
+    /* image pane */
+    .ssc-img { position: relative; overflow: hidden; }
+    .ssc-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.6s ease;
+    }
+    .service-sticky-card:hover .ssc-img img { transform: scale(1.04); }
+
+    /* content pane */
+    .ssc-content {
+      background: #111;
+      padding: 52px 48px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .ssc-num {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif; font-size: 80px;
+      color: rgba(255,255,255,0.18); line-height: 1;
+      margin-bottom: 16px;
+    }
+    .ssc-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 3.2vw, 48px); color: #fff; line-height: 1;
+      margin-bottom: 18px;
+    }
+    .ssc-desc {
+      font-size: 15px; color: rgba(255,255,255,0.68);
+      line-height: 1.75; margin-bottom: 20px; max-width: 380px;
+    }
+    .ssc-list {
+      list-style: none; padding: 0; margin: 0 0 32px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .ssc-list li {
+      font-size: 14px; color: rgba(255,255,255,0.55);
+      padding-left: 20px; position: relative; line-height: 1.5;
+    }
+    .ssc-list li::before {
+      content: '•'; position: absolute; left: 0;
+      color: var(--red); font-size: 16px; line-height: 1.3;
+    }
+    .ssc-btn {
+      display: inline-block; padding: 12px 28px; width: fit-content;
+      border: 1.5px solid rgba(255,255,255,0.35); border-radius: 999px;
+      color: #fff; font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 600; text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .ssc-btn:hover { background: var(--red); border-color: var(--red); }
+
+    @media (max-width: 768px) {
+      .services-stack { padding: 0 16px 40px; }
+      .service-sticky-card {
+        position: relative; top: 0; margin: 0 0 20px;
+        grid-template-columns: 1fr; height: auto; border-radius: 16px;
+      }
+      .ssc-img { height: 240px; }
+      .ssc-content { padding: 32px 24px; }
+      .ssc-num { font-size: 80px; }
+    }
+
+    /* ══════════════════════════════════════
+       TESTIMONIALS (Section 6)
+    ══════════════════════════════════════ */
+    #testimonials {
+      background: #080808; padding: 80px 48px 120px;
+      text-align: center;
+      border-radius: 0 0 60px 60px;
+      position: relative;
+      z-index: 4;
+    }
+    .testimonials-h2 {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 80px);
+      color: #fff; line-height: 1; margin-bottom: 60px;
+    }
+    .testimonial-stage {
+      position: relative; max-width: 660px; margin: 0 auto;
+      padding-bottom: 16px; overflow: visible;
+    }
+    .ghost-card {
+      position: absolute; inset: 0;
+      border-radius: 20px;
+      box-shadow: none; border: none;
+      transition: transform 0.4s ease;
+    }
+    .ghost-card.g1 {
+      background: #FF1E2D;
+      border: none;
+      transform: rotate(-5deg) translate(-10px, 8px);
+      z-index: 0;
+    }
+    .ghost-card.g2 {
+      background: #E8001A;
+      border: none;
+      transform: rotate(4deg) translate(8px, -6px);
+      z-index: 1;
+    }
+    .testi-card {
+      position: relative; background: #fff; border-radius: 20px;
+      padding: 40px 48px;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.5);
+      z-index: 2;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .testi-quote { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: var(--red); line-height: 0.6; margin-bottom: 16px; }
+    .testi-text { font-size: 18px; color: #1a1a1a; line-height: 1.6; margin-bottom: 24px; }
+    .testi-author { display: flex; align-items: center; justify-content: center; gap: 14px; }
+    .testi-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+    .testi-name { font-weight: 700; font-size: 14px; color: #111; }
+    .testi-role { font-size: 12px; color: var(--red); text-transform: uppercase; letter-spacing: 1px; }
+    .testi-nav { display: flex; gap: 16px; justify-content: center; margin-top: 32px; }
+    .testi-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.06);
+      color: #fff; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .testi-btn:hover { background: var(--red); border-color: var(--red); }
+
+    /* ══════════════════════════════════════
+       CTA (Section 7)
+    ══════════════════════════════════════ */
+    #cta {
+      background: var(--red);
+      padding: 80px 48px 20px;
+      text-align: center;
+      position: sticky;
+      bottom: 320px;
+      z-index: 2;
+      margin-top: -60px;
+      padding-top: 140px;
+    }
+    .cta-h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 96px); line-height: 0.95;
+      color: #fff; margin-bottom: 0;
+    }
+    .cta-h2-line3 { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .cta-go-btn {
+      display: inline-flex; align-items: center; padding: 14px 28px;
+      border: 2px solid #fff; border-radius: 999px;
+      background: #fff; color: var(--red);
+      font-family: 'Bebas Neue', sans-serif; font-size: 36px;
+      letter-spacing: 1px; text-decoration: none; cursor: pointer;
+      box-shadow: 0 0 0 0 rgba(227,27,27,0);
+      transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+    }
+    .cta-go-btn:hover {
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 0 24px 8px rgba(255,255,255,0.3), 0 0 50px 18px rgba(255,255,255,0.15);
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER (Section 8)
+    ══════════════════════════════════════ */
+    #footer { background: var(--red); padding: 80px 40px 40px; position: sticky; bottom: 0; z-index: 1; }
+    #cta-footer-wrapper { overflow: visible; }
+    #cta { position: sticky; bottom: 0; z-index: 3; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 48px; }
+    .footer-address-title {
+      font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 700;
+      color: #fff; margin-top: 28px; margin-bottom: 12px; line-height: 1.7;
+      text-transform: uppercase;
+    }
+    .footer-address-text { font-size: 17px; color: #fff; line-height: 1.7; }
+    .address-line { white-space: nowrap; }
+    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; margin-top: -20px; margin-left: -15px; }
+    .footer-logo-row img { height: 80px; width: auto; display: block; }
+    .footer-tagline { font-size: 18px; color: #fff; line-height: 1.6; margin-bottom: 28px; }
+    .footer-contact a {
+      display: flex; align-items: center; gap: 8px;
+      color: #fff; text-decoration: none; font-size: 20px; font-weight: 400;
+      margin-bottom: 10px; transition: text-decoration 0.2s; line-height: 1;
+    }
+    .contact-icon { font-size: 32px; color: #fff; display: flex; align-items: center; }
+    .footer-contact a:nth-child(2) .contact-icon { font-size: 20px; filter: brightness(0) invert(1); }
+    .footer-contact a:hover { text-decoration: none; }
+    .footer-contact a:hover .footer-link-text { text-decoration: underline; }
+    .footer-links-grid { display: flex; flex-direction: column; gap: 20px; align-content: start; padding-top: 8px; }
+    .footer-links-grid a {
+      font-size: 18px; color: #fff; text-decoration: none;
+      transition: text-decoration 0.2s;
+    }
+    .footer-links-grid a:hover { text-decoration: underline; }
+    .footer-bottom {
+      margin: 0 -40px -40px; padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .social-icons { display: flex; gap: 10px; }
+    .social-icon {
+      width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.1);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      color: #fff; text-decoration: none; font-size: 16px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-icon:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
+    .footer-copy { font-size: 13px; color: #fff; text-align: center; }
+    .back-to-top {
+      padding: 10px 22px; border: 1.5px solid #fff;
+      border-radius: 999px; background: rgba(255,255,255,0.1); color: #fff;
+      font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    }
+    .back-to-top:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    /* ══════════════════════════════════════
+       BLOGS SECTION
+    ══════════════════════════════════════ */
+    #blogs-section {
+      background: #F9F9F7;
+      padding: 100px 48px 120px;
+      border-radius: 0 0 60px 60px;
+      position: relative;
+      z-index: 4;
+    }
+    .blogs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .blogs-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 7vw, 80px);
+      color: #111;
+      margin-bottom: 60px;
+      line-height: 1;
+    }
+    .blogs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .blog-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .blog-card-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+    }
+    .blog-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .blog-card:hover .blog-card-image img {
+      transform: scale(1.04);
+    }
+    .blog-card-content {
+      padding: 20px 24px 32px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .blog-card-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #E02020;
+      margin-bottom: 12px;
+    }
+    .blog-card-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #111;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-card-date {
+      font-size: 13px;
+      color: #888;
+      font-weight: 500;
+    }
+    #blogs-section .btn-outline-white:hover { background: var(--red); border-color: var(--red); color: #fff; }
+    @media (max-width: 768px) {
+      #blogs-section { padding: 60px 20px 80px; }
+      .blogs-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    }
+    @media (max-width: 480px) {
+      .blogs-grid { grid-template-columns: 1fr; }
+    }
+
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      pointer-events: auto;
+    }
+    .video-modal.active {
+      display: flex;
+    }
+    .modal-content {
+      position: relative;
+      width: 90vw;
+      max-width: 1200px;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      pointer-events: auto;
+    }
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .iframe-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+      transition: background 0.2s, border-color 0.2s;
+      pointer-events: auto;
+    }
+    .modal-close:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    @media (max-width: 768px) {
+      #nav { padding: 14px 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      #hero { padding: 100px 20px 100px; }
+      .portrait-strip { display: none; }
+
+      #marquee-section { padding: 60px 0 40px; }
+
+      #about { padding: 60px 20px 80px; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-inner .about-img { order: -1; }
+      .about-img img { height: 280px; }
+
+      #our-work { padding: 60px 20px; }
+      .work-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .work-card { flex: 0 0 85%; }
+      .carousel-btn { display: none; }
+
+      #services { padding: 60px 20px 80px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { aspect-ratio: 3/2; }
+
+      #testimonials { padding: 80px 20px 0; }
+      .testi-card { padding: 28px 24px; }
+      .testi-text { font-size: 16px; }
+
+      #cta { padding: 0 20px 80px; }
+      .cta-h2 { font-size: clamp(40px, 10vw, 56px); }
+
+      #footer { padding: 60px 20px 30px; }
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <img src="logo/White logo.png" alt="TOBC Entertainment" style="height: 90px; width: auto;" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="our-work.html">Our Work</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">Contact Us</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- mobile menu -->
+<div id="mobile-menu">
+  <a href="#hero" class="mob-link">Home</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#our-work" class="mob-link">Our Work</a>
+  <a href="gallery.html" class="mob-link">Gallery</a>
+  <a href="blog.html" class="mob-link">Blog</a>
+  <a href="contact.html" class="mob-link">Contact Us</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<div class="hero-flow">
+<section id="hero">
+  <h1 class="hero-h1 reveal">India's Most Trusted Entertainment<br>Production Partner</h1>
+  <p class="hero-sub reveal">Reliable production, powerful brand endorsements, and high-impact<br>video campaigns for 100+ brands, connected across 15+ countries.</p>
+  <a href="our-work.html" class="btn-red reveal">Take A Look At Our Work →</a>
+
+  <div class="portrait-strip">
+    <div class="portrait-card"><img src="input/hero-images/Alia_Bhatt_attends_at_the_2026_Cannes_Film_Festival_(cropped)_(cropped).jpg" alt="Alia Bhatt" loading="lazy"/></div>
+    <div class="portrait-card"><img src="input/hero-images/07-11-2022_384321sunil-grover1.jpg" alt="Sunil Grover" loading="lazy"/></div>
+    <div class="portrait-card"><img src="input/hero-images/rakeshbedi.png" alt="Rakesh Bedi" loading="lazy"/></div>
+    <div class="portrait-card"><img src="input/hero-images/saina-nehwal-2026-01-511c7f58dc2d1d70755bce5b00f7716e.jpg" alt="Saina Nehwal" loading="lazy"/></div>
+    <div class="portrait-card"><img src="input/hero-images/Varun_Sharma_1.jpg" alt="Varun Sharma" loading="lazy"/></div>
+    <div class="portrait-card"><img src="input/hero-images/daya.png" alt="Daya" loading="lazy"/></div>
+    <div class="portrait-card"><img src="input/hero-images/tamannah.jpg" alt="Tamannaah" loading="lazy"/></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MARQUEE (LOGOS)
+══════════════════════════════════════ -->
+<section id="marquee-section" style="background: transparent; padding: 150px 0 40px 0;">
+  <div class="marquee-wrap" style="overflow: hidden;">
+    <div class="marquee-track" style="gap: 80px; width: 200%; animation: scrollLeft 50s linear infinite; display: flex; align-items: center; padding: 0 48px;">
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ChatGPT Image Jul 8, 2026, 11_23_09 PM.png" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ChatGPT Image Jul 8, 2026, 11_24_33 PM.png" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/CRED_White_logo_1d81a91e96.png" alt="CRED Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ChatGPT Image Jul 8, 2026, 11_39_47 PM.png" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/Prime-Video-Logo-PNG.png" alt="Prime Video Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/Asset+1@2x.webp" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ChatGPT Image Jul 8, 2026, 11_45_54 PM.png" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ChatGPT Image Jul 8, 2026, 11_47_02 PM.png" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ADANIENT.NS.D-43788a1f.png" alt="Adani Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/aviva-logo-black-and-white.png" alt="Aviva Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <!-- Duplicate for seamless looping -->
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ChatGPT Image Jul 8, 2026, 11_23_09 PM.png" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ChatGPT Image Jul 8, 2026, 11_24_33 PM.png" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/CRED_White_logo_1d81a91e96.png" alt="CRED Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ChatGPT Image Jul 8, 2026, 11_39_47 PM.png" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/Prime-Video-Logo-PNG.png" alt="Prime Video Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/Asset+1@2x.webp" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ChatGPT Image Jul 8, 2026, 11_45_54 PM.png" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ChatGPT Image Jul 8, 2026, 11_47_02 PM.png" alt="Brand Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/ADANIENT.NS.D-43788a1f.png" alt="Adani Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+      <div style="width: 180px; height: 150px; display: flex; align-items: center; justify-content: center;"><img src="logo/aviva-logo-black-and-white.png" alt="Aviva Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;" loading="lazy"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     ABOUT
+══════════════════════════════════════ -->
+<section id="about">
+  <div class="about-inner">
+    <div class="reveal">
+      <h2 class="about-h2">The production house<br>brands keep returning to</h2>
+      <p class="about-body">TOBC started with a song in 2021.</p>
+      <p class="about-body">We met wherever we could. No business plan. No office.</p>
+      <p class="about-body">Just a music video called Tum Mere Paas and one belief: that good work finds its audience.</p>
+      <p class="about-body">Today, just a few years later, it's a creative network across 15+ countries making films, advertisements, music videos, films, live events, and multilingual content for brands, artists, and agencies.</p>
+      <p class="about-body">We manage talents. We build brands. We show up on set, on time, and on brief. Every single time.</p>
+      <p class="about-body">That's how a song built a production house.</p>
+      <a href="about.html" class="btn-outline-white">All About TOBC →</a>
+    </div>
+    <div class="about-img reveal">
+      <img src="input/about-images/tobc-new-about.webp" alt="TOBC Production" loading="lazy"/>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     OUR WORK
+══════════════════════════════════════ -->
+<section id="our-work">
+  <div class="work-header reveal">
+    <div>
+      <p class="work-eyebrow">*Curious About What We've Created?</p>
+      <h2 class="section-h2">EXPLORE OUR MOST SUCCESSFUL PROJECTS</h2>
+    </div>
+    <div class="work-header-right">
+      <a href="our-work.html" class="btn-outline-white" style="color: #111; border-color: #111;">View More Projects →</a>
+    </div>
+  </div>
+  <div class="carousel-outer reveal">
+    <button class="carousel-btn prev" id="work-prev" aria-label="Previous">&#8592;</button>
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="work-track">
+        <div class="work-card" data-vimeo-id="1195985556">
+          <img src="https://vumbnail.com/1195985556.jpg" alt="Advertisement" loading="lazy"/>
+          <div class="play-button-overlay"></div>
+          <div class="work-card-overlay"></div>
+          <span class="work-card-badge">Advertisement</span>
+          <span class="work-card-title">Chetak Screen Awards</span>
+          
+        </div>
+        <div class="work-card" data-vimeo-id="1058910593">
+          <img src="https://vumbnail.com/1058910593.jpg" alt="Brand Campaign" loading="lazy"/>
+          <div class="play-button-overlay"></div>
+          <div class="work-card-overlay"></div>
+          <span class="work-card-badge">Advertisement</span>
+          <span class="work-card-title">Amazon Prime India</span>
+          
+        </div>
+        <div class="work-card" data-vimeo-id="1143090932">
+          <img src="https://vumbnail.com/1143090932.jpg" alt="Brand Story" loading="lazy"/>
+          <div class="play-button-overlay"></div>
+          <div class="work-card-overlay"></div>
+          <span class="work-card-badge">Advertisement</span>
+          <span class="work-card-title">Philips</span>
+          
+        </div>
+        <div class="work-card" data-vimeo-id="1147627110">
+          <img src="https://vumbnail.com/1147627110.jpg" alt="Creative Direction" loading="lazy"/>
+          <div class="play-button-overlay"></div>
+          <div class="work-card-overlay"></div>
+          <span class="work-card-badge">Advertisement</span>
+          <span class="work-card-title">Skyscanner</span>
+          
+        </div>
+        <div class="work-card" data-vimeo-id="838546884">
+          <img src="https://vumbnail.com/838546884.jpg" alt="Rhythm Rising" loading="lazy"/>
+          <div class="play-button-overlay"></div>
+          <div class="work-card-overlay"></div>
+          <span class="work-card-badge">Music</span>
+          <span class="work-card-title">Muskurana Tera</span>
+          
+        </div>
+        <div class="work-card" data-vimeo-id="1206822796">
+          <img src="https://vumbnail.com/1206822796.jpg" alt="The Last Take" loading="lazy"/>
+          <div class="play-button-overlay"></div>
+          <div class="work-card-overlay"></div>
+          <span class="work-card-badge">Film</span>
+          <span class="work-card-title">Dilemma</span>
+          
+        </div>
+      </div>
+    </div>
+    <button class="carousel-btn next" id="work-next" aria-label="Next">&#8594;</button>
+  </div>
+</section>
+</div>
+
+<!-- ══════════════════════════════════════
+     SERVICES
+══════════════════════════════════════ -->
+<section id="services">
+  <div class="services-title-wrap reveal">
+    <h2 class="services-title">WHAT WE DO</h2>
+  </div>
+
+  <div class="services-stack">
+    <div class="service-sticky-card s1">
+      <div class="ssc-img">
+        <img src="input/services/film-production.jpg" alt="Video Production" loading="lazy"/>
+      </div>
+      <div class="ssc-content">
+        <span class="ssc-num">01</span>
+        <div class="ssc-name">VIDEO PRODUCTION</div>
+        <p class="ssc-desc">From concept to final production, we create content built for brands, campaigns and entertainment.</p>
+        <ul class="ssc-list">
+          <li>UGC & P2C Content</li>
+          <li>Advertisements (TVCs & DVCs)</li>
+          <li>Government Campaigns</li>
+          <li>Films, Web Series, Music Videos</li>
+          <li>Vertical Series</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-sticky-card s2">
+      <div class="ssc-img">
+        <img src="input/services/post-production.webp" alt="Post Production" loading="lazy"/>
+      </div>
+      <div class="ssc-content">
+        <span class="ssc-num">02</span>
+        <div class="ssc-name">POST PRODUCTION</div>
+        <p class="ssc-desc">We turn raw footage into polished videos built for campaigns, brands and digital platforms.</p>
+        <ul class="ssc-list">
+          <li>Video Editing & Graphic Design</li>
+          <li>Color Grading & DI</li>
+          <li>Motion Graphics & Animation</li>
+          <li>Sound Design</li>
+          <li>VFX & AI Video Enhancement</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-sticky-card s3">
+      <div class="ssc-img">
+        <img src="input/services/talent.png" alt="Talent Collaborations" loading="lazy"/>
+      </div>
+      <div class="ssc-content">
+        <span class="ssc-num">03</span>
+        <div class="ssc-name">TALENT COLLABORATIONS</div>
+        <p class="ssc-desc">Connecting brands with the right talent to create campaigns that get noticed.</p>
+        <ul class="ssc-list">
+          <li>Celebrity Endorsements</li>
+          <li>Influencer & Creator Collaborations</li>
+          <li>Talent Sourcing & Coordination</li>
+          <li>Talent Negotiation & Contracts</li>
+          <li>Event & Launch Appearances</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-sticky-card s5">
+      <div class="ssc-img">
+        <img src="input/services/marketing.jpg" alt="Growth Marketing" loading="lazy" style="object-position: 65% center;"/>
+      </div>
+      <div class="ssc-content">
+        <span class="ssc-num">04</span>
+        <div class="ssc-name">GROWTH MARKETING</div>
+        <p class="ssc-desc">Marketing strategies built to increase visibility, and drive measurable business growth.</p>
+        <ul class="ssc-list">
+          <li>Performance Marketing</li>
+          <li>Paid Search & Social Campaigns</li>
+          <li>SEO & ASO</li>
+          <li>E-commerce Marketing</li>
+          <li>ATL & BTL Activations</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="service-sticky-card s6">
+      <div class="ssc-img">
+        <img src="input/services/ai.jpg" alt="AI Creative & Digital" loading="lazy"/>
+      </div>
+      <div class="ssc-content">
+        <span class="ssc-num">05</span>
+        <div class="ssc-name">AI CREATIVE & DIGITAL</div>
+        <p class="ssc-desc">AI powered creative solutions for brands looking to produce faster and experiment with new formats.</p>
+        <ul class="ssc-list">
+          <li>AI Campaigns & Advertisements</li>
+          <li>AI Generated UGC</li>
+          <li>AI Creator Development</li>
+          <li>AI Video Production</li>
+          <li>AI Powered Websites</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════ -->
+<section id="testimonials">
+  <h2 class="testimonials-h2 reveal">WHAT THEY SAY ABOUT US</h2>
+  <div class="testimonial-stage reveal">
+    <div class="ghost-card g1"></div>
+    <div class="testi-card" id="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text" id="testi-text">It was a really amazing experience to working with these professionals. Everything was superb. Well organised well plan very great humans highly recommend to work with these kind of people which you find rare in our industry.</p>
+      <div class="testi-author">
+        <img class="testi-avatar" id="testi-avatar" src="input/review-images/unnamed.png" alt="sharma Yashdeep"/>
+        <div>
+          <div class="testi-name" id="testi-name">sharma Yashdeep</div>
+          <div class="testi-role" id="testi-role"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="testi-nav">
+    <button class="testi-btn" id="testi-prev" aria-label="Previous">&#8592;</button>
+    <button class="testi-btn" id="testi-next" aria-label="Next">&#8594;</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOGS SECTION
+══════════════════════════════════════ -->
+<section id="blogs-section" class="reveal">
+  <div class="blogs-inner">
+    <h2 class="blogs-heading">Let's do <span style="color: var(--red);">Entertainment Talk</span></h2>
+    <div class="blogs-grid">
+      <a href="blog.html" class="blog-card">
+        <div class="blog-card-image">
+          <img src="images/blog-2-hero.png" alt="Influencer Marketing vs Brand Ambassador" loading="lazy"/>
+        </div>
+        <div class="blog-card-content">
+          <h3 class="blog-card-title">Influencer Marketing vs. Brand Ambassador: What's the Difference and Which One Does Your Brand Actually Need?</h3>
+          <p class="blog-card-date">June 15, 2026</p>
+        </div>
+      </a>
+
+      <a href="blog.html" class="blog-card">
+        <div class="blog-card-image">
+          <img src="images/blog-3-hero.png" alt="Why Your Last Brand Film Didn't Perform" loading="lazy"/>
+        </div>
+        <div class="blog-card-content">
+          <h3 class="blog-card-title">Why Your Last Brand Film Didn't Perform (And What to Fix Before the Next One)</h3>
+          <p class="blog-card-date">June 12, 2026</p>
+        </div>
+      </a>
+
+      <a href="blog.html" class="blog-card">
+        <div class="blog-card-image">
+          <img src="images/blog-4-hero.png" alt="What Does a Casting Director Do" loading="lazy"/>
+        </div>
+        <div class="blog-card-content">
+          <h3 class="blog-card-title">What Does a Casting Director Actually Do? A Guide for Brands and Independent Filmmakers in India</h3>
+          <p class="blog-card-date">June 8, 2026</p>
+        </div>
+      </a>
+    </div>
+    <div style="text-align: center; margin-top: 60px;">
+      <a href="blog.html" class="btn-outline-white" style="color: #111; border-color: #111;">Read All Blogs →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CTA + FOOTER
+══════════════════════════════════════ -->
+<div id="cta-footer-wrapper">
+<section id="cta">
+  <h2 class="cta-h2">
+    WORK WITH TOBC.<br/>
+    CREATE THE MAGIC.<br/>
+    <span class="cta-h2-line3">PRESS THIS BUTTON.
+      <a href="contact.html" class="cta-go-btn">GO →</a>
+    </span>
+  </h2>
+</section>
+
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-row">
+          <img src="logo/White logo.png" alt="TOBC Entertainment" />
+        </div>
+        <p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
+        <div class="footer-contact">
+          <a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span><span class="footer-link-text"> info@tobcentertainment.com</span></a>
+          <a href="tel:+918077552630"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 80775 52630</span></a>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start;">
+        <div class="footer-links-grid">
+          <a href="index.html">Home</a>
+<a href="about.html">About</a>
+          <a href="our-work.html">Our Work</a>
+          <a href="blog.html">Blog</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+        <div style="margin-top: -20px;">
+          <p class="footer-address-title">Come say Hi!</p>
+          <p class="footer-address-text">
+            9th Floor, SMARTWORKS,<br/>
+            Wing A, Paradigm, Mindspace,<br/>
+            Malad (W), Mumbai,<br/>
+            Maharashtra 400064, India
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/tobcentertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@tobcmusic" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </a>
+        <a href="https://www.twitter.com/CreativesOfTOBC" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter / X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/TOBCEntertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+      <p class="footer-copy">Copyright © 2026 TOBC Entertainment (OPC) Pvt. Ltd. All rights reserved.</p>
+      <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top ↑</button>
+    </div>
+  </div>
+</footer>
+</div><!-- end cta-footer-wrapper -->
+
+<!-- ══════════════════════════════════════
+     VIDEO MODAL
+══════════════════════════════════════ -->
+<div class="video-modal" id="videoModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeVideoModal()">&times;</button>
+    <div class="iframe-wrapper">
+      <iframe id="modalIframe" title="vimeo-player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+  /* ── Nav scroll blur ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  /* ── Hamburger menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  /* ── IntersectionObserver for reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Work carousel ── */
+  (function() {
+    const track = document.getElementById('work-track');
+    const prevBtn = document.getElementById('work-prev');
+    const nextBtn = document.getElementById('work-next');
+    let allCards = Array.from(track.querySelectorAll('.work-card'));
+    const totalOriginal = allCards.length;
+    let idx = 0;
+    let cardsVisible = 2;
+
+    // Clone first 2 cards and append for seamless infinite loop
+    const clonesToAppend = Math.min(2, totalOriginal);
+    for (let i = 0; i < clonesToAppend; i++) {
+      const clone = allCards[i].cloneNode(true);
+      track.appendChild(clone);
+    }
+
+    allCards = Array.from(track.querySelectorAll('.work-card'));
+    const total = allCards.length;
+
+    function getCardWidth() {
+      if (allCards[0]) return allCards[0].offsetWidth + 20;
+      return 0;
+    }
+
+    function getCardsVisible() {
+      return window.innerWidth <= 768 ? 1 : 2;
+    }
+
+    function getMaxIdx() {
+      cardsVisible = getCardsVisible();
+      return Math.max(0, totalOriginal - cardsVisible);
+    }
+
+    function updateTransform() {
+      track.style.transform = `translateX(-${idx * getCardWidth()}px)`;
+    }
+
+    function navigate(direction) {
+      idx += direction;
+      track.style.transition = 'transform 0.4s ease';
+      updateTransform();
+
+      // After animation, seamlessly reset if looped
+      setTimeout(() => {
+        const maxIdx = getMaxIdx();
+        if (idx > maxIdx) {
+          idx = 0;
+          track.style.transition = 'none';
+          updateTransform();
+        } else if (idx < 0) {
+          idx = maxIdx;
+          track.style.transition = 'none';
+          updateTransform();
+        }
+      }, 400);
+    }
+
+    function update() {
+      updateTransform();
+    }
+
+    prevBtn.addEventListener('click', () => { navigate(-1); });
+    nextBtn.addEventListener('click', () => { navigate(1); });
+    window.addEventListener('resize', update, { passive: true });
+
+    /* drag/swipe */
+    let startX = 0, dragging = false;
+    track.addEventListener('mousedown', e => { startX = e.clientX; dragging = true; track.classList.add('dragging'); });
+    window.addEventListener('mouseup', e => {
+      if (!dragging) return; dragging = false; track.classList.remove('dragging');
+      const diff = startX - e.clientX;
+      if (Math.abs(diff) > 50) { navigate(diff > 0 ? 1 : -1); }
+    });
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { navigate(diff > 0 ? 1 : -1); }
+    }, { passive: true });
+  })();
+
+  /* ── Video modal handlers ── */
+  function openVideoModal(vimeoId) {
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('modalIframe');
+    iframe.src = `https://player.vimeo.com/video/${vimeoId}`;
+    modal.classList.add('active');
+  }
+
+  function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('modalIframe');
+    modal.classList.remove('active');
+    iframe.src = '';
+  }
+
+  /* ── Work card click handlers ── */
+  document.querySelectorAll('.work-card[data-vimeo-id]').forEach(card => {
+    card.addEventListener('click', function() {
+      const vimeoId = this.getAttribute('data-vimeo-id');
+      openVideoModal(vimeoId);
+    });
+  });
+
+  /* ── Close modal on outside click ── */
+  document.getElementById('videoModal').addEventListener('click', function(e) {
+    if (e.target === this) closeVideoModal();
+  });
+
+  /* ── Close modal on Escape ── */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeVideoModal();
+  });
+
+  /* ── Testimonial slider ── */
+  (function() {
+    const testimonials = [
+      { text: "It was a really amazing experience to working with these professionals. Everything was superb. Well organised well plan very great humans highly recommend to work with these kind of people which you find rare in our industry.", name: "sharma Yashdeep", role: "", avatar: "input/review-images/unnamed.png" },
+      { text: "Tobc team has come up with good and enthusiastic team .. love working with such professionals.. cheers", name: "DI Baas Films", role: "DI Studio", avatar: "input/review-images/unnamed2.png" },
+      { text: "Good people to work with ...", name: "oankar chavan", role: "DOP", avatar: "input/review-images/unnamed4.png" },
+      { text: "This was a great experience to work with them honestly smart or good people thank you for the opportunity shivam sir,❤", name: "MΔC", role: "Editor", avatar: "input/review-images/unnamed3.png" },
+      { text: "Great production house in Mumbai great teem and lovely experience ❤️❤️❤️👌👌", name: "Akshat Kalra", role: "", avatar: "input/review-images/unnamed5.png" }
+    ];
+    let cur = 0;
+    const card = document.getElementById('testi-card');
+    const textEl = document.getElementById('testi-text');
+    const nameEl = document.getElementById('testi-name');
+    const roleEl = document.getElementById('testi-role');
+    const avatarEl = document.getElementById('testi-avatar');
+
+    const tilts = [-4, 3, -2, 4, -3, 2];
+    let tiltIdx = 0;
+
+    function show(i, direction) {
+      const tilt = tilts[tiltIdx % tilts.length] * (direction >= 0 ? 1 : -1);
+      tiltIdx++;
+      const g1 = document.querySelector('.ghost-card.g1');
+      const g2 = document.querySelector('.ghost-card.g2');
+
+      card.style.opacity = '0';
+      card.style.transform = `rotate(${tilt * 0.5}deg)`;
+      setTimeout(() => {
+        const t = testimonials[i];
+        textEl.textContent = t.text;
+        nameEl.textContent = t.name;
+        roleEl.textContent = t.role;
+        avatarEl.src = t.avatar;
+        avatarEl.alt = t.name;
+        card.style.opacity = '1';
+        card.style.transform = `rotate(${tilt}deg)`;
+        if (g1) g1.style.transform = `rotate(${tilt - 3}deg)`;
+        if (g2) g2.style.transform = `rotate(${tilt + 3}deg)`;
+      }, 200);
+    }
+
+    card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    document.getElementById('testi-prev').addEventListener('click', () => { cur = (cur - 1 + testimonials.length) % testimonials.length; show(cur, -1); });
+    document.getElementById('testi-next').addEventListener('click', () => { cur = (cur + 1) % testimonials.length; show(cur, 1); });
+  })();
+</script>
+
+<!-- CONNECT WITH US MODAL -->
+<div id="contact-modal" style="display:none; position:fixed; inset:0; z-index:2000; overflow-y:auto; background:#0a0a0a;">
+<style>
+#contact-modal {font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff;}
+:root {--red:#E31B1B;--red-hover:#c41515;--black:#0a0a0a;--white:#ffffff;--grey:#888888;--border:#222222;}
+#contact-modal a {color:inherit;}
+#contact-modal .modal-nav {position:sticky;top:0;z-index:2001;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(10,10,10,0.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #1a1a1a;}
+#contact-modal .modal-nav-logo {display:flex;align-items:center;gap:10px;text-decoration:none;}
+#contact-modal .modal-nav-logo img {height:28px;width:auto;display:block;}
+#contact-modal .modal-nav-wordmark {font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#fff;}
+#contact-modal .modal-nav-links {display:flex;gap:28px;list-style:none;margin:0;padding:0;}
+#contact-modal .modal-nav-links a {font-family:'Inter',sans-serif;font-size:13px;font-variant:small-caps;letter-spacing:1px;color:#fff;text-decoration:none;opacity:0.85;transition:opacity 0.2s;}
+#contact-modal .modal-nav-links a:hover {opacity:1;}
+#contact-modal .modal-close-btn {padding:10px 22px;border:1.5px solid #fff;border-radius:999px;background:transparent;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.2s,color 0.2s;flex-shrink:0;}
+#contact-modal .modal-close-btn:hover {background:#fff;color:#E31B1B;border-color:#fff;}
+#contact-modal #hook {background:var(--black);padding:80px 0 0;}
+#contact-modal .hook-form-inner {max-width:1400px;margin:0 auto;display:flex;align-items:flex-start;}
+#contact-modal .hook-left {width:50%;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-start;padding:15px 60px 80px 80px;position:sticky;top:120px;}
+#contact-modal .hook-h1 {font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5.5vw,72px);line-height:1.05;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:24px;}
+#contact-modal .hook-subline {font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.5vw,36px);color:var(--grey);text-transform:uppercase;letter-spacing:1px;line-height:1.2;}
+#contact-modal .hook-right {flex:1;min-width:0;}
+#contact-modal #contact-form {background:transparent;padding:80px 60px;}
+#contact-modal .form-section-title-row {display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+#contact-modal .form-section-title {font-family:'Bebas Neue',sans-serif;letter-spacing:0.5px;font-size:28px;font-weight:400;color:#fff;}
+#contact-modal .form-divider {border:none;border-top:1px solid #222;margin-bottom:36px;}
+#contact-modal .form-field {margin-bottom:30px;}
+#contact-modal .form-field label {display:block;font-size:18px;font-weight:600;color:#fff;margin-bottom:10px;}
+#contact-modal .form-field input,#contact-modal .form-field select,#contact-modal .form-field textarea {width:100%;background:transparent;border:none;border-bottom:1.5px solid #333;color:#fff;font-family:'Inter',sans-serif;font-size:17px;font-weight:500;padding:8px 2px;outline:none;transition:border-color 0.2s;}
+#contact-modal .form-field textarea {resize:vertical;min-height:90px;font-family:inherit;}
+#contact-modal .form-field input::placeholder,#contact-modal .form-field textarea::placeholder {color:#555;font-weight:400;}
+#contact-modal .form-field input:focus,#contact-modal .form-field select:focus,#contact-modal .form-field textarea:focus {border-bottom:1.5px solid var(--red);}
+#contact-modal .phone-field {display:flex;align-items:center;gap:8px;border-bottom:1.5px solid #333;padding-bottom:4px;}
+#contact-modal .phone-field:focus-within {border-bottom-color:var(--red);}
+#contact-modal .phone-prefix {font-size:15px;font-weight:500;color:#fff;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+#contact-modal .phone-field input {border-bottom:none;padding:8px 2px 4px;}
+#contact-modal .form-field select {appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%23ffffff' stroke-width='2' fill='none' fill-rule='evenodd'/></svg>");background-repeat:no-repeat;background-position:right 4px center;cursor:pointer;}
+#contact-modal .form-field select:invalid,#contact-modal .form-field select option[value=""] {color:#555;}
+#contact-modal .form-field select option {color:#111;}
+#contact-modal .submit-btn {display:inline-flex;align-items:center;gap:10px;padding:16px 36px;margin-top:8px;background:var(--red);color:#fff;border:none;border-radius:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:15px;letter-spacing:1px;cursor:pointer;transition:background 0.2s,transform 0.2s;}
+#contact-modal .submit-btn:hover {background:var(--red-hover);transform:translateY(-1px);}
+#contact-modal #email-row {background:var(--black);padding:80px 48px 80px;}
+#contact-modal .email-row-outer {max-width:1200px;margin:0 auto;display:grid;grid-template-columns:11fr 9fr;align-items:start;gap:60px;}
+#contact-modal .email-row-heading {font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:#fff;text-transform:uppercase;line-height:1.05;margin:0;}
+#contact-modal .email-row-inner {display:flex;flex-direction:column;gap:28px;}
+#contact-modal .email-col {display:flex;flex-direction:row;align-items:center;gap:18px;}
+#contact-modal .email-icon {width:48px;height:48px;border-radius:50%;flex-shrink:0;background:var(--red);display:flex;align-items:center;justify-content:center;}
+#contact-modal .email-icon svg {width:22px;height:22px;}
+#contact-modal .email-col-text {display:flex;flex-direction:column;gap:3px;}
+#contact-modal .email-heading {font-family:'Inter',sans-serif;font-size:19px;font-weight:700;color:#fff;text-transform:none;letter-spacing:0;}
+#contact-modal .email-link {font-size:17px;font-weight:400;color:var(--grey);text-decoration:none;transition:color 0.2s;}
+#contact-modal .email-link:hover {color:#fff;}
+#contact-modal #cta {background:var(--red);padding:80px 48px 20px;text-align:center;position:static;z-index:2;margin-top:0;padding-top:80px;}
+#contact-modal .cta-h2 {font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,96px);line-height:0.95;color:#fff;margin-bottom:0;}
+#contact-modal .cta-h2-line3 {display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;}
+#contact-modal .cta-go-btn {display:inline-flex;align-items:center;padding:14px 28px;border:2px solid #fff;border-radius:999px;background:#fff;color:var(--red);font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;text-decoration:none;cursor:pointer;box-shadow:0 0 0 0 rgba(227,27,27,0);transition:background 0.2s,color 0.2s,box-shadow 0.3s;}
+#contact-modal .cta-go-btn:hover {background:rgba(255,255,255,0.85);box-shadow:0 0 24px 8px rgba(255,255,255,0.3),0 0 50px 18px rgba(255,255,255,0.15);}
+#contact-modal #footer {background:var(--red);padding:80px 40px 40px;position:static;z-index:1;}
+#contact-modal .footer-inner {max-width:1200px;margin:0 auto;}
+#contact-modal .footer-top {display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:48px;}
+#contact-modal .footer-address-title {font-family:'Inter',sans-serif;font-size:17px;font-weight:700;color:#fff;margin-top:28px;margin-bottom:12px;line-height:1.7;text-transform:uppercase;}
+#contact-modal .footer-address-text {font-size:17px;color:#fff;line-height:1.7;}
+#contact-modal .address-line {white-space:nowrap;}
+#contact-modal .footer-logo-row {display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:-20px;margin-left:-15px;}
+#contact-modal .footer-logo-row img {height:80px;width:auto;display:block;}
+#contact-modal .footer-tagline {font-size:18px;color:#fff;line-height:1.6;margin-bottom:28px;}
+#contact-modal .footer-contact a {display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:20px;font-weight:700;margin-bottom:10px;transition:color 0.2s;line-height:1;}
+#contact-modal .contact-icon {font-size:32px;color:#fff;display:flex;align-items:center;}
+#contact-modal .footer-contact a:nth-child(2) .contact-icon {font-size:20px;filter:brightness(0) invert(1);}
+#contact-modal .footer-contact a:last-child {font-size:20px;font-weight:400;color:#fff;}
+#contact-modal .footer-contact a:hover {color:#fff;}
+#contact-modal .footer-links-grid {display:flex;flex-direction:column;gap:20px;align-content:start;padding-top:8px;}
+#contact-modal .footer-links-grid a {font-size:18px;color:#fff;text-decoration:none;transition:color 0.2s;}
+#contact-modal .footer-links-grid a:hover {color:#fff;}
+#contact-modal .footer-bottom {margin:0 -40px -40px;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+#contact-modal .social-icons {display:flex;gap:10px;}
+#contact-modal .social-icon {width:42px;height:42px;border:1.5px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:16px;transition:border-color 0.2s,color 0.2s,background 0.2s;}
+#contact-modal .social-icon:hover {border-color:#fff;background:rgba(255,255,255,0.2);}
+#contact-modal .footer-copy {font-size:16px;color:#fff;text-align:center;}
+#contact-modal .back-to-top {padding:10px 22px;border:1.5px solid #fff;border-radius:999px;background:rgba(255,255,255,0.1);color:#fff;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;cursor:pointer;transition:background 0.2s,border-color 0.2s;}
+#contact-modal .back-to-top:hover {border-color:#fff;background:rgba(255,255,255,0.2);}
+@media (max-width:768px) {#contact-modal .modal-nav {padding:14px 20px;}#contact-modal .modal-nav-links {display:none;}#contact-modal .hook-form-inner {flex-direction:column;}#contact-modal .hook-left {width:100%;position:static;padding:40px 20px;top:auto;}#contact-modal #contact-form {padding:20px 20px 60px;}#contact-modal #email-row {padding:32px 20px 10px;}#contact-modal .email-row-outer {grid-template-columns:1fr;gap:32px;}#contact-modal #cta {padding:0 20px 80px;}#contact-modal .cta-h2 {font-size:clamp(40px,10vw,56px);}#contact-modal #footer {padding:60px 20px 30px;}#contact-modal .footer-top {grid-template-columns:1fr;gap:40px;}#contact-modal .footer-bottom {flex-direction:column;align-items:center;text-align:center;margin:0 -20px -30px;padding:20px;}}
+</style>
+<nav class="modal-nav">
+<div style="max-width:1400px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;">
+<a href="index.html" class="modal-nav-logo"><img src="logo/White logo.png" alt="TOBC Entertainment"/><span class="modal-nav-wordmark">TOBC</span></a>
+<ul class="modal-nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="our-work.html">Our Work</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+<button class="modal-close-btn" onclick="closeContactModal()">Close</button>
+</div>
+</nav>
+<section id="hook">
+<div class="hook-form-inner">
+<div class="hook-left">
+<h1 class="hook-h1">GOT A BIG IDEA?<br/>LET'S MAKE IT REAL.</h1>
+<p class="hook-subline">We're listening,<br/>reach out anytime!</p>
+</div>
+<div class="hook-right" id="contact-form">
+<div class="form-section-title-row"><span class="form-section-title">Your Details</span><span>↓</span></div>
+<hr class="form-divider"/>
+<form>
+<div class="form-field"><label for="modal-name">Name</label><input type="text" id="modal-name" name="name" placeholder="Enter your name"/></div>
+<div class="form-field"><label for="modal-phone">Phone Number</label><div class="phone-field"><span class="phone-prefix">🇮🇳 +91</span><input type="tel" id="modal-phone" name="phone" placeholder="Enter your phone number"/></div></div>
+<div class="form-field"><label for="modal-email">Email</label><input type="email" id="modal-email" name="email" placeholder="Enter your email"/></div>
+<div class="form-field"><label for="modal-type">Are you an Agency or a Brand?</label><select id="modal-type" name="type" required><option value="" selected disabled hidden>Select option</option><option value="agency">Agency</option><option value="brand">Brand</option></select></div>
+<div class="form-field"><label for="modal-services">Which services are you interested in?</label><select id="modal-services" name="services" required><option value="" selected disabled hidden>Select a service</option><option value="Ad Film">Ad Film</option><option value="Video Production">Video Production</option><option value="Music Video">Music Video</option><option value="Celebrity Endorsement">Celebrity Endorsement</option><option value="Influencer Management">Influencer Management</option><option value="Digital Marketing">Digital Marketing</option><option value="Brand Campaign">Brand Campaign</option><option value="Casting">Casting</option><option value="Live Events">Live Events</option><option value="OTT / Web Series">OTT / Web Series</option><option value="Brand Partnerships">Brand Partnerships</option></select></div>
+<div class="form-field"><label for="modal-source">How did you hear about us?</label><select id="modal-source" name="source" required><option value="" selected disabled hidden>Select an option</option><option value="Referral">Referral</option><option value="Instagram / Facebook">Instagram / Facebook</option><option value="YouTube">YouTube</option><option value="LinkedIn">LinkedIn</option><option value="Search / Google">Search / Google</option><option value="Media & News">Media &amp; News</option><option value="Other">Other</option></select></div>
+<div class="form-field"><label for="modal-message">Tell us about your project</label><textarea id="modal-message" name="message" placeholder="What's on your mind?"></textarea></div>
+<button type="submit" class="submit-btn">SUBMIT</button>
+</form>
+</div>
+</div>
+</section>
+<section id="email-row">
+<div class="email-row-outer">
+<h2 class="email-row-heading">Drop us an email</h2>
+<div class="email-row-inner">
+<div class="email-col"><div class="email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7L22 6"/></svg></div><div class="email-col-text"><h3 class="email-heading">Business Inquiries</h3><a class="email-link" href="mailto:info@tobcentertainment.com">info@tobcentertainment.com</a></div></div>
+<div class="email-col"><div class="email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="email-col-text"><h3 class="email-heading">Music</h3><a class="email-link" href="mailto:music@tobcentertainment.com">music@tobcentertainment.com</a></div></div>
+<div class="email-col"><div class="email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M2 7l3-4h4l-3 4M9 7l3-4h4l-3 4M16 7l3-4h3l-3 4"/></svg></div><div class="email-col-text"><h3 class="email-heading">Casting</h3><a class="email-link" href="mailto:casting@tobcentertainment.com">casting@tobcentertainment.com</a></div></div>
+</div>
+</div>
+</section>
+<section id="cta">
+<h2 class="cta-h2">WORK WITH TOBC.<br/>CREATE THE MAGIC.<br/><span class="cta-h2-line3">PRESS THIS BUTTON.<button class="cta-go-btn" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">GO →</button></span></h2>
+</section>
+<footer id="footer">
+<div class="footer-inner">
+<div class="footer-top">
+<div>
+<div class="footer-logo-row"><img src="logo/White logo.png" alt="TOBC Entertainment"/></div>
+<p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
+<div class="footer-contact">
+<a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span> info@tobcentertainment.com</a>
+<a href="tel:+918077552630"><span class="contact-icon">📞</span> +91 80775 52630</a>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-start;">
+<div class="footer-links-grid">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="our-work.html">Our Work</a>
+<a href="index.html#footer">Blog</a>
+<a href="index.html#footer">Privacy Policy</a>
+</div>
+<div style="margin-top:-20px;">
+<p class="footer-address-title">Come say Hi!</p>
+<p class="footer-address-text"><span class="address-line">Platinum Heights, Andheri West,</span><br/>Mumbai, Maharashtra 400018</p>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="social-icons">
+<a href="https://www.instagram.com/tobcentertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+<a href="https://www.youtube.com/@tobcmusic" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+<a href="https://www.twitter.com/CreativesOfTOBC" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter / X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+<a href="https://www.facebook.com/TOBCEntertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+</div>
+<p class="footer-copy">Copyright © 2026 TOBC Entertainment (OPC) Pvt. Ltd. All rights reserved.</p>
+<button class="back-to-top" onclick="closeContactModal()">Close ✕</button>
+</div>
+</div>
+</footer>
+</div>
+<script>
+let prevScrollPos = window.pageYOffset;
+window.addEventListener('scroll', function() {
+  const currentScrollPos = window.pageYOffset;
+  const nav = document.getElementById('nav');
+  if (currentScrollPos > 100) {
+    if (prevScrollPos < currentScrollPos) {
+      nav.style.transform = 'translateY(-100%)';
+    } else {
+      nav.style.transform = 'translateY(0)';
+    }
+  }
+  prevScrollPos = currentScrollPos;
+});
+function openContactModal(){document.getElementById('contact-modal').style.display='block';document.body.style.overflow='hidden';}function closeContactModal(){document.getElementById('contact-modal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeContactModal();});document.querySelectorAll('#contact-modal form').forEach(f=>f.addEventListener('submit',(e)=>e.preventDefault()));
+</script>
+
+
+
+
+
+
+<!-- CONNECT WITH US MODAL -->
+<div id="contact-modal" style="display:none; position:fixed; inset:0; z-index:2000; overflow-y:auto; background:#0a0a0a;">
+<style>
+#contact-modal {font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff;}
+#contact-modal .modal-nav {position:sticky;top:0;z-index:2001;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(10,10,10,0.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #1a1a1a;}
+#contact-modal .modal-nav-logo {display:flex;align-items:center;gap:10px;text-decoration:none;}
+#contact-modal .modal-nav-logo img {height:28px;width:auto;display:block;}
+#contact-modal .modal-nav-wordmark {font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#fff;}
+#contact-modal .modal-nav-links {display:flex;gap:28px;list-style:none;margin:0;padding:0;}
+#contact-modal .modal-nav-links a {font-family:'Inter',sans-serif;font-size:13px;font-variant:small-caps;letter-spacing:1px;color:#fff;text-decoration:none;opacity:0.85;transition:opacity 0.2s;}
+#contact-modal .modal-nav-links a:hover {opacity:1;}
+#contact-modal .modal-close-btn {padding:10px 22px;border:1.5px solid #fff;border-radius:999px;background:transparent;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.2s,color 0.2s;flex-shrink:0;}
+#contact-modal .modal-close-btn:hover {background:#fff;color:#E31B1B;border-color:#fff;}
+#contact-modal #hook {background:#0a0a0a;padding:80px 0 0;}
+#contact-modal .hook-form-inner {max-width:1400px;margin:0 auto;display:flex;align-items:flex-start;}
+#contact-modal .hook-left {width:50%;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-start;padding:15px 60px 80px 80px;position:sticky;top:0;}
+#contact-modal .hook-h1 {font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5.5vw,72px);line-height:1.05;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:24px;}
+#contact-modal .hook-subline {font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.5vw,36px);color:#888888;text-transform:uppercase;letter-spacing:1px;line-height:1.2;}
+#contact-modal .hook-right {flex:1;min-width:0;}
+#contact-modal .form-section-title-row {display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+#contact-modal .form-section-title {font-family:'Bebas Neue',sans-serif;font-size:28px;font-weight:400;color:#fff;letter-spacing:0.5px;}
+#contact-modal .form-divider {border:none;border-top:1px solid #222;margin-bottom:36px;}
+#contact-modal .form-field {margin-bottom:30px;}
+#contact-modal .form-field label {display:block;font-size:18px;font-weight:600;color:#fff;margin-bottom:10px;}
+#contact-modal .form-field input,#contact-modal .form-field select,#contact-modal .form-field textarea {width:100%;background:transparent;border:none;border-bottom:1.5px solid #333;color:#fff;font-family:'Inter',sans-serif;font-size:17px;font-weight:500;padding:8px 2px;outline:none;transition:border-color 0.2s;}
+#contact-modal .form-field textarea {resize:vertical;min-height:90px;}
+#contact-modal .form-field input::placeholder,#contact-modal .form-field textarea::placeholder {color:#555;font-weight:400;}
+#contact-modal .form-field input:focus,#contact-modal .form-field select:focus,#contact-modal .form-field textarea:focus {border-bottom:1.5px solid #E31B1B;}
+#contact-modal .phone-field {display:flex;align-items:center;gap:8px;border-bottom:1.5px solid #333;padding-bottom:4px;}
+#contact-modal .phone-field:focus-within {border-bottom-color:#E31B1B;}
+#contact-modal .phone-prefix {font-size:15px;font-weight:500;color:#fff;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+#contact-modal .phone-field input {border-bottom:none;padding:8px 2px 4px;}
+#contact-modal .form-field select {appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%23ffffff' stroke-width='2' fill='none' fill-rule='evenodd'/></svg>");background-repeat:no-repeat;background-position:right 4px center;cursor:pointer;}
+#contact-modal .form-field select option {color:#111;}
+#contact-modal .submit-btn {display:inline-flex;align-items:center;gap:10px;padding:16px 36px;margin-top:8px;background:#E31B1B;color:#fff;border:none;border-radius:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:15px;letter-spacing:1px;cursor:pointer;transition:background 0.2s,transform 0.2s;}
+#contact-modal .submit-btn:hover {background:#c41515;transform:translateY(-1px);}
+#contact-modal #email-row {background:#0a0a0a;padding:80px 48px 80px;}
+#contact-modal .email-row-outer {max-width:1200px;margin:0 auto;display:grid;grid-template-columns:11fr 9fr;align-items:start;gap:60px;}
+#contact-modal .email-row-heading {font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:#fff;text-transform:uppercase;line-height:1.05;margin:0;}
+#contact-modal .email-row-inner {display:flex;flex-direction:column;gap:28px;}
+#contact-modal .email-col {display:flex;flex-direction:row;align-items:center;gap:18px;}
+#contact-modal .email-icon {width:48px;height:48px;border-radius:50%;flex-shrink:0;background:#E31B1B;display:flex;align-items:center;justify-content:center;}
+#contact-modal .email-icon svg {width:22px;height:22px;}
+#contact-modal .email-col-text {display:flex;flex-direction:column;gap:3px;}
+#contact-modal .email-heading {font-family:'Inter',sans-serif;font-size:19px;font-weight:700;color:#fff;text-transform:none;letter-spacing:0;}
+#contact-modal .email-link {font-size:17px;font-weight:400;color:#888;text-decoration:none;transition:color 0.2s;}
+#contact-modal .email-link:hover {color:#fff;}
+@media (max-width:768px) {#contact-modal .modal-nav {padding:14px 20px;}#contact-modal .modal-nav-links {display:none;}#contact-modal .modal-close-btn {display:none;}#contact-modal .hook-form-inner {flex-direction:column;}#contact-modal .hook-left {width:100%;position:static;padding:40px 20px;}#contact-modal .hook-right {padding:0 20px;}#contact-modal #email-row {padding:40px 20px;}#contact-modal .email-row-outer {grid-template-columns:1fr;gap:32px;}}
+</style>
+<nav class="modal-nav">
+<div class="modal-nav-inner">
+<a href="index.html" class="modal-nav-logo">
+<img src="logo/White logo.png" alt="TOBC Entertainment"/>
+<span class="modal-nav-wordmark">TOBC</span>
+</a>
+<ul class="modal-nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="our-work.html">Our Work</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+<button class="modal-close-btn" onclick="closeContactModal()">Close</button>
+</div>
+</nav>
+<section id="hook">
+<div class="hook-form-inner">
+<div class="hook-left">
+<h1 class="hook-h1">GOT A BIG IDEA?<br/>LET'S MAKE IT REAL.</h1>
+<p class="hook-subline">We're listening,<br/>reach out anytime!</p>
+</div>
+<div class="hook-right" id="contact-form-modal">
+<div class="form-section-title-row"><span class="form-section-title">Your Details</span><span>&#8595;</span></div>
+<hr class="form-divider"/>
+<form><div class="form-field"><label for="modal-name">Name</label><input type="text" id="modal-name" name="name" placeholder="Enter your name"/></div><div class="form-field"><label for="modal-phone">Phone Number</label><div class="phone-field"><span class="phone-prefix">🇮🇳 +91</span><input type="tel" id="modal-phone" name="phone" placeholder="Enter your phone number"/></div></div><div class="form-field"><label for="modal-email">Email</label><input type="email" id="modal-email" name="email" placeholder="Enter your email"/></div><div class="form-field"><label for="modal-type">Are you an Agency or a Brand?</label><select id="modal-type" name="type" required><option value="" selected disabled hidden>Select option</option><option value="agency">Agency</option><option value="brand">Brand</option></select></div><div class="form-field"><label for="modal-services">Which services are you interested in?</label><select id="modal-services" name="services" required><option value="" selected disabled hidden>Select a service</option><option value="Ad Film">Ad Film</option><option value="Video Production">Video Production</option><option value="Music Video">Music Video</option><option value="Celebrity Endorsement">Celebrity Endorsement</option><option value="Influencer Management">Influencer Management</option><option value="Digital Marketing">Digital Marketing</option><option value="Brand Campaign">Brand Campaign</option><option value="Casting">Casting</option><option value="Live Events">Live Events</option><option value="OTT / Web Series">OTT / Web Series</option><option value="Brand Partnerships">Brand Partnerships</option></select></div><div class="form-field"><label for="modal-source">How did you hear about us?</label><select id="modal-source" name="source" required><option value="" selected disabled hidden>Select an option</option><option value="Referral">Referral</option><option value="Instagram / Facebook">Instagram / Facebook</option><option value="YouTube">YouTube</option><option value="LinkedIn">LinkedIn</option><option value="Search / Google">Search / Google</option><option value="Media & News">Media &amp; News</option><option value="Other">Other</option></select></div><div class="form-field"><label for="modal-message">Tell us about your project</label><textarea id="modal-message" name="message" placeholder="What's on your mind?"></textarea></div><button type="submit" class="submit-btn">SUBMIT</button></form>
+</div>
+</div>
+</section>
+<section id="email-row">
+<div class="email-row-outer">
+<h2 class="email-row-heading">Drop us an email</h2>
+<div class="email-row-inner">
+<div class="email-col"><div class="email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7L22 6"/></svg></div><div class="email-col-text"><h3 class="email-heading">Business Inquiries</h3><a class="email-link" href="mailto:info@tobcentertainment.com">info@tobcentertainment.com</a></div></div>
+<div class="email-col"><div class="email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="email-col-text"><h3 class="email-heading">Music</h3><a class="email-link" href="mailto:music@tobcentertainment.com">music@tobcentertainment.com</a></div></div>
+<div class="email-col"><div class="email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M2 7l3-4h4l-3 4M9 7l3-4h4l-3 4M16 7l3-4h3l-3 4"/></svg></div><div class="email-col-text"><h3 class="email-heading">Casting</h3><a class="email-link" href="mailto:casting@tobcentertainment.com">casting@tobcentertainment.com</a></div></div>
+</div>
+</div>
+</section>
+</div>
+<script>
+let prevScrollPos = window.pageYOffset;
+window.addEventListener('scroll', function() {
+  const currentScrollPos = window.pageYOffset;
+  const nav = document.getElementById('nav');
+  if (currentScrollPos > 100) {
+    if (prevScrollPos < currentScrollPos) {
+      nav.style.transform = 'translateY(-100%)';
+    } else {
+      nav.style.transform = 'translateY(0)';
+    }
+  }
+  prevScrollPos = currentScrollPos;
+});
+function openContactModal(){document.getElementById('contact-modal').style.display='block';document.body.style.overflow='hidden';}function closeContactModal(){document.getElementById('contact-modal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeContactModal();});document.querySelectorAll('#contact-modal form').forEach(f=>f.addEventListener('submit',(e)=>e.preventDefault()));
+</script>
+</body>
+</html>

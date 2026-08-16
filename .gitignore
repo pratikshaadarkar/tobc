@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+*.log
+*.bak
+input/
+.claude/
+CLAUDE.md
+server.js
+services-copy.md
+parallax-scrolling.tsx
+sticky-footer.tsx
+tracker.html
+tracker-standalone.html
+home-page/
+output/

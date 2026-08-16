@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Your Last Brand Film Didn't Perform - TOBC Entertainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
+    :root { --red: #E02020; --dark-red: #CC0000; --near-black: #0a0a0a; }
+    #progress-bar { position: fixed; top: 0; left: 0; z-index: 9999; height: 3px; background: var(--red); width: 0%; transition: width 0.1s linear; }
+    #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 12px 30px; background: #0a0a0a; transition: background 0.3s, backdrop-filter 0.3s, transform 0.3s ease-in-out; transform: translateY(0); }
+    #nav.scrolled { background: rgba(10,10,10,0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-left: 30px; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a { font-size: 15px; letter-spacing: 1px; color: #fff; text-decoration: none; opacity: 0.75; transition: opacity 0.2s; }
+    .nav-links a:hover { opacity: 1; text-decoration: underline; }
+    .nav-cta { padding: 12px 26px; border: 1.5px solid #fff; border-radius: 999px; background: transparent; color: #fff; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s, color 0.2s; margin-right: 40px; }
+    .nav-cta:hover { background: var(--red); border-color: var(--red); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    #mobile-menu { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(10,10,10,0.97); flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; color: #fff; text-decoration: none; transition: color 0.2s; }
+    #mobile-menu a:hover { color: var(--red); }
+    .blog-hero { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 16px; margin: 28px 0 36px; }
+    .blog-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .blog-hero-overlay { display: none; }
+    .blog-category-pill { display: none; }
+    .article-wrapper { background: #fff; padding-top: 120px; }
+    .article-container { max-width: 1200px; margin: 0 auto; padding: 56px 60px 80px; }
+    .article-title { font-family: 'Inter', sans-serif; font-size: clamp(28px, 4vw, 48px); font-weight: 800; color: #0a0a0a; line-height: 1.15; margin-bottom: 32px; letter-spacing: -0.5px; }
+    .article-meta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+    .author-info { display: flex; align-items: center; gap: 12px; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .author-name { font-weight: 700; font-size: 0.875rem; color: #0a0a0a; display: block; }
+    .article-date { font-size: 0.8rem; color: #999; }
+    .share-circle-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; color: #0a0a0a; }
+    .share-icon-circle { width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid #ccc; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
+    .share-circle-btn:hover .share-icon-circle { border-color: #0a0a0a; }
+    .share-btn-label { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.3px; color: #0a0a0a; }
+    .article-divider { border: none; border-top: 1px solid #e5e5e5; margin-bottom: 48px; }
+    .article-body { font-size: 1.05rem; color: #2a2a2a; line-height: 1.85; }
+    .article-body h2 { font-family: 'Inter', sans-serif; font-size: 1.55rem; font-weight: 800; color: #0a0a0a; margin: 52px 0 16px; letter-spacing: -0.3px; }
+    .article-body h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; font-weight: 400; color: #0a0a0a; margin: 40px 0 12px; letter-spacing: 0.5px; }
+    .article-body p { margin-bottom: 22px; }
+    .article-body strong { color: #0a0a0a; font-weight: 700; }
+    .article-body ul, .article-body ol { margin: 4px 0 22px 28px; }
+    .article-body li { margin-bottom: 10px; }
+    .article-body a { color: var(--red); text-decoration: underline; }
+    .article-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 48px; padding-top: 32px; border-top: 1px solid #e5e5e5; }
+    .article-tag { padding: 5px 16px; border: 1.5px solid #ddd; border-radius: 999px; font-size: 0.78rem; color: #555; font-weight: 500; }
+    .related-section { background: #fff; padding: 72px 60px; border-radius: 0 0 60px 60px; position: relative; z-index: 4; }
+    .related-inner { max-width: 1100px; margin: 0 auto; }
+    .related-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: #0a0a0a; margin-bottom: 36px; }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .related-card { background: #fff; border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; display: block; transition: transform 0.2s, box-shadow 0.2s; }
+    .related-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+    .related-card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+    .related-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .related-card:hover .related-card-img img { transform: scale(1.05); }
+    .related-card-body { padding: 20px; }
+    .related-card-badge { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #999; margin-bottom: 8px; display: block; }
+    .related-card-title { font-weight: 700; font-size: 0.95rem; color: #0a0a0a; line-height: 1.45; }
+    .read-all-btn { display: inline-block; padding: 16px 56px; border: 1.5px solid #0a0a0a; border-radius: 8px; color: #0a0a0a; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: background 0.2s, color 0.2s; }
+    .read-all-btn:hover { background: #0a0a0a; color: #fff; }
+    #cta { background: var(--red); padding: 80px 48px 20px; text-align: center; position: sticky; bottom: 320px; z-index: 2; margin-top: -60px; padding-top: 140px; }
+    .cta-h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 96px); line-height: 0.95; color: #fff; margin-bottom: 0; }
+    .cta-h2-line3 { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .cta-go-btn { display: inline-flex; align-items: center; padding: 14px 28px; border: 2px solid #fff; border-radius: 999px; background: #fff; color: var(--red); font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; text-decoration: none; cursor: pointer; transition: background 0.2s, box-shadow 0.3s; }
+    .cta-go-btn:hover { background: rgba(255,255,255,0.85); box-shadow: 0 0 24px 8px rgba(255,255,255,0.3); }
+    #footer { background: var(--red); padding: 80px 40px 40px; position: sticky; bottom: 0; z-index: 1; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 48px; }
+    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; margin-top: -20px; margin-left: -15px; }
+    .footer-logo-row img { height: 80px; width: auto; display: block; }
+    .footer-tagline { font-size: 18px; color: #fff; line-height: 1.6; margin-bottom: 28px; }
+    .footer-contact a { display: flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; font-size: 20px; font-weight: 400; margin-bottom: 10px; }
+    .contact-icon { font-size: 32px; color: #fff; }
+    .footer-contact a:nth-child(2) .contact-icon { font-size: 20px; filter: brightness(0) invert(1); }
+    .footer-contact a:hover .footer-link-text { text-decoration: underline; }
+    .footer-address-title { font-size: 17px; font-weight: 700; color: #fff; margin-top: 28px; margin-bottom: 12px; text-transform: uppercase; }
+    .footer-address-text { font-size: 17px; color: #fff; line-height: 1.7; }
+    .footer-links-grid { display: flex; flex-direction: column; gap: 20px; padding-top: 8px; }
+    .footer-links-grid a { font-size: 18px; color: #fff; text-decoration: none; }
+    .footer-links-grid a:hover { text-decoration: underline; }
+    .footer-bottom { margin: 0 -40px -40px; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .social-icons { display: flex; gap: 10px; }
+    .social-icon { width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+    .social-icon:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
+    .footer-copy { font-size: 13px; color: #fff; }
+    .back-to-top { padding: 10px 22px; border: 1.5px solid #fff; border-radius: 999px; background: rgba(255,255,255,0.1); color: #fff; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .back-to-top:hover { background: rgba(255,255,255,0.2); }
+    @media (max-width: 768px) {
+      #nav { padding: 14px 20px; } .nav-links, .nav-cta { display: none; } .hamburger { display: flex; }
+      .blog-hero { height: 280px; } .blog-hero-overlay { padding: 24px 20px; }
+      .article-container { padding: 40px 20px 60px; } .related-section { padding: 48px 20px; }
+      .related-grid { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+    }
+
+    /* ── Share Modal ── */
+    .share-overlay { display: none; position: fixed; inset: 0; z-index: 9000; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); align-items: center; justify-content: center; }
+    .share-overlay.open { display: flex; }
+    .share-modal { background: #fff; border-radius: 20px; width: 90%; max-width: 460px; overflow: hidden; animation: modalIn 0.28s cubic-bezier(.4,0,.2,1); }
+    @keyframes modalIn { from { opacity:0; transform: translateY(24px) scale(0.97); } to { opacity:1; transform: translateY(0) scale(1); } }
+    .share-modal-head { background: #0a0a0a; padding: 22px 28px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .share-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: #fff; letter-spacing: 1.5px; }
+    .share-modal-close { background: rgba(255,255,255,0.12); border: none; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; transition: background 0.2s; }
+    .share-modal-close:hover { background: rgba(255,255,255,0.25); }
+    .share-modal-body { padding: 28px 28px 32px; }
+    .share-section-label { font-size: 0.78rem; font-weight: 600; color: #999; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 16px; }
+    .share-socials { display: flex; gap: 14px; margin-bottom: 28px; }
+    .share-social-btn { width: 48px; height: 48px; border-radius: 50%; background: #0a0a0a; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .share-social-btn:hover { background: var(--red); transform: translateY(-2px); }
+    .share-copy-row { display: flex; align-items: center; gap: 0; border: 1.5px solid #e0e0e0; border-radius: 10px; overflow: hidden; }
+    .share-copy-icon { padding: 0 12px; color: #bbb; display: flex; align-items: center; flex-shrink: 0; }
+    .share-url-text { flex: 1; font-size: 0.78rem; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 13px 0; font-family: monospace; }
+    .share-copy-btn { background: #0a0a0a; color: #fff; border: none; padding: 13px 22px; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: background 0.2s; flex-shrink: 0; }
+    .share-copy-btn:hover { background: var(--red); }
+    .share-divider { border: none; border-top: 1px solid #f0f0f0; margin: 0 0 24px; }
+    .pull-quote { padding: 40px 60px; margin: 52px 0; text-align: center; border-left: none; background: none; border-radius: 0; }
+    .pull-quote p { font-family: 'Inter', sans-serif; font-size: 2rem; font-weight: 700; color: #0a0a0a; line-height: 1.5; margin: 0; letter-spacing: 0; font-style: italic; }
+  </style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><img src="logo/White logo.png" alt="TOBC Entertainment" style="height:90px;width:auto;" /></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="our-work.html">Our Work</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="blog.html">Blog</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location.href='contact.html'">Contact Us</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="our-work.html">Our Work</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact Us</a>
+</div>
+
+
+<div class="article-wrapper">
+  <div class="article-container">
+    <h1 class="article-title">Why Your Last Brand Film Didn't Perform (And What to Fix Before the Next One)</h1>
+    <div class="article-meta">
+      <div class="author-info">
+        <div class="author-avatar">T</div>
+        <div>
+          <span class="author-name">TOBC Team</span>
+          <span class="article-date">June 12, 2026 &nbsp;·&nbsp; 7 min read</span>
+        </div>
+      </div>
+      <button class="share-circle-btn" onclick="openShare()">
+        <div class="share-icon-circle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/>
+            <polyline points="16 6 12 2 8 6"/>
+            <line x1="12" y1="2" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <span class="share-btn-label">Share</span>
+      </button>
+    </div>
+    <div class="blog-hero">
+  <img src="images/blog-3-hero.png" alt="Why Your Last Brand Film Didn't Perform" />
+  <div class="blog-hero-overlay"><span class="blog-category-pill">Brand Production</span></div>
+</div>
+
+    <div class="article-body">
+      <p>After every brand film that doesn't land the way it should, someone in the room says some version of the same thing.</p>
+      <p>"Maybe it was the timing." "The algorithm is just harder now." "Our audience isn't engaging with video the way they used to."</p>
+      <p>Sometimes those things are partially true. Most of the time, they're not the real problem.</p>
+
+      
+      <div class="pull-quote">
+        <p>"The problem almost never lives where people look for it. Brands blame the platform, the algorithm, the timing. The real culprits are almost always in the brief, the script, or the distribution plan."</p>
+      </div>
+
+
+      <p>Here are the most common reasons brand films underperform, and what to do differently before the next one.</p>
+
+      <h2>Problem 1: The Brief Was Too Broad</h2>
+      <p>A brief that says "we want to communicate our brand values, build emotional connection, drive awareness, and support the product launch" is not a brief. It's a wish list.</p>
+      <p>Every successful brand film has one central idea. One emotion. One specific response it's trying to create in the viewer. When the brief asks for five things simultaneously, the film tries to do all five, and does none of them well.</p>
+      <p>Before the next one: decide what you want the viewer to feel when it ends. Not think. Feel. Start there, and build everything else around it.</p>
+
+      <h2>Problem 2: The Script Was Written in a Conference Room</h2>
+      <p>Scripts that come out of internal brand teams tend to carry the weight of too many people's opinions. They're usually over-explained. Every plot point is made explicit. Every emotion is named. Every product benefit is squeezed in.</p>
+      <p>Real storytelling works through implication. A face held for two seconds says more than a line of dialogue. A detail in the background communicates character. A moment of silence before the music swells does more than a voiceover explaining what you're supposed to feel.</p>
+      <p>If your script reads like a presentation and not like a story, that's the problem. Bring in a writer who thinks cinematically, not just commercially.</p>
+
+      <h2>Problem 3: The Wrong Director</h2>
+      <p>Directors are not interchangeable. A director who's exceptional at TVCs may completely miss the emotional register a brand film needs. A director who makes beautiful aesthetic content may not understand how to build narrative tension.</p>
+      <p>When choosing a director, watch their previous work for the specific thing your film needs. Not their showreel as a whole. The specific quality, emotional intimacy, kinetic energy, cultural texture, comedic timing, that your film lives or dies by.</p>
+
+      <h2>Problem 4: Production Value Didn't Match the Category</h2>
+      <p>Production value is relative. A brand film for a luxury car and a brand film for a neighbourhood café need to communicate completely different things through their visual quality.</p>
+      <p>The problem isn't when brands spend too little. The problem is when the production quality contradicts the brand's positioning. A premium skincare brand that produces a brand film with flat lighting and a generic location sends a signal that undermines everything the brand says about itself.</p>
+      <p>Before the next shoot, ask honestly: does the visual quality of this production match the perception we're trying to build?</p>
+
+      <h2>Problem 5: No Hook in the First Five Seconds</h2>
+      <p>This one is non-negotiable for digital platforms.</p>
+      <p>If your brand film doesn't give a viewer a reason to keep watching in the first five seconds, the rest of the film doesn't matter. Not because audiences are unsophisticated, but because they have infinite options and no patience for slow starts.</p>
+      <p>The hook doesn't have to be loud or provocative. It can be a face with a specific expression. An unexpected sound. A visual that raises a question. Something that creates a reason to stay.</p>
+      <p>Test your first five seconds in isolation. If they don't compel you to continue, neither will anyone else.</p>
+
+      <h2>Problem 6: Distribution Was an Afterthought</h2>
+      <p>Most brand films are made for a hero format and then adapted, sometimes badly, for everything else. A three-minute film is cut to 90 seconds, then to 30, with no real thought about what story still works at each duration. Square formats are cropped from horizontal masters. Stories that were built for sound are published in contexts where most viewers watch without audio.</p>
+      <p>Distribution planning should happen before production begins, not after. Know where this film will live. Build it for those contexts from the script stage.</p>
+
+      <h2>Problem 7: Metrics Were Wrong</h2>
+      <p>Finally: how are you measuring performance?</p>
+      <p>If you're measuring a brand film by direct conversion, you're using the wrong metric for the format. Brand films build perception over time. They increase the likelihood of purchase decisions made weeks or months later. Direct attribution is nearly impossible, which is why so many brand film budgets get cut, they can't "prove ROI" the way a performance ad can.</p>
+      <p>The right metrics for a brand film: brand recall, sentiment shift, share rate, and completion rate. If those are good, the film is working. Trust the medium to do its job over a longer timeline.</p>
+
+      <h2>What to Do Before the Next One</h2>
+      <p>Have a conversation before you have a production. Bring in your production house at the brief stage, not after the concept is locked. The best brand films come out of a genuine creative collaboration, where the production team's expertise shapes the idea before it becomes a script.</p>
+      <p>TOBC Entertainment works with brands at every stage of this process. If you've had a film that didn't land the way you hoped, let's talk about what happened and what the next one should do differently. Reach out at <a href="mailto:info@tobcentertainment.com">info@tobcentertainment.com</a>.</p>
+    </div>
+    <div class="article-tags">
+      <span class="article-tag">Brand Production</span>
+      <span class="article-tag">Brand Film</span>
+      <span class="article-tag">Video Marketing</span>
+      <span class="article-tag">Content Strategy</span>
+    </div>
+  </div>
+</div>
+
+<section class="related-section">
+  <div class="related-inner">
+    <h2 class="related-title">You Might Also Like</h2>
+    <div class="related-grid">
+      <a class="related-card" href="what-does-a-casting-director-actually-do.html">
+        <div class="related-card-img"><img src="images/blog-4-hero.png"></div>
+        <div class="related-card-body"><span class="related-card-badge">Casting & Production</span><p class="related-card-title">What Does a Casting Director Actually Do? A Guide for Brands</p></div>
+      </a>
+      <a class="related-card" href="ad-film-vs-brand-film-vs-content-series.html">
+        <div class="related-card-img"><img src="images/blog-5-hero.png"></div>
+        <div class="related-card-body"><span class="related-card-badge">Brand Production</span><p class="related-card-title">Ad Film vs. Brand Film vs. Content Series: Which Format Should Your Brand Invest In?</p></div>
+      </a>
+      <a class="related-card" href="how-to-brief-a-production-house.html">
+        <div class="related-card-img"><img src="images/blog-6-hero.png"></div>
+        <div class="related-card-body"><span class="related-card-badge">Company Insights</span><p class="related-card-title">How to Brief a Production House: What to Send Before the First Meeting</p></div>
+      </a>
+    </div>
+    <div style="text-align: center; margin-top: 48px;">
+      <a href="blog.html" class="read-all-btn">READ ALL BLOGS</a>
+    </div>
+  </div>
+</section>
+
+<div id="cta-footer-wrapper">
+<section id="cta">
+  <h2 class="cta-h2">WORK WITH TOBC.<br/>CREATE THE MAGIC.<br/><span class="cta-h2-line3">PRESS THIS BUTTON. <a href="contact.html" class="cta-go-btn">GO →</a></span></h2>
+</section>
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-row"><img src="logo/White logo.png" alt="TOBC Entertainment" /></div>
+        <p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
+        <div class="footer-contact">
+          <a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span><span class="footer-link-text"> info@tobcentertainment.com</span></a>
+          <a href="tel:+918077552630"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 80775 52630</span></a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-start;">
+        <div class="footer-links-grid"><a href="index.html">Home</a>
+<a href="about.html">About</a><a href="our-work.html">Our Work</a><a href="blog.html">Blog</a><a href="privacy-policy.html">Privacy Policy</a></div>
+        <div style="margin-top:-20px;"><p class="footer-address-title">Come say Hi!</p><p class="footer-address-text">9th Floor, SMARTWORKS,<br/>Wing A, Paradigm, Mindspace,<br/>Malad (W), Mumbai,<br/>Maharashtra 400064, India</p></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/tobcentertainment" target="_blank" rel="noopener" class="social-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="https://www.youtube.com/@tobcmusic" target="_blank" rel="noopener" class="social-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+        <a href="https://www.twitter.com/CreativesOfTOBC" target="_blank" rel="noopener" class="social-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://www.facebook.com/TOBCEntertainment" target="_blank" rel="noopener" class="social-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      </div>
+      <p class="footer-copy">Copyright © 2026 TOBC Entertainment (OPC) Pvt. Ltd. All rights reserved.</p>
+      <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top ↑</button>
+    </div>
+  </div>
+</footer>
+</div>
+<script>
+  const nav = document.getElementById('nav');
+  let prevScrollPos = window.pageYOffset;
+  window.addEventListener('scroll', () => {
+    const currentScrollPos = window.pageYOffset;
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    if (currentScrollPos > 100) {
+      nav.style.transform = currentScrollPos > prevScrollPos ? 'translateY(-100%)' : 'translateY(0)';
+    }
+    prevScrollPos = currentScrollPos;
+    const d = document.documentElement;
+    document.getElementById('progress-bar').style.width = Math.min((window.scrollY / (d.scrollHeight - window.innerHeight)) * 100, 100) + '%';
+  }, { passive: true });
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+  document.querySelectorAll('#mobile-menu a').forEach(l => l.addEventListener('click', () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }));
+
+  function openShare() {
+    const url = window.location.href;
+    document.getElementById('shareUrlText').textContent = url;
+    document.getElementById('share-x').href = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(url);
+    document.getElementById('share-linkedin').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
+    document.getElementById('share-whatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(url);
+    document.getElementById('shareOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeShare() {
+    document.getElementById('shareOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function copyShareUrl() {
+    navigator.clipboard.writeText(window.location.href);
+    const btn = document.getElementById('shareCopyBtn');
+    btn.textContent = 'COPIED!';
+    btn.style.background = '#16a34a';
+    setTimeout(() => { btn.textContent = 'COPY'; btn.style.background = ''; }, 2000);
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShare(); });
+</script>
+
+<!-- Share Modal -->
+<div class="share-overlay" id="shareOverlay" onclick="if(event.target===this)closeShare()">
+  <div class="share-modal">
+    <div class="share-modal-head">
+      <span class="share-modal-title">Share This Article</span>
+      <button class="share-modal-close" onclick="closeShare()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="share-modal-body">
+      <p class="share-section-label">Share via Socials</p>
+      <div class="share-socials">
+        <a id="share-x" href="#" target="_blank" rel="noopener" class="share-social-btn" title="Share on X">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a id="share-linkedin" href="#" target="_blank" rel="noopener" class="share-social-btn" title="Share on LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a id="share-whatsapp" href="#" target="_blank" rel="noopener" class="share-social-btn" title="Share on WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
+      <hr class="share-divider" />
+      <p class="share-section-label">Or copy link</p>
+      <div class="share-copy-row">
+        <span class="share-copy-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        </span>
+        <span class="share-url-text" id="shareUrlText"></span>
+        <button class="share-copy-btn" id="shareCopyBtn" onclick="copyShareUrl()">COPY</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
