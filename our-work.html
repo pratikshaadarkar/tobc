@@ -959,13 +959,18 @@
     }
   });
 
-  // Fetch Vimeo thumbnails via oEmbed (works on all domains)
+  // Fetch Vimeo thumbnails via oEmbed at high resolution
   document.querySelectorAll('.project-thumb img[src*="vumbnail"]').forEach(img => {
     const videoId = img.closest('[data-video]')?.dataset.video;
     if (!videoId) return;
-    fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${videoId}`)
+    fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${videoId}&width=1280`)
       .then(r => r.json())
-      .then(data => { if (data.thumbnail_url) img.src = data.thumbnail_url; })
+      .then(data => {
+        if (data.thumbnail_url) {
+          // Upgrade to 1280x720 resolution
+          img.src = data.thumbnail_url.replace(/_\d+x\d+(\.\w+)?$/, '_1280x720');
+        }
+      })
       .catch(() => {});
   });
 
