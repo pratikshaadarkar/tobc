@@ -959,6 +959,16 @@
     }
   });
 
+  // Fetch Vimeo thumbnails via oEmbed (works on all domains)
+  document.querySelectorAll('.project-thumb img[src*="vumbnail"]').forEach(img => {
+    const videoId = img.closest('[data-video]')?.dataset.video;
+    if (!videoId) return;
+    fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${videoId}`)
+      .then(r => r.json())
+      .then(data => { if (data.thumbnail_url) img.src = data.thumbnail_url; })
+      .catch(() => {});
+  });
+
 </script>
 
 </body>
