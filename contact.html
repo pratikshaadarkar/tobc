@@ -401,23 +401,25 @@
       </div>
       <hr class="form-divider" />
 
-      <form>
+      <form method="POST" action="https://api.web3forms.com/submit">
+        <input type="hidden" name="access_key" value="01b223d5-3f1f-40da-8874-77f7fe743847" />
+
         <div class="form-field">
           <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Enter your name" />
+          <input type="text" id="name" name="name" placeholder="Enter your name" required />
         </div>
 
         <div class="form-field">
           <label for="phone">Phone Number</label>
           <div class="phone-field">
             <span class="phone-prefix">🇮🇳 +91</span>
-            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" />
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
           </div>
         </div>
 
         <div class="form-field">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" />
+          <input type="email" id="email" name="email" placeholder="Enter your email" required />
         </div>
 
         <div class="form-field">
@@ -464,7 +466,7 @@
 
         <div class="form-field">
           <label for="message">Tell us about your project</label>
-          <textarea id="message" name="message" placeholder="What's on your mind?"></textarea>
+          <textarea id="message" name="message" placeholder="What's on your mind?" required></textarea>
         </div>
 
         <button type="submit" class="submit-btn">SUBMIT</button>
