@@ -206,15 +206,36 @@
     .phone-field input { border-bottom: none; padding: 8px 2px 4px; }
     .phone-field:focus-within input { border-bottom: none; }
 
-    .form-field select {
-      appearance: none; -webkit-appearance: none;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%23ffffff' stroke-width='2' fill='none' fill-rule='evenodd'/></svg>");
-      background-repeat: no-repeat; background-position: right 4px center;
-      cursor: pointer;
+    .form-field select { display: none; }
+
+    .custom-select { position: relative; }
+    .custom-select-trigger {
+      width: 100%; background: transparent;
+      border: none; border-bottom: 1.5px solid #333;
+      color: #555; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400;
+      padding: 8px 28px 8px 2px; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      user-select: none; transition: border-color 0.2s;
     }
-    .form-field select:invalid,
-    .form-field select option[value=""] { color: #555; }
-    .form-field select option { color: #111; }
+    .custom-select-trigger.has-value { color: #fff; }
+    .custom-select.open .custom-select-trigger { border-bottom-color: var(--red); }
+    .custom-select-arrow {
+      width: 14px; height: 14px; flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .custom-select.open .custom-select-arrow { transform: rotate(180deg); }
+    .custom-select-dropdown {
+      position: fixed; display: none;
+      background: #1e1e1e; border: 1px solid #444; border-radius: 10px;
+      z-index: 99999; overflow-y: auto; max-height: 220px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.8);
+    }
+    .custom-select-option {
+      padding: 14px 16px; color: #ccc; font-family: 'Inter', sans-serif;
+      font-size: 15px; cursor: pointer; transition: background 0.15s, color 0.15s;
+    }
+    .custom-select-option:hover { background: #2a2a2a; color: #fff; }
+    .custom-select-option.selected { color: #fff; background: #2a2a2a; }
 
     .pill-field { margin-bottom: 2rem; margin-top: 0; }
     .pill-field.pill-field-source { margin-top: 2rem; }
@@ -339,14 +360,20 @@
       #contact-form { padding: 100px 40px 80px 40px; }
     }
 
-    @media (max-width: 768px) {
+    
+    @media (max-width: 1024px) {
+      #cta { position: relative; bottom: auto; }
+      #footer { position: relative; bottom: auto; }
+    }
+@media (max-width: 768px) {
       #nav { padding: 14px 20px; }
       .nav-logo img { height: 60px !important; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
 
-      .hook-form-inner { flex-direction: column; }
+      .hook-form-inner { flex-direction: column; align-items: stretch; }
       .hook-left { width: 100%; position: static; top: auto; padding: 100px 20px 32px; }
+      .hook-right { width: 100%; }
       .hook-h1 { margin-bottom: 16px; }
       .hook-subline { font-size: clamp(18px, 4vw, 28px); }
 
@@ -361,7 +388,7 @@
       .email-link { word-break: break-all; font-size: 15px; }
       .email-heading { font-size: 17px; }
 
-      #cta { position: relative; bottom: auto; margin-top: 0; padding: 60px 20px 60px; } #footer { position: relative; bottom: auto; }
+      #cta { position: relative; bottom: auto; margin-top: -40px; padding: 110px 20px 40px; } #footer { position: relative; bottom: auto; }
       .cta-h2 { font-size: clamp(40px, 10vw, 56px); }
 
       #footer { padding: 32px 20px 20px; }
@@ -455,45 +482,63 @@
         </div>
 
         <div class="form-field">
-          <label for="type">Are you an Agency or a Brand?</label>
-          <select id="type" name="type" required>
-            <option value="" selected disabled hidden>Select option</option>
-            <option value="agency">Agency</option>
-            <option value="brand">Brand</option>
-          </select>
+          <label>Are you an Agency or a Brand?</label>
+          <select id="type" name="type" required></select>
+          <div class="custom-select" data-target="type">
+            <div class="custom-select-trigger">
+              <span>Select option</span>
+              <svg class="custom-select-arrow" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l6 6 6-6" stroke="#fff" stroke-width="2" fill="none"/></svg>
+            </div>
+            <div class="custom-select-dropdown">
+              <div class="custom-select-option" data-value="agency">Agency</div>
+              <div class="custom-select-option" data-value="brand">Brand</div>
+            </div>
+          </div>
         </div>
 
         <div class="form-field">
-          <label for="services">Which services are you interested in?</label>
-          <select id="services" name="services" required>
-            <option value="" selected disabled hidden>Select a service</option>
-            <option value="Ad Film">Ad Film</option>
-            <option value="Video Production">Video Production</option>
-            <option value="Music Video">Music Video</option>
-            <option value="Celebrity Endorsement">Celebrity Endorsement</option>
-            <option value="Influencer Management">Influencer Management</option>
-            <option value="Digital Marketing">Digital Marketing</option>
-            <option value="Brand Campaign">Brand Campaign</option>
-            <option value="Casting">Casting</option>
-            <option value="Live Events">Live Events</option>
-            <option value="OTT / Web Series">OTT / Web Series</option>
-            <option value="Brand Partnerships">Brand Partnerships</option>
-            <option value="Event Management">Event Management</option>
-          </select>
+          <label>Which services are you interested in?</label>
+          <select id="services" name="services" required></select>
+          <div class="custom-select" data-target="services">
+            <div class="custom-select-trigger">
+              <span>Select a service</span>
+              <svg class="custom-select-arrow" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l6 6 6-6" stroke="#fff" stroke-width="2" fill="none"/></svg>
+            </div>
+            <div class="custom-select-dropdown">
+              <div class="custom-select-option" data-value="Ad Film">Ad Film</div>
+              <div class="custom-select-option" data-value="Video Production">Video Production</div>
+              <div class="custom-select-option" data-value="Music Video">Music Video</div>
+              <div class="custom-select-option" data-value="Celebrity Endorsement">Celebrity Endorsement</div>
+              <div class="custom-select-option" data-value="Influencer Management">Influencer Management</div>
+              <div class="custom-select-option" data-value="Digital Marketing">Digital Marketing</div>
+              <div class="custom-select-option" data-value="Brand Campaign">Brand Campaign</div>
+              <div class="custom-select-option" data-value="Casting">Casting</div>
+              <div class="custom-select-option" data-value="Live Events">Live Events</div>
+              <div class="custom-select-option" data-value="OTT / Web Series">OTT / Web Series</div>
+              <div class="custom-select-option" data-value="Brand Partnerships">Brand Partnerships</div>
+              <div class="custom-select-option" data-value="Event Management">Event Management</div>
+            </div>
+          </div>
         </div>
 
         <div class="form-field">
-          <label for="source">How did you hear about us?</label>
-          <select id="source" name="source" required>
-            <option value="" selected disabled hidden>Select an option</option>
-            <option value="Referral">Referral</option>
-            <option value="Instagram / Facebook">Instagram / Facebook</option>
-            <option value="YouTube">YouTube</option>
-            <option value="LinkedIn">LinkedIn</option>
-            <option value="Search / Google">Search / Google</option>
-            <option value="Media & News">Media &amp; News</option>
-            <option value="Other">Other</option>
-          </select>
+          <label>How did you hear about us?</label>
+          <select id="source" name="source" required></select>
+          <div class="custom-select" data-target="source">
+            <div class="custom-select-trigger">
+              <span>Select an option</span>
+              <svg class="custom-select-arrow" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l6 6 6-6" stroke="#fff" stroke-width="2" fill="none"/></svg>
+            </div>
+            <div class="custom-select-dropdown">
+              <div class="custom-select-option" data-value="Referral">Referral</div>
+              <div class="custom-select-option" data-value="Instagram / Facebook">Instagram / Facebook</div>
+              <div class="custom-select-option" data-value="YouTube">YouTube</div>
+              <div class="custom-select-option" data-value="LinkedIn">LinkedIn</div>
+              <div class="custom-select-option" data-value="Search / Google">Search / Google</div>
+              <div class="custom-select-option" data-value="Media & News">Media &amp; News</div>
+              <div class="custom-select-option" data-value="Other">Other</div>
+            </div>
+          </div>
         </div>
 
         <div class="form-field">
@@ -685,34 +730,76 @@
     }
   });
 
-  function setupPillGroup(groupId, hiddenInputId) {
-    const group = document.getElementById(groupId);
-    const hiddenInput = document.getElementById(hiddenInputId);
-    const mode = group.dataset.mode;
-    const pills = group.querySelectorAll('.pill');
 
-    function updateHiddenInput() {
-      const selected = Array.from(pills)
-        .filter(p => p.classList.contains('selected'))
-        .map(p => p.dataset.value);
-      hiddenInput.value = selected.join(', ');
+  // Custom select dropdowns — portal dropdown to body to avoid GSAP stacking context issues
+  let activeDropdown = null;
+
+  function closeAllDropdowns() {
+    document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
+    if (activeDropdown) {
+      activeDropdown.style.display = 'none';
     }
-
-    pills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        if (mode === 'single') {
-          pills.forEach(p => p.classList.remove('selected'));
-          pill.classList.add('selected');
-        } else {
-          pill.classList.toggle('selected');
-        }
-        updateHiddenInput();
-      });
-    });
+    activeDropdown = null;
   }
 
-  setupPillGroup('services-group', 'services-selected');
-  setupPillGroup('source-group', 'source-selected');
+  function positionDropdown(dropdown, trigger) {
+    const rect = trigger.getBoundingClientRect();
+    dropdown.style.position = 'fixed';
+    dropdown.style.top = (rect.bottom + 4) + 'px';
+    dropdown.style.left = rect.left + 'px';
+    dropdown.style.width = rect.width + 'px';
+    dropdown.style.right = 'auto';
+    dropdown.style.display = 'block';
+  }
+
+  document.querySelectorAll('.custom-select').forEach(sel => {
+    const trigger = sel.querySelector('.custom-select-trigger');
+    const dropdown = sel.querySelector('.custom-select-dropdown');
+    const label = trigger.querySelector('span');
+    const targetId = sel.dataset.target;
+    const hiddenSelect = document.getElementById(targetId);
+
+    // Move dropdown to body on first use
+    document.body.appendChild(dropdown);
+    dropdown.style.display = 'none';
+
+    trigger.addEventListener('click', e => {
+      e.stopPropagation();
+      if (sel.classList.contains('open')) {
+        sel.classList.remove('open');
+        closeAllDropdowns();
+      } else {
+        closeAllDropdowns();
+        sel.classList.add('open');
+        positionDropdown(dropdown, trigger);
+        activeDropdown = dropdown;
+      }
+    });
+
+    dropdown.querySelectorAll('.custom-select-option').forEach(opt => {
+      opt.addEventListener('click', e => {
+        e.stopPropagation();
+        const val = opt.dataset.value;
+        const text = opt.textContent;
+        label.textContent = text;
+        trigger.classList.add('has-value');
+        dropdown.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        sel.classList.remove('open');
+        closeAllDropdowns();
+        hiddenSelect.innerHTML = `<option value="${val}" selected>${text}</option>`;
+      });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    if (activeDropdown) {
+      const openSel = document.querySelector('.custom-select.open');
+      if (openSel) positionDropdown(activeDropdown, openSel.querySelector('.custom-select-trigger'));
+    }
+  }, { passive: true });
+
+  document.addEventListener('click', closeAllDropdowns);
 </script>
 
 <!-- GSAP + ScrollTrigger -->

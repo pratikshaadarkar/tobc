@@ -372,7 +372,12 @@
     /* ══════════════════════════════════════
        RESPONSIVE
     ══════════════════════════════════════ */
-    @media (max-width: 768px) {
+    
+    @media (max-width: 1024px) {
+      #cta { position: relative; bottom: auto; }
+      #footer { position: relative; bottom: auto; }
+    }
+@media (max-width: 768px) {
       #nav { padding: 14px 20px; }
       .nav-logo img { height: 60px !important; }
       .nav-links, .nav-cta { display: none; }
@@ -387,7 +392,7 @@
       #blog-grid { padding: 40px 20px 60px; }
       .blog-cards-row { gap: 24px; }
 
-      #cta { position: relative; bottom: auto; margin-top: 0; padding: 60px 20px 60px; } #footer { position: relative; bottom: auto; }
+      #cta { position: relative; bottom: auto; margin-top: -40px; padding: 110px 20px 40px; } #footer { position: relative; bottom: auto; }
       .cta-h2 { font-size: clamp(40px, 10vw, 56px); }
 
       #footer { padding: 60px 20px 30px; }

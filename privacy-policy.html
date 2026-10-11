@@ -31,7 +31,7 @@
     #mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; color: #fff; text-decoration: none; transition: color 0.2s; }
     #mobile-menu a:hover { color: var(--red); }
 
-    .page-wrapper { background: #fff; padding-top: 120px; border-radius: 0 0 60px 60px; position: relative; z-index: 2; }
+    .page-wrapper { background: #fff; padding-top: 120px; border-radius: 0 0 60px 60px; position: relative; z-index: 4; }
     .page-container { max-width: 860px; margin: 0 auto; padding: 56px 60px 100px; }
     .page-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
     .page-title { font-family: 'Inter', sans-serif; font-size: clamp(32px, 5vw, 52px); font-weight: 800; color: #0a0a0a; line-height: 1.1; margin-bottom: 16px; letter-spacing: -0.5px; }
@@ -49,7 +49,9 @@
       background: var(--red);
       padding: 80px 48px 20px;
       text-align: center;
-      position: static;
+      position: sticky;
+      bottom: 0;
+      z-index: 3;
       margin-top: -60px;
       padding-top: 140px;
     }
@@ -73,7 +75,7 @@
       box-shadow: 0 0 24px 8px rgba(255,255,255,0.3), 0 0 50px 18px rgba(255,255,255,0.15);
     }
 
-    #footer { background: var(--red); padding: 80px 40px 40px; position: static; }
+    #footer { background: var(--red); padding: 80px 40px 40px; position: sticky; bottom: 0; z-index: 1; }
     .footer-inner { max-width: 1200px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 48px; }
     .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; margin-top: -20px; margin-left: -15px; }
@@ -98,13 +100,30 @@
     .back-to-top { padding: 10px 22px; border: 1.5px solid #fff; border-radius: 999px; background: rgba(255,255,255,0.1); color: #fff; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
     .back-to-top:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
 
+    @media (max-width: 1024px) {
+      .page-container { padding: 40px 40px 80px; }
+    }
+
     @media (max-width: 768px) {
-      #nav { padding: 14px 20px; } .nav-links, .nav-cta { display: none; } .hamburger { display: flex; }
-      .page-container { padding: 40px 24px 72px; }
-      #cta { padding: 0 20px 80px; }
+      #nav { padding: 14px 20px; }
+      .nav-logo img { height: 60px !important; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .page-container { padding: 40px 20px 60px; }
+      #cta { margin-top: -40px; padding: 110px 20px 40px; }
       .cta-h2 { font-size: clamp(40px, 10vw, 56px); }
-      .footer-top { grid-template-columns: 1fr; gap: 40px; }
-      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+      #footer { padding: 60px 20px 30px; }
+      .footer-top { grid-template-columns: 1fr; gap: 28px; margin-bottom: 28px; }
+      .footer-logo-row { margin-top: 0; margin-left: 0; margin-bottom: 10px; }
+      .footer-logo-row img { height: 52px; }
+      .footer-tagline { font-size: 15px; margin-bottom: 16px; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; margin: 0 -20px -30px; padding: 20px; }
+      .address-line { white-space: normal; }
+    }
+
+    @media (max-width: 480px) {
+      .page-title { font-size: clamp(28px, 8vw, 40px); }
+      .policy-body { font-size: 0.95rem; }
     }
   </style>
 </head>
