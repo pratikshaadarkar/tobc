@@ -386,6 +386,8 @@
       color: #E31B1B;
     }
 
+    .about-headline span { white-space: normal !important; }
+
     .about-red-line {
       width: 60px; height: 2px;
       background: #E31B1B;
@@ -561,6 +563,14 @@
       line-height: 1;
     }
 
+    @media (max-width: 1200px) {
+      #about-text { overflow-x: hidden; padding: 80px 6%; }
+      .about-cols { grid-template-columns: 1fr; gap: 40px; }
+      .about-headline { font-size: 2rem; }
+      .about-right { align-items: center; justify-content: center; }
+      .about-quote-block { width: 100%; max-width: 440px; margin: 0 auto !important; }
+    }
+
     @media (max-width: 1024px) {
       .stats-bg-img { height: 440px; }
       #awards { padding: 60px 6%; }
@@ -568,12 +578,6 @@
       .awards-right { align-items: flex-start; }
       .award-single-stack { width: 300px; height: 380px; }
       .aw-card { width: 300px; height: 380px; }
-      #about-text { overflow-x: hidden; padding: 80px 6%; }
-      .about-cols { grid-template-columns: 1fr; gap: 40px; }
-      .about-headline { font-size: 2rem; }
-      .about-headline span { white-space: normal !important; }
-      .about-right { align-items: center; justify-content: center; }
-      .about-quote-block { width: 100%; max-width: 400px; margin: 0 auto !important; }
     }
 
     @media (max-width: 768px) {
