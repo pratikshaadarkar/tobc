@@ -474,10 +474,16 @@
     }
 
     @media (max-width: 768px) {
-      #about-text { padding: 60px 6%; }
+      #about-text { padding: 60px 6%; overflow-x: hidden; }
       .about-cols { grid-template-columns: 1fr; gap: 40px; }
-      .about-headline { font-size: 1.8rem; }
+      .about-headline { font-size: 1.6rem; }
+      .about-headline span { white-space: normal !important; }
+      .about-body-text { font-size: 1rem; word-break: break-word; }
       .about-big-quote { font-size: 120px; margin-bottom: -36px; }
+      .hero-headline-block { padding: 90px 20px 0; }
+      .hero-main-headline { font-size: 2rem; }
+      .nav-logo { margin-left: 0; }
+      .carousel-cards { width: 220px; height: 340px; }
     }
 
     /* ══════════════════════════════════════
@@ -555,10 +561,22 @@
       line-height: 1;
     }
 
+    @media (max-width: 1024px) {
+      .stats-bg-img { height: 440px; }
+      #awards { padding: 60px 6%; }
+      .awards-inner { grid-template-columns: 1fr; gap: 40px; }
+      .awards-right { align-items: flex-start; }
+      .award-single-stack { width: 300px; height: 380px; }
+      .aw-card { width: 300px; height: 380px; }
+      .about-cols { grid-template-columns: 1fr; gap: 40px; }
+      .about-right { align-items: center; }
+      .about-quote-block { width: 100%; max-width: 340px; margin: 0 auto; }
+    }
+
     @media (max-width: 768px) {
       #stats { padding: 0 5% 60px; }
-      .stats-bg-img { height: 560px; }
-      .stats-content { padding: 0 5%; align-items: flex-start; padding-top: 40px; }
+      .stats-bg-img { height: 340px; }
+      .stats-content { padding: 0 5%; align-items: center; }
       .stats-row { flex-wrap: wrap; }
       .stat-item {
         flex: 0 0 50%;
@@ -648,6 +666,7 @@
       height: 400px;
       border-radius: 16px;
       overflow: hidden;
+      background: #111;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -780,16 +799,16 @@
     }
 
     @media (max-width: 768px) {
-      #awards { padding: 60px 6%; }
-      .awards-inner { grid-template-columns: 1fr; gap: 48px; }
+      #awards { padding: 60px 5%; }
+      .awards-inner { grid-template-columns: 1fr; gap: 40px; }
       .awards-headline { font-size: 2.2rem; }
-      .award-single-stack { width: 220px; height: 348px; }
-      .aw-card { width: 220px; height: 293px; }
-      .award-single-stack.expanded { height: 1253px; }
-      .award-single-stack.expanded .aw-card:nth-child(2) { top: 309px; }
-      .award-single-stack.expanded .aw-card:nth-child(3) { top: 618px; }
-      .award-single-stack.expanded .aw-card:nth-child(4) { top: 927px; }
-      .award-single-stack.expanded { height: 888px; }
+      .awards-right { align-items: flex-start; }
+      .award-single-stack { width: 260px; height: 330px; }
+      .aw-card { width: 260px; height: 330px; }
+      .award-single-stack.expanded { height: 820px; }
+      .award-single-stack.expanded .aw-card:nth-child(2) { top: 276px; }
+      .award-single-stack.expanded .aw-card:nth-child(3) { top: 552px; }
+      .award-single-stack.expanded .aw-card:nth-child(4) { top: 828px; }
     }
 
     /* ══════════════════════════════════════
@@ -885,11 +904,11 @@
       #footer { position: relative; bottom: auto; }
     }
 @media (max-width: 768px) {
-      #nav { padding: 14px 20px; }
+      #nav, #nav.scrolled { padding: 14px 20px 14px 12px; }
       .nav-logo img { height: 60px !important; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
-      .about-quote-block { width: 100%; margin-left: 0; }
+      .about-quote-block { width: 100%; max-width: 280px; margin: 0 auto; }
       .c-card { width: 220px; height: 340px; }
       .c-card[data-pos="-1"] { transform: translateX(-140px) rotateY(22deg) scale(0.67); }
       .c-card[data-pos="1"]  { transform: translateX(140px) rotateY(-22deg) scale(0.67); }
@@ -902,13 +921,15 @@
 
     @media (max-width: 480px) {
       .c-card { width: 180px; height: 280px; }
+      .carousel-cards { width: 180px; height: 280px; }
       .c-card[data-pos="-1"] { transform: translateX(-110px) rotateY(22deg) scale(0.67); }
       .c-card[data-pos="1"]  { transform: translateX(110px) rotateY(-22deg) scale(0.67); }
       #about-text { padding: 40px 5%; }
-      .about-headline { font-size: 1.5rem; }
+      .about-headline { font-size: 1.4rem; }
+      .about-headline span { white-space: normal !important; }
       .about-big-quote { font-size: 90px; }
       .stat-number { font-size: 2.8rem; }
-      .stats-bg-img { height: 480px; }
+      .stats-bg-img { height: 360px; }
     }
   </style>
 </head>
