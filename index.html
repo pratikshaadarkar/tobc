@@ -93,7 +93,7 @@
     /* ══════════════════════════════════════
        HERO
     ══════════════════════════════════════ */
-    .hero-flow { background: var(--gradient); }
+    .hero-flow { background: var(--gradient); overflow: visible; }
     #hero {
       position: relative; min-height: 100vh;
       background: transparent;
@@ -101,6 +101,7 @@
       justify-content: center; text-align: center;
       padding: 120px 24px 200px;
       overflow: visible;
+      z-index: 3;
     }
     .hero-eyebrow {
       font-size: 12px; font-weight: 600; letter-spacing: 3px;
@@ -125,17 +126,21 @@
 
     /* portrait strip */
     .portrait-strip {
-      position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%);
-      display: flex; gap: -12px; align-items: flex-end;
-      width: max-content;
+      position: absolute; bottom: -60px; left: 0; right: 0;
+      display: flex; align-items: flex-end; justify-content: center;
+      gap: clamp(6px, 1.2vw, 30px);
+      z-index: 2;
+      padding: 0 8px;
+      box-sizing: border-box;
     }
     .portrait-card {
-      width: 190px; height: 280px; border-radius: 999px;
+      width: clamp(55px, 8.5vw, 190px);
+      height: clamp(88px, 13.5vw, 280px);
+      border-radius: 999px;
       overflow: hidden; position: relative; flex-shrink: 0;
       box-shadow: 0 8px 24px rgba(0,0,0,0.5);
       border: 2px solid rgba(255,255,255,0.15);
     }
-    .portrait-strip { gap: 30px; }
     .portrait-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .portrait-card::after {
       content: ''; position: absolute; inset: 0;
@@ -183,18 +188,12 @@
       background: transparent;
       padding: 80px 40px 120px 40px;
     }
-    .about-inner .reveal {
-      margin-left: -40px;
-    }
     .about-inner {
       max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: 550px 190px 480px; gap: 0px; align-items: center;
-    }
-    .about-inner .reveal {
-      grid-column: 1;
-    }
-    .about-inner .about-img {
-      grid-column: 3;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, min(480px, 44%));
+      gap: clamp(24px, 5vw, 80px);
+      align-items: center;
     }
     .tag-pill {
       display: inline-block; padding: 6px 18px;
@@ -244,7 +243,6 @@
     #our-work {
       background: transparent;
       padding: 100px 48px;
-      overflow: hidden;
     }
     .work-header { margin-bottom: 48px; display: flex; align-items: flex-start; justify-content: space-between; gap: 48px; }
     .work-eyebrow { font-size: 14px; color: rgba(0,0,0,0.45); font-style: italic; margin-bottom: 8px; }
@@ -432,7 +430,7 @@
        TESTIMONIALS (Section 6)
     ══════════════════════════════════════ */
     #testimonials {
-      background: #080808; padding: 80px 48px 120px;
+      background: #080808; padding: 80px 48px 180px;
       text-align: center;
       border-radius: 0 0 60px 60px;
       position: relative;
@@ -751,27 +749,38 @@
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
 
-      #hero { padding: 100px 20px 100px; }
-      .portrait-strip { display: none; }
+      #hero { padding: 100px 20px 60px; min-height: auto; }
+      .portrait-strip {
+        position: static;
+        margin-top: 40px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 16px 24px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .portrait-strip::-webkit-scrollbar { display: none; }
 
       #marquee-section { padding: 60px 0 40px; }
 
       #about { padding: 60px 20px 80px; }
       .about-inner { grid-template-columns: 1fr; gap: 40px; }
-      .about-inner .about-img { order: -1; }
+      .about-inner .about-img { order: 1; }
       .about-img img { height: 280px; }
-      .about-inner .reveal { margin-left: 0 !important; }
 
-      #our-work { padding: 60px 20px; }
+
+      #our-work { padding: 60px 40px; }
       .work-header { flex-direction: column; align-items: flex-start; gap: 8px; }
       .work-card { flex: 0 0 85%; }
-      .carousel-btn { display: none; }
+      .carousel-btn { display: flex; }
+      .carousel-btn.prev { left: -24px; }
+      .carousel-btn.next { right: -24px; }
 
       #services { padding: 60px 20px 80px; }
       .services-grid { grid-template-columns: 1fr; }
       .service-card { aspect-ratio: 3/2; }
 
-      #testimonials { padding: 80px 20px 0; }
+      #testimonials { padding: 80px 20px 120px; }
       .testi-card { padding: 28px 24px; }
       .testi-text { font-size: 16px; }
 
@@ -785,6 +794,21 @@
     }
 
     @media (max-width: 480px) {
+      .portrait-strip {
+        position: static;
+        margin-top: 40px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 16px 16px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .portrait-strip::-webkit-scrollbar { display: none; }
+      .portrait-card {
+        width: 80px;
+        height: 130px;
+        flex-shrink: 0;
+      }
       .ssc-num { font-size: 56px; }
       .ssc-content { padding: 24px 16px; }
       .testi-card { padding: 20px 16px; }

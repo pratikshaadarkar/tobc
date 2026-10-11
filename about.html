@@ -355,14 +355,14 @@
 
     .about-cols {
       display: grid;
-      grid-template-columns: 55fr 45fr;
-      gap: 60px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, min(360px, 32%));
+      gap: clamp(20px, 4vw, 60px);
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    .about-left {}
+    .about-left { min-width: 0; }
 
     .about-label {
       font-size: 0.85rem;
@@ -386,8 +386,6 @@
       color: #E31B1B;
     }
 
-    .about-headline span { white-space: normal !important; }
-
     .about-red-line {
       width: 60px; height: 2px;
       background: #E31B1B;
@@ -403,19 +401,19 @@
 
     .about-body-text p + p { margin-top: 1.2em; }
 
-    /* RIGHT SIDE — styled like WRM reference */
+    /* RIGHT SIDE */
     .about-right {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+      min-width: 0;
     }
 
     .about-quote-block {
       position: relative;
-      width: 350px;
-      margin-left: -80px;
-      margin-right: auto;
+      width: 100%;
+      margin: 0;
     }
 
     .about-big-quote {
@@ -563,14 +561,6 @@
       line-height: 1;
     }
 
-    @media (max-width: 1200px) {
-      #about-text { overflow-x: hidden; padding: 80px 6%; }
-      .about-cols { grid-template-columns: 1fr; gap: 40px; }
-      .about-headline { font-size: 2rem; }
-      .about-right { align-items: center; justify-content: center; }
-      .about-quote-block { width: 100%; max-width: 440px; margin: 0 auto !important; }
-    }
-
     @media (max-width: 1024px) {
       .stats-bg-img { height: 440px; }
       #awards { padding: 60px 6%; }
@@ -627,7 +617,7 @@
 
     .awards-headline {
       font-family: 'Inter', sans-serif;
-      font-size: clamp(2.8rem, 4.5vw, 5rem);
+      font-size: clamp(2rem, 3.2vw, 3.5rem);
       font-weight: 800;
       line-height: 1.05;
       color: #fff;
@@ -648,20 +638,20 @@
     .awards-right {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-end;
     }
 
     /* outer wrapper — grows when expanded */
     .award-single-stack {
       position: relative;
-      width: 260px;
+      width: min(400px, 100%);
       height: 390px; /* collapsed: front card (346px) + 3 cards peeking below */
       cursor: pointer;
       transition: height 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
 
     .award-single-stack.expanded {
-      height: 1480px; /* 4 × 346px + 3 × 16px gaps */
+      height: calc(4 * 362px + 60px);
       cursor: default;
     }
 
@@ -669,7 +659,7 @@
     .aw-card {
       position: absolute;
       left: 0;
-      width: 400px;
+      width: 100%;
       height: 400px;
       border-radius: 16px;
       overflow: hidden;
@@ -1111,8 +1101,8 @@
   <div class="about-cols">
     <div class="about-left reveal">
       <h2 class="about-headline">
-        <span style="white-space: nowrap;">We're The <span class="highlight">Out Of Box Creators</span> Entertainment,</span><br/>
-        <span style="white-space: nowrap;">And Our Friends Call Us TOBC</span>
+        <span>We're The <span class="highlight">Out Of Box Creators</span> Entertainment,</span><br/>
+        <span>And Our Friends Call Us TOBC</span>
       </h2>
       <div class="about-red-line"></div>
       <div class="about-body-text">
@@ -1173,9 +1163,7 @@
   <div class="awards-inner">
     <div class="awards-left reveal">
       <h2 class="awards-headline" style="text-transform: none !important;">
-        <span style="display: block; white-space: nowrap;">Stories That Got</span>
-        <span style="display: block; white-space: nowrap;">The Industry's</span>
-        <span style="display: block; white-space: nowrap;">Attention.</span>
+        <span style="white-space: nowrap;">Stories That Got</span><br>The Industry's<br>Attention.
       </h2>
     </div>
     <div class="awards-right reveal">
