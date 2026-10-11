@@ -386,6 +386,8 @@
       color: #E31B1B;
     }
 
+    .about-headline span { white-space: normal !important; }
+
     .about-red-line {
       width: 60px; height: 2px;
       background: #E31B1B;
@@ -406,14 +408,14 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
+      align-items: center;
+      justify-content: center;
     }
 
     .about-quote-block {
       position: relative;
-      width: 350px;
-      margin-left: -80px;
-      margin-right: auto;
+      width: 100%;
+      max-width: 420px;
     }
 
     .about-big-quote {
@@ -561,15 +563,12 @@
       line-height: 1;
     }
 
-    @media (max-width: 1300px) {
-      .about-headline { font-size: 2.2rem; }
-      .about-quote-block { margin-left: 0; }
-      .award-single-stack { width: 300px; }
-      .aw-card { width: 300px; height: 360px; }
-      .award-single-stack.expanded { height: 1430px; }
-      .award-single-stack.expanded .aw-card:nth-child(2) { top: 358px; }
-      .award-single-stack.expanded .aw-card:nth-child(3) { top: 716px; }
-      .award-single-stack.expanded .aw-card:nth-child(4) { top: 1074px; }
+    @media (max-width: 1200px) {
+      #about-text { overflow-x: hidden; padding: 80px 6%; }
+      .about-cols { grid-template-columns: 1fr; gap: 40px; }
+      .about-headline { font-size: 2rem; }
+      .about-right { align-items: center; justify-content: center; }
+      .about-quote-block { width: 100%; max-width: 440px; margin: 0 auto !important; }
     }
 
     @media (max-width: 1024px) {
@@ -579,12 +578,6 @@
       .awards-right { align-items: flex-start; }
       .award-single-stack { width: 300px; height: 380px; }
       .aw-card { width: 300px; height: 380px; }
-      #about-text { overflow-x: hidden; padding: 80px 6%; }
-      .about-cols { grid-template-columns: 1fr; gap: 40px; }
-      .about-headline { font-size: 2rem; }
-      .about-headline span { white-space: normal !important; }
-      .about-right { align-items: center; justify-content: center; }
-      .about-quote-block { width: 100%; max-width: 400px; margin: 0 auto !important; }
     }
 
     @media (max-width: 768px) {
@@ -1118,8 +1111,8 @@
   <div class="about-cols">
     <div class="about-left reveal">
       <h2 class="about-headline">
-        We're The <span class="highlight">Out Of Box Creators</span> Entertainment,<br/>
-        And Our Friends Call Us TOBC
+        <span style="white-space: nowrap;">We're The <span class="highlight">Out Of Box Creators</span> Entertainment,</span><br/>
+        <span style="white-space: nowrap;">And Our Friends Call Us TOBC</span>
       </h2>
       <div class="about-red-line"></div>
       <div class="about-body-text">
