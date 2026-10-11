@@ -326,40 +326,62 @@
     }
     .back-to-top:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
 
+    /* ── Footer links right column ── */
+    .footer-links-right {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start;
+    }
+
     /* ══════════════════════════════════════
        RESPONSIVE
     ══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .hook-left { padding: 15px 40px 80px 40px; }
+      #contact-form { padding: 100px 40px 80px 40px; }
+    }
+
     @media (max-width: 768px) {
       #nav { padding: 14px 20px; }
       .nav-logo img { height: 60px !important; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
 
-      #hook { padding: 100px 20px 40px; }
-      .hook-h1 { margin-bottom: 32px; }
       .hook-form-inner { flex-direction: column; }
-      .hook-left { width: 100%; position: static; top: auto; padding-bottom: 0; }
+      .hook-left { width: 100%; position: static; top: auto; padding: 100px 20px 32px; }
+      .hook-h1 { margin-bottom: 16px; }
+      .hook-subline { font-size: clamp(18px, 4vw, 28px); }
 
-      #contact-form { padding: 20px 20px 60px; }
+      #contact-form { padding: 24px 20px 60px; }
       .form-inner { grid-template-columns: 1fr; gap: 32px; }
-      .form-side-label { text-align: center; }
+      .form-side-label { text-align: left; }
 
-      #email-row { padding: 32px 20px 10px; }
+      #email-row { padding: 40px 20px 60px; }
       .email-row-outer { grid-template-columns: 1fr; gap: 32px; }
-      .email-row-inner { flex-direction: column; align-items: center; gap: 32px; }
+      .email-row-inner { gap: 24px; }
+      .email-col { align-items: flex-start; }
+      .email-link { word-break: break-all; font-size: 15px; }
+      .email-heading { font-size: 17px; }
 
-      #cta { padding: 0 20px 80px; }
+      #cta { position: relative; bottom: auto; margin-top: 0; padding: 60px 20px 60px; } #footer { position: relative; bottom: auto; }
       .cta-h2 { font-size: clamp(40px, 10vw, 56px); }
 
-      #footer { padding: 60px 20px 30px; }
-      .footer-top { grid-template-columns: 1fr; gap: 40px; }
-      .footer-bottom { flex-direction: column; align-items: center; text-align: center; margin: 0 -20px -30px; padding: 20px; }
+      #footer { padding: 32px 20px 20px; }
+      .footer-top { grid-template-columns: 1fr; gap: 28px; margin-bottom: 28px; }
+      .footer-logo-row { margin-top: 0; margin-left: 0; margin-bottom: 10px; }
+      .footer-logo-row img { height: 52px; }
+      .footer-tagline { font-size: 15px; margin-bottom: 16px; }
+      .footer-links-right { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; margin: 0 -20px -20px; padding: 20px; }
       .address-line { white-space: normal; }
     }
 
     @media (max-width: 480px) {
-      .hook-h1 { font-size: clamp(2rem, 9vw, 3rem); }
-      .form-side-label { font-size: 14px; }
+      .hook-h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+      .hook-subline { font-size: clamp(16px, 4vw, 22px); }
+      .form-field label { font-size: 16px; }
+      .form-field input, .form-field select, .form-field textarea { font-size: 15px; }
+      .pill { font-size: 0.78rem; padding: 7px 14px; }
+      .footer-links-right { grid-template-columns: 1fr; gap: 24px; }
+      .submit-btn { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -550,7 +572,7 @@
           <a href="tel:+919136668695"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 91366 68695</span></a>
         </div>
       </div>
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start;">
+      <div class="footer-links-right">
         <div class="footer-links-grid">
           <a href="/">Home</a>
 <a href="about">About</a>
