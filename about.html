@@ -881,12 +881,29 @@
 
     @media (max-width: 768px) {
       #nav { padding: 14px 20px; }
+      .nav-logo img { height: 60px !important; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
+      .about-quote-block { width: 100%; margin-left: 0; }
+      .c-card { width: 220px; height: 340px; }
+      .c-card[data-pos="-1"] { transform: translateX(-140px) rotateY(22deg) scale(0.67); }
+      .c-card[data-pos="1"]  { transform: translateX(140px) rotateY(-22deg) scale(0.67); }
       #cta { padding: 60px 20px 80px; }
       #footer { padding: 60px 20px 30px; }
       .footer-top { grid-template-columns: 1fr; gap: 40px; }
-      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; margin: 0 -20px -30px; padding: 20px; }
+      .address-line { white-space: normal; }
+    }
+
+    @media (max-width: 480px) {
+      .c-card { width: 180px; height: 280px; }
+      .c-card[data-pos="-1"] { transform: translateX(-110px) rotateY(22deg) scale(0.67); }
+      .c-card[data-pos="1"]  { transform: translateX(110px) rotateY(-22deg) scale(0.67); }
+      #about-text { padding: 40px 5%; }
+      .about-headline { font-size: 1.5rem; }
+      .about-big-quote { font-size: 90px; }
+      .stat-number { font-size: 2.8rem; }
+      .stats-bg-img { height: 480px; }
     }
   </style>
 </head>
@@ -1165,7 +1182,7 @@
         <p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
         <div class="footer-contact">
           <a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span><span class="footer-link-text"> info@tobcentertainment.com</span></a>
-          <a href="tel:+918077552630"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 80775 52630</span></a>
+          <a href="tel:+919136668695"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 91366 68695</span></a>
         </div>
       </div>
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start;">
@@ -1566,7 +1583,7 @@
 <p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
 <div class="footer-contact">
 <a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span> info@tobcentertainment.com</a>
-<a href="tel:+918077552630"><span class="contact-icon">📞</span> +91 80775 52630</a>
+<a href="tel:+919136668695"><span class="contact-icon">📞</span> +91 91366 68695</a>
 </div>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-start;">

@@ -169,8 +169,14 @@
     #grid-advertisement, #grid-music {
       grid-template-columns: 1fr 1fr;
     }
+    #grid-ugc {
+      grid-template-columns: repeat(4, 1fr);
+    }
     .project-card {
       cursor: pointer;
+    }
+    #grid-ugc .project-thumb {
+      aspect-ratio: 9 / 16;
     }
     .project-thumb {
       width: 100%;
@@ -534,12 +540,15 @@
     ══════════════════════════════════════ */
     @media (max-width: 768px) {
       #nav { padding: 14px 20px; }
+      .nav-logo img { height: 60px !important; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
+      #grid-ugc { grid-template-columns: repeat(2, 1fr); }
       #cta { padding: 0 20px 80px; }
       .cta-h2 { font-size: clamp(40px, 10vw, 56px); }
       .footer-top { grid-template-columns: 1fr; gap: 40px; }
-      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; margin: 0 -20px -30px; padding: 20px; }
+      .address-line { white-space: normal; }
     }
     @media (max-width: 600px) {
       #work-headline { padding: 120px 5% 48px; }
@@ -548,16 +557,20 @@
       #work-filters { padding: 0 5% 40px; justify-content: center; }
       #work-grids { padding: 0 5% 60px; }
       .work-grid { grid-template-columns: 1fr; }
+      #grid-ugc { grid-template-columns: repeat(2, 1fr); }
       #grid-films { gap: 40px; }
       #grid-films .film-showcase {
         grid-template-columns: 1fr;
         gap: 0;
-      }
-      #grid-films .film-showcase.reverse {
         direction: ltr;
       }
+      #grid-films .film-showcase .film-image-wrapper { margin-left: 0 !important; margin-right: 0 !important; }
       #view-more-wrap { padding: 0 5% 60px; }
       #footer { padding: 60px 20px 30px; }
+    }
+    @media (max-width: 480px) {
+      #grid-ugc { grid-template-columns: 1fr 1fr; }
+      .filter-btn { font-size: 13px; padding: 8px 14px; }
     }
 
   </style>
@@ -606,6 +619,7 @@
 ══════════════════════════════════════ -->
 <div id="work-filters">
   <button class="filter-btn active" data-filter="advertisement">Advertisement</button>
+  <button class="filter-btn" data-filter="ugc">UGC</button>
   <button class="filter-btn" data-filter="music">Music</button>
   <button class="filter-btn" data-filter="films">Films</button>
 </div>
@@ -629,10 +643,6 @@
       <div class="project-thumb"><img src="assets/images/chetak-zakir.png" alt="Zakir Khan And Saurabh Dwivedi With Chetak Screen Awards" loading="lazy"/><div class="play-button-overlay"></div></div>
       <p class="project-title">Zakir Khan And Saurabh Dwivedi With Chetak Screen Awards</p>
     </div>
-    <div class="project-card ad-card" data-video="1190042551">
-      <div class="project-thumb"><img src="https://vumbnail.com/1190042551.jpg" alt="Brand Campaign" loading="eager"/><div class="play-button-overlay"></div></div>
-      <p class="project-title">Rapido</p>
-    </div>
     <div class="project-card ad-card" data-video="1169556963">
       <div class="project-thumb"><img src="https://vumbnail.com/1169556963.jpg" alt="Aviva Life Insurance" loading="lazy"/><div class="play-button-overlay"></div></div>
       <p class="project-title">Aviva Life Insurance</p>
@@ -653,10 +663,6 @@
       <div class="project-thumb"><img src="https://vumbnail.com/1028327950.jpg" alt="ITC Maratha Hotel" loading="lazy"/><div class="play-button-overlay"></div></div>
       <p class="project-title">ITC Maratha Hotel</p>
     </div>
-    <div class="project-card ad-card" data-video="1020867798">
-      <div class="project-thumb"><img src="https://vumbnail.com/1020867798.jpg" alt="Philips With Varun Sharma" loading="lazy"/><div class="play-button-overlay"></div></div>
-      <p class="project-title">Philips With Varun Sharma</p>
-    </div>
     <div class="project-card ad-card" data-video="1143090932">
       <div class="project-thumb"><img src="https://vumbnail.com/1143090932.jpg" alt="Philips" loading="lazy"/><div class="play-button-overlay"></div></div>
       <p class="project-title">Philips</p>
@@ -669,33 +675,162 @@
       <div class="project-thumb"><img src="https://vumbnail.com/1110070118.jpg" alt="Nippon India Mutual Fund" loading="lazy"/><div class="play-button-overlay"></div></div>
       <p class="project-title">Nippon India Mutual Fund</p>
     </div>
+    <div class="project-card yt-card" data-youtube="lPtlXoZBp3s">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/lPtlXoZBp3s/hqdefault.jpg" alt="Abil Group" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Abil Group</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="c28RIwle4Fg">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/c28RIwle4Fg/hqdefault.jpg" alt="White Force" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">White Force</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="gFodGg-cvr4">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/gFodGg-cvr4/hqdefault.jpg" alt="PP Jewellers" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">PP Jewellers</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="veXuK5iuki4">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/veXuK5iuki4/hqdefault.jpg" alt="Somfy" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Somfy</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="EzSM8KXy8Yg">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/EzSM8KXy8Yg/hqdefault.jpg" alt="Octro PlayRummy" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Octro PlayRummy</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="BTkD_JovcYk">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/BTkD_JovcYk/hqdefault.jpg" alt="Pocket52" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Pocket52</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="qlOXYBDutTw">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/qlOXYBDutTw/hqdefault.jpg" alt="Zingbus" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Zingbus</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="qneX72g-CBM">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/qneX72g-CBM/hqdefault.jpg" alt="Bachpan Play School" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Bachpan Play School</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="BzkvjHYsZOY">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/BzkvjHYsZOY/hqdefault.jpg" alt="Manasum Senior Living" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Manasum Senior Living</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="s2ovmgoFDAg">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/s2ovmgoFDAg/hqdefault.jpg" alt="PB Partners" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">PB Partners</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="X8ZFy-g7GK8">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/X8ZFy-g7GK8/hqdefault.jpg" alt="Amazon Prime Video" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Amazon Prime Video</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="d0_sBA_GIkY">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/d0_sBA_GIkY/hqdefault.jpg" alt="Amazon Prime Video" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Amazon Prime Video</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="zLJ63tDsa2g">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/zLJ63tDsa2g/hqdefault.jpg" alt="Aviva Life Insurance" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Aviva Life Insurance</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="2-i61d0yIjw">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/2-i61d0yIjw/hqdefault.jpg" alt="Shaadi.com" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Shaadi.com</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="fwHlJ1_XhBw">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/fwHlJ1_XhBw/hqdefault.jpg" alt="Nippon India Mutual Fund" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Nippon India Mutual Fund</p>
+    </div>
+  </div>
+
+  <!-- UGC GRID -->
+  <div class="work-grid" id="grid-ugc">
+    <div class="project-card ad-card" data-video="1110062768">
+      <div class="project-thumb"><img src="https://vumbnail.com/1110062768.jpg" alt="UGC" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">UGC</p>
+    </div>
+    <div class="project-card ad-card" data-video="1110065450">
+      <div class="project-thumb"><img src="https://vumbnail.com/1110065450.jpg" alt="UGC" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">UGC</p>
+    </div>
+    <div class="project-card ad-card" data-video="1190042551">
+      <div class="project-thumb"><img src="https://vumbnail.com/1190042551.jpg" alt="Rapido" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Rapido</p>
+    </div>
+    <div class="project-card ad-card" data-video="1020867798">
+      <div class="project-thumb"><img src="https://vumbnail.com/1020867798.jpg" alt="Philips Airfryer" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Philips Airfryer</p>
+    </div>
   </div>
 
   <!-- MUSIC GRID -->
   <div class="work-grid" id="grid-music">
-    <div class="project-card music-card" data-video="1145954135">
-      <div class="project-thumb"><img src="https://vumbnail.com/1145954135.jpg" alt="Music Video" loading="lazy"/><div class="play-button-overlay"></div></div>
-      <p class="project-title">Darham</p>
-    </div>
-    <div class="project-card music-card" data-video="1180265355">
-      <div class="project-thumb"><img src="https://vumbnail.com/1180265355.jpg" alt="Music Production" loading="lazy"/><div class="play-button-overlay"></div></div>
-      <p class="project-title">Tera Ghata Acoustic</p>
-    </div>
-    <div class="project-card music-card" data-video="838546884">
-      <div class="project-thumb"><img src="https://vumbnail.com/838546884.jpg" alt="Music Video" loading="lazy"/><div class="play-button-overlay"></div></div>
-      <p class="project-title">Muskurana Tera</p>
-    </div>
-    <div class="project-card music-card" data-video="834526037">
-      <div class="project-thumb"><img src="https://vumbnail.com/834526037.jpg" alt="Music Video" loading="lazy"/><div class="play-button-overlay"></div></div>
-      <p class="project-title">Khayalat</p>
-    </div>
+
+
+
+
     <div class="project-card music-card" data-video="831436257">
       <div class="project-thumb"><img src="https://vumbnail.com/831436257.jpg" alt="Music Production" loading="lazy"/><div class="play-button-overlay"></div></div>
       <p class="project-title">Ab Kise Barbaad Karoge</p>
     </div>
-    <div class="project-card music-card" data-video="838544425">
-      <div class="project-thumb"><img src="https://vumbnail.com/838544425.jpg" alt="Music Video" loading="lazy"/><div class="play-button-overlay"></div></div>
-      <p class="project-title">Ex With Danish Alfaaz &amp; Daisy Shah</p>
+
+    <div class="project-card yt-card" data-youtube="z4gYurl-uIE">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/z4gYurl-uIE/hqdefault.jpg" alt="Aankhein Mila Ke" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Aankhein Mila Ke</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="_ZtubMyKlaw">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/_ZtubMyKlaw/hqdefault.jpg" alt="Taare Ginke" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Taare Ginke</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="gvwgw_QgxIg">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/gvwgw_QgxIg/hqdefault.jpg" alt="Tera Ghata" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Tera Ghata</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="tumLsHJ5q3U">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/tumLsHJ5q3U/hqdefault.jpg" alt="Enna Yaad" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Enna Yaad</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="YcvbOWOnpP0">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/YcvbOWOnpP0/hqdefault.jpg" alt="Muskurana Tera" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Muskurana Tera</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="qvH8W8sS2GI">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/qvH8W8sS2GI/hqdefault.jpg" alt="Mai Tere Ishq Mein 2.0" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Mai Tere Ishq Mein 2.0</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="KmILhw-1ztc">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/KmILhw-1ztc/hqdefault.jpg" alt="Tu Mere Dil Me Rahne Ke Layak Nahi" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Tu Mere Dil Me Rahne Ke Layak Nahi</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="B5h-fTV0m3A">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/B5h-fTV0m3A/hqdefault.jpg" alt="Tujhi Pe Mera Haq Hai" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Tujhi Pe Mera Haq Hai</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="PaAJeXtT1Hw">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/PaAJeXtT1Hw/hqdefault.jpg" alt="Tum Subah" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Tum Subah</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="20_CJoeNzUE">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/20_CJoeNzUE/hqdefault.jpg" alt="Khilona" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Khilona</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="4L_Ur3bVBF0">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/4L_Ur3bVBF0/hqdefault.jpg" alt="Tum Mere Paas" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Tum Mere Paas</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="cLxYDGNIc6M">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/cLxYDGNIc6M/hqdefault.jpg" alt="Dirham" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Dirham</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="uoE6_wd6pFQ">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/uoE6_wd6pFQ/hqdefault.jpg" alt="Khayalat" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Khayalat</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="V61rzxoukNM">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/V61rzxoukNM/hqdefault.jpg" alt="Ex" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Ex</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="zffBlrbRJVo">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/zffBlrbRJVo/hqdefault.jpg" alt="Laut Aao Maa" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Laut Aao Maa</p>
+    </div>
+    <div class="project-card yt-card" data-youtube="WBqoJVEyJPU">
+      <div class="project-thumb"><img src="https://img.youtube.com/vi/WBqoJVEyJPU/hqdefault.jpg" alt="Sajna" loading="lazy"/><div class="play-button-overlay"></div></div>
+      <p class="project-title">Sajna</p>
     </div>
   </div>
 
@@ -750,7 +885,7 @@
         <p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
         <div class="footer-contact">
           <a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span><span class="footer-link-text"> info@tobcentertainment.com</span></a>
-          <a href="tel:+918077552630"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 80775 52630</span></a>
+          <a href="tel:+919136668695"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 91366 68695</span></a>
         </div>
       </div>
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start;">
@@ -910,6 +1045,8 @@
     '834526037': '10c4c5f307',
     '831436257': '188b804735',
     '838544425': '574463727c',
+    '1110062768': '76ec801769',
+    '1110065450': 'e6ecf86852',
     '1195985556': '2122cd2cb0',
     '1195981502': 'b01837f6d3',
     '1195978296': 'c1f9dad5ee'
@@ -924,6 +1061,14 @@
       const iframe = modal.querySelector('iframe');
       iframe.src = `https://player.vimeo.com/video/${videoId}?h=${hash}&badge=0&autopause=0&player_id=0&app_id=58479`;
       modal.classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.yt-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const ytId = card.dataset.youtube;
+      if (!ytId) return;
+      window.open(`https://www.youtube.com/watch?v=${ytId}`, '_blank', 'noopener');
     });
   });
 
@@ -957,6 +1102,15 @@
     if (e.target === modal || e.target === closeBtn) {
       closeModal();
     }
+  });
+
+  // YouTube thumbnail fallback: maxresdefault → hqdefault
+  document.querySelectorAll('.project-thumb img[src*="youtube.com"]').forEach(img => {
+    img.addEventListener('error', function() {
+      if (this.src.includes('maxresdefault')) {
+        this.src = this.src.replace('maxresdefault', 'hqdefault');
+      }
+    });
   });
 
   // Fetch Vimeo thumbnails via oEmbed at high resolution
