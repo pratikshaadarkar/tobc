@@ -350,19 +350,18 @@
     ══════════════════════════════════════ */
     #about-text {
       background: #ffffff;
-      padding: 100px 8%;
+      padding: 100px 24px;
     }
 
     .about-cols {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, min(360px, 32%));
-      gap: clamp(20px, 4vw, 60px);
-      align-items: center;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
+      text-align: center;
     }
 
     .about-left { min-width: 0; }
+    .about-red-line { margin: 0 auto; }
+    .about-body-text { text-align: center; }
 
     .about-label {
       font-size: 0.85rem;
@@ -375,7 +374,7 @@
 
     .about-headline {
       font-family: 'Inter', sans-serif;
-      font-size: 2.8rem;
+      font-size: 2.2rem;
       font-weight: 800;
       line-height: 1.2;
       color: #111111;
@@ -396,7 +395,8 @@
       font-size: 1.1rem;
       color: #444444;
       line-height: 1.85;
-      max-width: 750px;
+      max-width: 860px;
+      margin: 0 auto;
     }
 
     .about-body-text p + p { margin-top: 1.2em; }
@@ -474,7 +474,7 @@
     }
 
     @media (max-width: 768px) {
-      #about-text { padding: 60px 6%; overflow-x: hidden; }
+      #about-text { padding: 60px 20px; overflow-x: hidden; }
       .about-cols { grid-template-columns: 1fr; gap: 40px; }
       .about-headline { font-size: 1.6rem; }
       .about-headline span { white-space: normal !important; }
@@ -921,7 +921,7 @@
       .carousel-cards { width: 180px; height: 280px; }
       .c-card[data-pos="-1"] { transform: translateX(-110px) rotateY(22deg) scale(0.67); }
       .c-card[data-pos="1"]  { transform: translateX(110px) rotateY(-22deg) scale(0.67); }
-      #about-text { padding: 40px 5%; }
+      #about-text { padding: 40px 16px; }
       .about-headline { font-size: 1.4rem; }
       .about-headline span { white-space: normal !important; }
       .about-big-quote { font-size: 90px; }
@@ -1101,7 +1101,7 @@
   <div class="about-cols">
     <div class="about-left reveal">
       <h2 class="about-headline">
-        <span>We're The <span class="highlight">Out Of Box Creators</span> Entertainment,</span><br/>
+        <span>We're The <span class="highlight">Out Of Box Creators</span> Entertainment,</span><br>
         <span>And Our Friends Call Us TOBC</span>
       </h2>
       <div class="about-red-line"></div>
@@ -1112,11 +1112,6 @@
         <p>None of it was handed to us. Every client came back because we showed up. On time, on budget, and at a quality they didn't expect for the margins we work with. Repeat clients aren't a metric at TOBC. They're proof.</p>
         <p>Today, TOBC is a full service Mumbai based production house with 5+ years of experience, 200+ projects, 100+ clients and 100+ campaigns delivered. From music videos and TVCs to ad films, we handle everything from pre-production to post-production and marketing. We work with brands, ad agencies, artists and creators, with everything managed in-house by one team to maintain a consistent standard across every project.</p>
         <p>We make work worth remembering. And we make it on time.</p>
-      </div>
-    </div>
-    <div class="about-right reveal">
-      <div class="about-quote-block">
-        <img src="assets/images/ChatGPT Image Jun 28, 2026, 11_46_52 PM.png" alt="TOBC Creative Studio" style="width: 100%; border-radius: 12px;" loading="lazy" />
       </div>
     </div>
   </div>
