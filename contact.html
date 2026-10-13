@@ -1,611 +1,194 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | TOBC Entertainment</title>
-  <meta name="description" content="Got a big idea? Contact TOBC Entertainment, Mumbai's trusted full-service production house for ad films, music videos, and brand campaigns." />
-  <link rel="canonical" href="https://www.tobcentertainment.com/contact" />
-  <meta property="og:title" content="Contact | TOBC Entertainment" />
-  <meta property="og:description" content="Got a big idea? Contact TOBC Entertainment, Mumbai's trusted full-service production house for ad films, music videos, and brand campaigns." />
-  <meta property="og:url" content="https://www.tobcentertainment.com/contact" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://www.tobcentertainment.com/assets/images/White logo.png" />
-  <meta property="og:site_name" content="TOBC Entertainment" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Contact | TOBC Entertainment" />
-  <meta name="twitter:description" content="Got a big idea? Contact TOBC Entertainment, Mumbai's trusted full-service production house for ad films, music videos, and brand campaigns." />
-  <meta name="twitter:image" content="https://www.tobcentertainment.com/assets/images/White logo.png" />
-  <link rel="icon" type="image/png" href="assets/images/Only logo.png" />
-  <link rel="apple-touch-icon" href="assets/images/Only logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
-
-    :root {
-      --red: #E31B1B;
-      --red-hover: #c41515;
-      --black: #0a0a0a;
-      --white: #ffffff;
-      --grey: #888888;
-      --border: #222222;
-    }
-
-    a { color: inherit; }
-
-    /* ══════════════════════════════════════
-       NAV
-    ══════════════════════════════════════ */
-    #nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 30px;
-      margin-bottom: -25px;
-      background: rgba(10,10,10,1);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: background 0.3s, backdrop-filter 0.3s, transform 0.3s ease-in-out;
-      transform: translateY(0);
-    }
-    #nav.scrolled {
-      background: rgba(10,10,10,0.97);
-      padding: 12px 30px;
-    }
-    #nav.nav-hidden {
-      transform: translateY(-100%);
-    }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; transform: translateY(0px); margin-left: 30px; }
-    .nav-logo img { height: 90px; width: auto; display: block; position: relative; top: 0px; }
-    .nav-wordmark { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: #fff; }
-    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; height: 100%; }
-    .nav-links a {
-      font-family: 'Inter', sans-serif; font-size: 15px;
-      letter-spacing: 1px; color: #fff; text-decoration: none; opacity: 0.75;
-      transition: opacity 0.2s, text-decoration 0.2s;
-      transform: translateY(2px);
-      display: flex;
-      align-items: center;
-    }
-    .nav-links a:hover { opacity: 1; text-decoration: underline; }
-    .nav-cta {
-      padding: 12px 26px; border: 1.5px solid #fff; border-radius: 999px;
-      background: transparent; color: #fff; font-family: 'Inter', sans-serif;
-      font-size: 14px; font-weight: 600; cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      transform: translateY(2px);
-      margin-right: 40px;
-    }
-    .nav-cta:hover { background: var(--red); border-color: var(--red); }
-
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    #mobile-menu {
-      display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(10,10,10,0.97); flex-direction: column;
-      align-items: center; justify-content: center; gap: 32px;
-    }
-    #mobile-menu.open { display: flex; }
-    #mobile-menu a {
-      font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px;
-      color: #fff; text-decoration: none; transition: opacity 0.2s;
-    }
-    #mobile-menu a:hover { opacity: 0.7; }
-
-    /* ══════════════════════════════════════
-       SECTION 1 — HOOK + EMAIL + ADDRESS
-    ══════════════════════════════════════ */
-    #hook {
-      background: var(--black);
-      padding: 0;
-    }
-    .hook-form-inner {
-      max-width: 1400px; margin: 0 auto;
-      display: flex; align-items: flex-start;
-    }
-    .hook-left {
-      width: 50%; flex-shrink: 0;
-      display: flex; flex-direction: column; justify-content: flex-start;
-      padding: 15px 60px 80px 80px;
-      position: sticky; top: 120px;
-    }
-    .hook-h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(40px, 5.5vw, 72px);
-      line-height: 1.05; color: #fff; text-transform: uppercase;
-      letter-spacing: 1px; margin-bottom: 24px;
-    }
-    .hook-subline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(22px, 2.5vw, 36px);
-      color: var(--grey); text-transform: uppercase;
-      letter-spacing: 1px; line-height: 1.2;
-    }
-    .hook-right {
-      flex: 1; min-width: 0;
-    }
-
-    /* ── Email row (list style) ── */
-    #email-row {
-      background: var(--black);
-      padding: 80px 48px 140px;
-      border-radius: 0 0 60px 60px;
-      position: relative;
-      z-index: 4;
-    }
-    .email-row-outer {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 11fr 9fr; align-items: start; gap: 60px;
-    }
-    .email-row-heading {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(36px, 5vw, 64px);
-      color: #fff; text-transform: uppercase;
-      line-height: 1.05; margin: 0;
-    }
-    .email-row-inner {
-      display: flex; flex-direction: column; gap: 28px;
-    }
-    .email-col { display: flex; flex-direction: row; align-items: center; gap: 18px; }
-    .email-icon {
-      width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
-      background: var(--red); display: flex; align-items: center; justify-content: center;
-    }
-    .email-icon svg { width: 22px; height: 22px; }
-    .email-col-text { display: flex; flex-direction: column; gap: 3px; }
-    .email-heading {
-      font-family: 'Inter', sans-serif; font-size: 19px; font-weight: 700;
-      color: #fff; text-transform: none; letter-spacing: 0;
-    }
-    .email-desc { display: none; }
-    .email-link { font-size: 17px; font-weight: 400; color: var(--grey); text-decoration: none; transition: color 0.2s; }
-    .email-link:hover { color: #fff; }
-
-
-    /* ══════════════════════════════════════
-       SECTION 2 — CONTACT FORM
-    ══════════════════════════════════════ */
-    #contact-form {
-      background: transparent;
-      padding: 140px 80px 80px 60px;
-    }
-    .form-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 40fr 60fr; gap: 60px;
-    }
-    .form-side-label { font-size: 15px; color: #fff; max-width: 280px; line-height: 1.5; }
-    .form-side-tagline {
-      font-size: 17px; color: var(--grey); font-style: italic;
-      margin-bottom: 2rem; line-height: 1.5;
-    }
-    .form-section-title-row {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    .form-section-title {
-      font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.5px;
-      font-size: 28px; font-weight: 400; color: #fff;
-    }
-    .form-divider { border: none; border-top: 1px solid #222; margin-bottom: 36px; }
-    .form-field { margin-bottom: 30px; }
-    .form-field label {
-      display: block; font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 10px;
-    }
-    .form-field input,
-    .form-field select,
-    .form-field textarea {
-      width: 100%; background: transparent; border: none;
-      border-bottom: 1.5px solid #333; color: #fff;
-      font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 500;
-      padding: 8px 2px; outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-field textarea { resize: vertical; min-height: 90px; font-family: inherit; }
-    .form-field input::placeholder,
-    .form-field textarea::placeholder { color: #555; font-weight: 400; }
-    .form-field input:focus,
-    .form-field select:focus,
-    .form-field textarea:focus { border-bottom: 1.5px solid var(--red); }
-
-    .phone-field { display: flex; align-items: center; gap: 8px; border-bottom: 1.5px solid #333; padding-bottom: 4px; }
-    .phone-field:focus-within { border-bottom-color: var(--red); }
-    .phone-prefix { font-size: 15px; font-weight: 500; color: #fff; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-    .phone-field input { border-bottom: none; padding: 8px 2px 4px; }
-    .phone-field:focus-within input { border-bottom: none; }
-
-    .form-field select { display: none; }
-
-    .custom-select { position: relative; }
-    .custom-select-trigger {
-      width: 100%; background: transparent;
-      border: none; border-bottom: 1.5px solid #333;
-      color: #555; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400;
-      padding: 8px 28px 8px 2px; cursor: pointer;
-      display: flex; align-items: center; justify-content: space-between;
-      user-select: none; transition: border-color 0.2s;
-    }
-    .custom-select-trigger.has-value { color: #fff; }
-    .custom-select.open .custom-select-trigger { border-bottom-color: var(--red); }
-    .custom-select-arrow {
-      width: 14px; height: 14px; flex-shrink: 0;
-      transition: transform 0.2s;
-    }
-    .custom-select.open .custom-select-arrow { transform: rotate(180deg); }
-    .custom-select-dropdown {
-      position: fixed; display: none;
-      background: #1e1e1e; border: 1px solid #444; border-radius: 10px;
-      z-index: 99999; overflow-y: auto; max-height: 220px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.8);
-    }
-    .custom-select-option {
-      padding: 14px 16px; color: #ccc; font-family: 'Inter', sans-serif;
-      font-size: 15px; cursor: pointer; transition: background 0.15s, color 0.15s;
-    }
-    .custom-select-option:hover { background: #2a2a2a; color: #fff; }
-    .custom-select-option.selected { color: #fff; background: #2a2a2a; }
-
-    .pill-field { margin-bottom: 2rem; margin-top: 0; }
-    .pill-field.pill-field-source { margin-top: 2rem; }
-    .pill-group { display: flex; flex-wrap: wrap; gap: 10px; }
-    .pill {
-      display: inline-flex; align-items: center; justify-content: center;
-      background: transparent; border: 1px solid #333; color: #fff;
-      border-radius: 50px; padding: 8px 18px;
-      font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500;
-      cursor: pointer; user-select: none;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .pill:hover { border-color: var(--red); color: #fff; }
-    .pill.selected { background: var(--red); border-color: var(--red); color: #fff; }
-
-    .submit-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 16px 36px; margin-top: 8px;
-      background: var(--red); color: #fff; border: none; border-radius: 6px;
-      font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px;
-      letter-spacing: 1px; cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .submit-btn:hover { background: var(--red-hover); transform: translateY(-1px); }
-
-    /* ══════════════════════════════════════
-       SECTION 3 — FOOTER (mirrors index.html)
-    ══════════════════════════════════════ */
-    #cta {
-      background: var(--red);
-      padding: 80px 48px 20px;
-      text-align: center;
-      position: sticky;
-      bottom: 320px;
-      z-index: 2;
-      margin-top: -60px;
-      padding-top: 140px;
-    }
-    .cta-h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(48px, 8vw, 96px); line-height: 0.95;
-      color: #fff; margin-bottom: 0;
-    }
-    .cta-h2-line3 { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
-    .cta-go-btn {
-      display: inline-flex; align-items: center; padding: 14px 28px;
-      border: 2px solid #fff; border-radius: 999px;
-      background: #fff; color: var(--red);
-      font-family: 'Bebas Neue', sans-serif; font-size: 36px;
-      letter-spacing: 1px; text-decoration: none; cursor: pointer;
-      box-shadow: 0 0 0 0 rgba(227,27,27,0);
-      transition: background 0.2s, color 0.2s, box-shadow 0.3s;
-    }
-    .cta-go-btn:hover {
-      background: rgba(255,255,255,0.85);
-      box-shadow: 0 0 24px 8px rgba(255,255,255,0.3), 0 0 50px 18px rgba(255,255,255,0.15);
-    }
-
-    #footer { background: var(--red); padding: 80px 40px 40px; position: sticky; bottom: 0; z-index: 1; }
-    #cta-footer-wrapper { overflow: visible; }
-    #cta { position: sticky; bottom: 0; z-index: 3; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; }
-    .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 48px; }
-    .footer-address-title {
-      font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 700;
-      color: #fff; margin-top: 28px; margin-bottom: 12px; line-height: 1.7;
-      text-transform: uppercase;
-    }
-    .footer-address-text { font-size: 17px; color: #fff; line-height: 1.7; }
-    .address-line { white-space: nowrap; }
-    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; margin-top: -20px; margin-left: -15px; }
-    .footer-logo-row img { height: 80px; width: auto; display: block; }
-    .nav-wordmark { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; color: #fff; }
-    .footer-tagline { font-size: 18px; color: #fff; line-height: 1.6; margin-bottom: 28px; }
-    .footer-contact a {
-      display: flex; align-items: center; gap: 8px;
-      color: #fff; text-decoration: none; font-size: 20px; font-weight: 400;
-      margin-bottom: 10px; transition: text-decoration 0.2s; line-height: 1;
-    }
-    .contact-icon { font-size: 32px; color: #fff; display: flex; align-items: center; }
-    .footer-contact a:nth-child(2) .contact-icon { font-size: 20px; filter: brightness(0) invert(1); }
-    .footer-contact a:nth-child(2)::before { color: #fff; }
-    .footer-contact a:hover { text-decoration: none; }
-    .footer-contact a:hover .footer-link-text { text-decoration: underline; }
-    .footer-links-grid { display: flex; flex-direction: column; gap: 20px; align-content: start; padding-top: 8px; }
-    .footer-links-grid a {
-      font-size: 18px; color: #fff; text-decoration: none;
-      transition: text-decoration 0.2s;
-    }
-    .footer-links-grid a:hover { text-decoration: underline; }
-    .footer-bottom {
-      margin: 0 -40px -40px; padding: 28px 40px;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
-    }
-    .social-icons { display: flex; gap: 10px; }
-    .social-icon {
-      width: 42px; height: 42px; border: 1.5px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.1);
-      border-radius: 8px; display: flex; align-items: center; justify-content: center;
-      color: #fff; text-decoration: none; font-size: 16px;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-    }
-    .social-icon:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
-    .footer-copy { font-size: 13px; color: #fff; text-align: center; }
-    .back-to-top {
-      padding: 10px 22px; border: 1.5px solid #fff;
-      border-radius: 999px; background: rgba(255,255,255,0.1); color: #fff;
-      font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
-      cursor: pointer; transition: background 0.2s, border-color 0.2s;
-    }
-    .back-to-top:hover { border-color: #fff; background: rgba(255,255,255,0.2); }
-
-    /* ── Footer links right column ── */
-    .footer-links-right {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start;
-    }
-
-    /* ══════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════ */
-    @media (max-width: 1024px) {
-      .hook-left { padding: 15px 40px 80px 40px; }
-      #contact-form { padding: 100px 40px 80px 40px; }
-    }
-
-    
-    @media (max-width: 1024px) {
-      #cta { position: relative; bottom: auto; }
-      #footer { position: relative; bottom: auto; }
-    }
-@media (max-width: 768px) {
-      #nav, #nav.scrolled { padding: 14px 20px 14px 12px; }
-      .nav-logo { margin-left: 0; }
-      .nav-logo img { height: 60px !important; }
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-
-      .hook-form-inner { flex-direction: column; align-items: stretch; }
-      .hook-left { width: 100%; position: static; top: auto; padding: 100px 20px 32px; }
-      .hook-right { width: 100%; }
-      .hook-h1 { margin-bottom: 16px; }
-      .hook-subline { font-size: clamp(18px, 4vw, 28px); }
-
-      #contact-form { padding: 24px 20px 60px; }
-      .form-inner { grid-template-columns: 1fr; gap: 32px; }
-      .form-side-label { text-align: left; }
-
-      #email-row { padding: 40px 20px 60px; }
-      .email-row-outer { grid-template-columns: 1fr; gap: 32px; }
-      .email-row-inner { gap: 24px; }
-      .email-col { align-items: flex-start; }
-      .email-link { word-break: break-all; font-size: 15px; }
-      .email-heading { font-size: 17px; }
-
-      #cta { position: relative; bottom: auto; margin-top: -40px; padding: 110px 20px 40px; } #footer { position: relative; bottom: auto; }
-      .cta-h2 { font-size: clamp(40px, 10vw, 56px); }
-
-      #footer { padding: 32px 20px 20px; }
-      .footer-top { grid-template-columns: 1fr; gap: 28px; margin-bottom: 28px; }
-      .footer-logo-row { margin-top: 0; margin-left: 0; margin-bottom: 10px; }
-      .footer-logo-row img { height: 52px; }
-      .footer-tagline { font-size: 15px; margin-bottom: 16px; }
-      .footer-links-right { grid-template-columns: 1fr 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; align-items: center; text-align: center; margin: 0 -20px -20px; padding: 20px; }
-      .address-line { white-space: normal; }
-    }
-
-    @media (max-width: 480px) {
-      .hook-h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
-      .hook-subline { font-size: clamp(16px, 4vw, 22px); }
-      .form-field label { font-size: 16px; }
-      .form-field input, .form-field select, .form-field textarea { font-size: 15px; }
-      .pill { font-size: 0.78rem; padding: 7px 14px; }
-      .footer-links-right { grid-template-columns: 1fr; gap: 24px; }
-      .submit-btn { width: 100%; justify-content: center; }
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact | TOBC Entertainment</title>
+<meta content="Got a big idea? Contact TOBC Entertainment, Mumbai's trusted full-service production house for ad films, music videos, and brand campaigns." name="description"/>
+<link href="https://www.tobcentertainment.com/contact" rel="canonical"/>
+<meta content="Contact | TOBC Entertainment" property="og:title"/>
+<meta content="Got a big idea? Contact TOBC Entertainment, Mumbai's trusted full-service production house for ad films, music videos, and brand campaigns." property="og:description"/>
+<meta content="https://www.tobcentertainment.com/contact" property="og:url"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.tobcentertainment.com/assets/images/White logo.png" property="og:image"/>
+<meta content="TOBC Entertainment" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Contact | TOBC Entertainment" name="twitter:title"/>
+<meta content="Got a big idea? Contact TOBC Entertainment, Mumbai's trusted full-service production house for ad films, music videos, and brand campaigns." name="twitter:description"/>
+<meta content="https://www.tobcentertainment.com/assets/images/White logo.png" name="twitter:image"/>
+<link href="assets/images/Only logo.png" rel="icon" type="image/png"/>
+<link href="assets/images/Only logo.png" rel="apple-touch-icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff}:root{--red:#E31B1B;--red-hover:#c41515;--black:#0a0a0a;--white:#ffffff;--grey:#888888;--border:#222222;}a{color:inherit}#nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:12px 30px;margin-bottom:-25px;background:rgba(10,10,10,1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:background 0.3s,backdrop-filter 0.3s,transform 0.3s ease-in-out;transform:translateY(0);}#nav.scrolled{background:rgba(10,10,10,0.97);padding:12px 30px;}#nav.nav-hidden{transform:translateY(-100%);}.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;transform:translateY(0px);margin-left:30px}.nav-logo img{height:90px;width:auto;display:block;position:relative;top:0px}.nav-wordmark{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#fff}.nav-links{display:flex;gap:28px;list-style:none;align-items:center;height:100%}.nav-links a{font-family:'Inter',sans-serif;font-size:15px;letter-spacing:1px;color:#fff;text-decoration:none;opacity:0.75;transition:opacity 0.2s,text-decoration 0.2s;transform:translateY(2px);display:flex;align-items:center;}.nav-links a:hover{opacity:1;text-decoration:underline}.nav-cta{padding:12px 26px;border:1.5px solid #fff;border-radius:999px;background:transparent;color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:background 0.2s,color 0.2s;transform:translateY(2px);margin-right:40px;}.nav-cta:hover{background:var(--red);border-color:var(--red)}.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}#mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(10,10,10,0.97);flex-direction:column;align-items:center;justify-content:center;gap:32px;}#mobile-menu.open{display:flex}#mobile-menu a{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;color:#fff;text-decoration:none;transition:opacity 0.2s;}#mobile-menu a:hover{opacity:0.7}#hook{background:var(--black);padding:0;}.hook-form-inner{max-width:1400px;margin:0 auto;display:flex;align-items:flex-start;}.hook-left{width:50%;flex-shrink:0;display:flex;flex-direction:column;justify-content:flex-start;padding:15px 60px 80px 80px;position:sticky;top:120px;}.hook-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5.5vw,72px);line-height:1.05;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:24px;}.hook-subline{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.5vw,36px);color:var(--grey);text-transform:uppercase;letter-spacing:1px;line-height:1.2;}.hook-right{flex:1;min-width:0;}#email-row{background:var(--black);padding:80px 48px 140px;border-radius:0 0 60px 60px;position:relative;z-index:4;}.email-row-outer{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:11fr 9fr;align-items:start;gap:60px;}.email-row-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:#fff;text-transform:uppercase;line-height:1.05;margin:0;}.email-row-inner{display:flex;flex-direction:column;gap:28px;}.email-col{display:flex;flex-direction:row;align-items:center;gap:18px}.email-icon{width:48px;height:48px;border-radius:50%;flex-shrink:0;background:var(--red);display:flex;align-items:center;justify-content:center;}.email-icon svg{width:22px;height:22px}.email-col-text{display:flex;flex-direction:column;gap:3px}.email-heading{font-family:'Inter',sans-serif;font-size:19px;font-weight:700;color:#fff;text-transform:none;letter-spacing:0;}.email-desc{display:none}.email-link{font-size:17px;font-weight:400;color:var(--grey);text-decoration:none;transition:color 0.2s}.email-link:hover{color:#fff}#contact-form{background:transparent;padding:140px 80px 80px 60px;}.form-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:40fr 60fr;gap:60px;}.form-side-label{font-size:15px;color:#fff;max-width:280px;line-height:1.5}.form-side-tagline{font-size:17px;color:var(--grey);font-style:italic;margin-bottom:2rem;line-height:1.5;}.form-section-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}.form-section-title{font-family:'Bebas Neue',sans-serif;letter-spacing:0.5px;font-size:28px;font-weight:400;color:#fff;}.form-divider{border:none;border-top:1px solid #222;margin-bottom:36px}.form-field{margin-bottom:30px}.form-field label{display:block;font-size:18px;font-weight:600;color:#fff;margin-bottom:10px;}.form-field input,.form-field select,.form-field textarea{width:100%;background:transparent;border:none;border-bottom:1.5px solid #333;color:#fff;font-family:'Inter',sans-serif;font-size:17px;font-weight:500;padding:8px 2px;outline:none;transition:border-color 0.2s;}.form-field textarea{resize:vertical;min-height:90px;font-family:inherit}.form-field input::placeholder,.form-field textarea::placeholder{color:#555;font-weight:400}.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-bottom:1.5px solid var(--red)}.phone-field{display:flex;align-items:center;gap:8px;border-bottom:1.5px solid #333;padding-bottom:4px}.phone-field:focus-within{border-bottom-color:var(--red)}.phone-prefix{font-size:15px;font-weight:500;color:#fff;display:flex;align-items:center;gap:6px;white-space:nowrap}.phone-field input{border-bottom:none;padding:8px 2px 4px}.phone-field:focus-within input{border-bottom:none}.form-field select{display:none}.custom-select{position:relative}.custom-select-trigger{width:100%;background:transparent;border:none;border-bottom:1.5px solid #333;color:#555;font-family:'Inter',sans-serif;font-size:16px;font-weight:400;padding:8px 28px 8px 2px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;transition:border-color 0.2s;}.custom-select-trigger.has-value{color:#fff}.custom-select.open .custom-select-trigger{border-bottom-color:var(--red)}.custom-select-arrow{width:14px;height:14px;flex-shrink:0;transition:transform 0.2s;}.custom-select.open .custom-select-arrow{transform:rotate(180deg)}.custom-select-dropdown{position:fixed;display:none;background:#1e1e1e;border:1px solid #444;border-radius:10px;z-index:99999;overflow-y:auto;max-height:220px;box-shadow:0 12px 40px rgba(0,0,0,0.8);}.custom-select-option{padding:14px 16px;color:#ccc;font-family:'Inter',sans-serif;font-size:15px;cursor:pointer;transition:background 0.15s,color 0.15s;}.custom-select-option:hover{background:#2a2a2a;color:#fff}.custom-select-option.selected{color:#fff;background:#2a2a2a}.pill-field{margin-bottom:2rem;margin-top:0}.pill-field.pill-field-source{margin-top:2rem}.pill-group{display:flex;flex-wrap:wrap;gap:10px}.pill{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:1px solid #333;color:#fff;border-radius:50px;padding:8px 18px;font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:500;cursor:pointer;user-select:none;transition:border-color 0.2s,background 0.2s;}.pill:hover{border-color:var(--red);color:#fff}.pill.selected{background:var(--red);border-color:var(--red);color:#fff}.submit-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;margin-top:8px;background:var(--red);color:#fff;border:none;border-radius:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:15px;letter-spacing:1px;cursor:pointer;transition:background 0.2s,transform 0.2s;}.submit-btn:hover{background:var(--red-hover);transform:translateY(-1px)}#cta{background:var(--red);padding:80px 48px 20px;text-align:center;position:sticky;bottom:320px;z-index:2;margin-top:-60px;padding-top:140px;}.cta-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,96px);line-height:0.95;color:#fff;margin-bottom:0;}.cta-h2-line3{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}.cta-go-btn{display:inline-flex;align-items:center;padding:14px 28px;border:2px solid #fff;border-radius:999px;background:#fff;color:var(--red);font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;text-decoration:none;cursor:pointer;box-shadow:0 0 0 0 rgba(227,27,27,0);transition:background 0.2s,color 0.2s,box-shadow 0.3s;}.cta-go-btn:hover{background:rgba(255,255,255,0.85);box-shadow:0 0 24px 8px rgba(255,255,255,0.3),0 0 50px 18px rgba(255,255,255,0.15);}#footer{background:var(--red);padding:80px 40px 40px;position:sticky;bottom:0;z-index:1}#cta-footer-wrapper{overflow:visible}#cta{position:sticky;bottom:0;z-index:3}.footer-inner{max-width:1200px;margin:0 auto}.footer-top{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:48px}.footer-address-title{font-family:'Inter',sans-serif;font-size:17px;font-weight:700;color:#fff;margin-top:28px;margin-bottom:12px;line-height:1.7;text-transform:uppercase;}.footer-address-text{font-size:17px;color:#fff;line-height:1.7}.address-line{white-space:nowrap}.footer-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:-20px;margin-left:-15px}.footer-logo-row img{height:80px;width:auto;display:block}.nav-wordmark{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:#fff}.footer-tagline{font-size:18px;color:#fff;line-height:1.6;margin-bottom:28px}.footer-contact a{display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:20px;font-weight:400;margin-bottom:10px;transition:text-decoration 0.2s;line-height:1;}.contact-icon{font-size:32px;color:#fff;display:flex;align-items:center}.footer-contact a:nth-child(2) .contact-icon{font-size:20px;filter:brightness(0) invert(1)}.footer-contact a:nth-child(2)::before{color:#fff}.footer-contact a:hover{text-decoration:none}.footer-contact a:hover .footer-link-text{text-decoration:underline}.footer-links-grid{display:flex;flex-direction:column;gap:20px;align-content:start;padding-top:8px}.footer-links-grid a{font-size:18px;color:#fff;text-decoration:none;transition:text-decoration 0.2s;}.footer-links-grid a:hover{text-decoration:underline}.footer-bottom{margin:0 -40px -40px;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}.social-icons{display:flex;gap:10px}.social-icon{width:42px;height:42px;border:1.5px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:16px;transition:border-color 0.2s,color 0.2s,background 0.2s;}.social-icon:hover{border-color:#fff;background:rgba(255,255,255,0.2)}.footer-copy{font-size:13px;color:#fff;text-align:center}.back-to-top{padding:10px 22px;border:1.5px solid #fff;border-radius:999px;background:rgba(255,255,255,0.1);color:#fff;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;cursor:pointer;transition:background 0.2s,border-color 0.2s;}.back-to-top:hover{border-color:#fff;background:rgba(255,255,255,0.2)}.footer-links-right{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-start;}@media (max-width:1024px){.hook-left{padding:15px 40px 80px 40px}#contact-form{padding:100px 40px 80px 40px}}@media (max-width:1024px){#cta{position:relative;bottom:auto}#footer{position:relative;bottom:auto}}@media (max-width:768px){#nav,#nav.scrolled{padding:14px 20px 14px 12px}.nav-logo{margin-left:0}.nav-logo img{height:60px !important}.nav-links,.nav-cta{display:none}.hamburger{display:flex}.hook-form-inner{flex-direction:column;align-items:stretch}.hook-left{width:100%;position:static;top:auto;padding:100px 20px 32px}.hook-right{width:100%}.hook-h1{margin-bottom:16px}.hook-subline{font-size:clamp(18px,4vw,28px)}#contact-form{padding:24px 20px 60px}.form-inner{grid-template-columns:1fr;gap:32px}.form-side-label{text-align:left}#email-row{padding:40px 20px 60px}.email-row-outer{grid-template-columns:1fr;gap:32px}.email-row-inner{gap:24px}.email-col{align-items:flex-start}.email-link{word-break:break-all;font-size:15px}.email-heading{font-size:17px}#cta{position:relative;bottom:auto;margin-top:-40px;padding:110px 20px 40px}#footer{position:relative;bottom:auto}.cta-h2{font-size:clamp(40px,10vw,56px)}#footer{padding:32px 20px 20px}.footer-top{grid-template-columns:1fr;gap:28px;margin-bottom:28px}.footer-logo-row{margin-top:0;margin-left:0;margin-bottom:10px}.footer-logo-row img{height:52px}.footer-tagline{font-size:15px;margin-bottom:16px}.footer-links-right{grid-template-columns:1fr 1fr;gap:32px}.footer-bottom{flex-direction:column;align-items:center;text-align:center;margin:0 -20px -20px;padding:20px}.address-line{white-space:normal}}@media (max-width:480px){.hook-h1{font-size:clamp(2.2rem,10vw,3.5rem)}.hook-subline{font-size:clamp(16px,4vw,22px)}.form-field label{font-size:16px}.form-field input,.form-field select,.form-field textarea{font-size:15px}.pill{font-size:0.78rem;padding:7px 14px}.footer-links-right{grid-template-columns:1fr;gap:24px}.submit-btn{width:100%;justify-content:center}}</style>
 </head>
 <body>
-
 <!-- ══════════════════════════════════════
      NAV
 ══════════════════════════════════════ -->
 <nav id="nav">
-  <a href="/" class="nav-logo">
-    <img src="assets/images/White logo.png" alt="TOBC Entertainment" />
-  </a>
-  <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="about">About</a></li>
-    <li><a href="our-work">Our Work</a></li>
-    <li><a href="gallery">Gallery</a></li>
-    <li><a href="blog">Blog</a></li>
-      </ul>
-  <button class="nav-cta" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Contact Us</button>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+<a class="nav-logo" href="/">
+<img alt="TOBC Entertainment" height="1500" src="assets/images/White logo.webp" width="2100"/>
+</a>
+<ul class="nav-links">
+<li><a href="/">Home</a></li>
+<li><a href="about">About</a></li>
+<li><a href="our-work">Our Work</a></li>
+<li><a href="gallery">Gallery</a></li>
+<li><a href="blog">Blog</a></li>
+</ul>
+<button class="nav-cta" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Contact Us</button>
+<button aria-label="Menu" class="hamburger" id="hamburger">
+<span></span><span></span><span></span>
+</button>
 </nav>
-
 <!-- mobile menu -->
 <div id="mobile-menu">
-  <a href="/" class="mob-link">Home</a>
-  <a href="about" class="mob-link">About</a>
-  <a href="our-work" class="mob-link">Our Work</a>
-  <a href="gallery" class="mob-link">Gallery</a>
-  <a href="blog" class="mob-link">Blog</a>
-  <a href="contact" class="mob-link">Contact Us</a>
+<a class="mob-link" href="/">Home</a>
+<a class="mob-link" href="about">About</a>
+<a class="mob-link" href="our-work">Our Work</a>
+<a class="mob-link" href="gallery">Gallery</a>
+<a class="mob-link" href="blog">Blog</a>
+<a class="mob-link" href="contact">Contact Us</a>
 </div>
-
 <!-- ══════════════════════════════════════
      SECTION 1 — HOOK + FORM
 ══════════════════════════════════════ -->
 <section id="hook">
-  <div class="hook-form-inner">
-    <div class="hook-left">
-      <h1 class="hook-h1">GOT A BIG IDEA?<br/>LET'S MAKE IT REAL.</h1>
-      <p class="hook-subline">We're listening,<br/>reach out anytime!</p>
-    </div>
-    <div class="hook-right" id="contact-form">
-      <div class="form-section-title-row">
-        <span class="form-section-title">Your Details</span>
-        <span>&#8595;</span>
-      </div>
-      <hr class="form-divider" />
-
-      <form method="POST" action="https://api.web3forms.com/submit">
-        <input type="hidden" name="access_key" value="01b223d5-3f1f-40da-8874-77f7fe743847" />
-        <input type="text" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
-
-        <div class="form-field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Enter your name" required />
-        </div>
-
-        <div class="form-field">
-          <label for="phone">Phone Number</label>
-          <div class="phone-field">
-            <span class="phone-prefix">🇮🇳 +91</span>
-            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
-          </div>
-        </div>
-
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required />
-        </div>
-
-        <div class="form-field">
-          <label>Are you an Agency or a Brand?</label>
-          <select id="type" name="type" required></select>
-          <div class="custom-select" data-target="type">
-            <div class="custom-select-trigger">
-              <span>Select option</span>
-              <svg class="custom-select-arrow" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l6 6 6-6" stroke="#fff" stroke-width="2" fill="none"/></svg>
-            </div>
-            <div class="custom-select-dropdown">
-              <div class="custom-select-option" data-value="agency">Agency</div>
-              <div class="custom-select-option" data-value="brand">Brand</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-field">
-          <label>Which services are you interested in?</label>
-          <select id="services" name="services" required></select>
-          <div class="custom-select" data-target="services">
-            <div class="custom-select-trigger">
-              <span>Select a service</span>
-              <svg class="custom-select-arrow" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l6 6 6-6" stroke="#fff" stroke-width="2" fill="none"/></svg>
-            </div>
-            <div class="custom-select-dropdown">
-              <div class="custom-select-option" data-value="Ad Film">Ad Film</div>
-              <div class="custom-select-option" data-value="Video Production">Video Production</div>
-              <div class="custom-select-option" data-value="Music Video">Music Video</div>
-              <div class="custom-select-option" data-value="Celebrity Endorsement">Celebrity Endorsement</div>
-              <div class="custom-select-option" data-value="Influencer Management">Influencer Management</div>
-              <div class="custom-select-option" data-value="Digital Marketing">Digital Marketing</div>
-              <div class="custom-select-option" data-value="Brand Campaign">Brand Campaign</div>
-              <div class="custom-select-option" data-value="Casting">Casting</div>
-              <div class="custom-select-option" data-value="Live Events">Live Events</div>
-              <div class="custom-select-option" data-value="OTT / Web Series">OTT / Web Series</div>
-              <div class="custom-select-option" data-value="Brand Partnerships">Brand Partnerships</div>
-              <div class="custom-select-option" data-value="Event Management">Event Management</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-field">
-          <label>How did you hear about us?</label>
-          <select id="source" name="source" required></select>
-          <div class="custom-select" data-target="source">
-            <div class="custom-select-trigger">
-              <span>Select an option</span>
-              <svg class="custom-select-arrow" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l6 6 6-6" stroke="#fff" stroke-width="2" fill="none"/></svg>
-            </div>
-            <div class="custom-select-dropdown">
-              <div class="custom-select-option" data-value="Referral">Referral</div>
-              <div class="custom-select-option" data-value="Instagram / Facebook">Instagram / Facebook</div>
-              <div class="custom-select-option" data-value="YouTube">YouTube</div>
-              <div class="custom-select-option" data-value="LinkedIn">LinkedIn</div>
-              <div class="custom-select-option" data-value="Search / Google">Search / Google</div>
-              <div class="custom-select-option" data-value="Media & News">Media &amp; News</div>
-              <div class="custom-select-option" data-value="Other">Other</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-field">
-          <label for="message">Tell us about your project</label>
-          <textarea id="message" name="message" placeholder="What's on your mind?" required></textarea>
-        </div>
-
-        <button type="submit" class="submit-btn">SUBMIT</button>
-      </form>
-    </div><!-- end hook-right -->
-  </div><!-- end hook-form-inner -->
+<div class="hook-form-inner">
+<div class="hook-left">
+<h1 class="hook-h1">GOT A BIG IDEA?<br/>LET'S MAKE IT REAL.</h1>
+<p class="hook-subline">We're listening,<br/>reach out anytime!</p>
+</div>
+<div class="hook-right" id="contact-form">
+<div class="form-section-title-row">
+<span class="form-section-title">Your Details</span>
+<span>↓</span>
+</div>
+<hr class="form-divider"/>
+<form action="https://api.web3forms.com/submit" method="POST">
+<input name="access_key" type="hidden" value="01b223d5-3f1f-40da-8874-77f7fe743847"/>
+<input autocomplete="off" name="botcheck" style="display:none;" tabindex="-1" type="text"/>
+<div class="form-field">
+<label for="name">Name</label>
+<input id="name" name="name" placeholder="Enter your name" required="" type="text"/>
+</div>
+<div class="form-field">
+<label for="phone">Phone Number</label>
+<div class="phone-field">
+<span class="phone-prefix">🇮🇳 +91</span>
+<input id="phone" name="phone" placeholder="Enter your phone number" required="" type="tel"/>
+</div>
+</div>
+<div class="form-field">
+<label for="email">Email</label>
+<input id="email" name="email" placeholder="Enter your email" required="" type="email"/>
+</div>
+<div class="form-field">
+<label>Are you an Agency or a Brand?</label>
+<select id="type" name="type" required=""></select>
+<div class="custom-select" data-target="type">
+<div class="custom-select-trigger">
+<span>Select option</span>
+<svg class="custom-select-arrow" fill="none" viewbox="0 0 14 9" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l6 6 6-6" fill="none" stroke="#fff" stroke-width="2"></path></svg>
+</div>
+<div class="custom-select-dropdown">
+<div class="custom-select-option" data-value="agency">Agency</div>
+<div class="custom-select-option" data-value="brand">Brand</div>
+</div>
+</div>
+</div>
+<div class="form-field">
+<label>Which services are you interested in?</label>
+<select id="services" name="services" required=""></select>
+<div class="custom-select" data-target="services">
+<div class="custom-select-trigger">
+<span>Select a service</span>
+<svg class="custom-select-arrow" fill="none" viewbox="0 0 14 9" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l6 6 6-6" fill="none" stroke="#fff" stroke-width="2"></path></svg>
+</div>
+<div class="custom-select-dropdown">
+<div class="custom-select-option" data-value="Ad Film">Ad Film</div>
+<div class="custom-select-option" data-value="Video Production">Video Production</div>
+<div class="custom-select-option" data-value="Music Video">Music Video</div>
+<div class="custom-select-option" data-value="Celebrity Endorsement">Celebrity Endorsement</div>
+<div class="custom-select-option" data-value="Influencer Management">Influencer Management</div>
+<div class="custom-select-option" data-value="Digital Marketing">Digital Marketing</div>
+<div class="custom-select-option" data-value="Brand Campaign">Brand Campaign</div>
+<div class="custom-select-option" data-value="Casting">Casting</div>
+<div class="custom-select-option" data-value="Live Events">Live Events</div>
+<div class="custom-select-option" data-value="OTT / Web Series">OTT / Web Series</div>
+<div class="custom-select-option" data-value="Brand Partnerships">Brand Partnerships</div>
+<div class="custom-select-option" data-value="Event Management">Event Management</div>
+</div>
+</div>
+</div>
+<div class="form-field">
+<label>How did you hear about us?</label>
+<select id="source" name="source" required=""></select>
+<div class="custom-select" data-target="source">
+<div class="custom-select-trigger">
+<span>Select an option</span>
+<svg class="custom-select-arrow" fill="none" viewbox="0 0 14 9" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l6 6 6-6" fill="none" stroke="#fff" stroke-width="2"></path></svg>
+</div>
+<div class="custom-select-dropdown">
+<div class="custom-select-option" data-value="Referral">Referral</div>
+<div class="custom-select-option" data-value="Instagram / Facebook">Instagram / Facebook</div>
+<div class="custom-select-option" data-value="YouTube">YouTube</div>
+<div class="custom-select-option" data-value="LinkedIn">LinkedIn</div>
+<div class="custom-select-option" data-value="Search / Google">Search / Google</div>
+<div class="custom-select-option" data-value="Media &amp; News">Media &amp; News</div>
+<div class="custom-select-option" data-value="Other">Other</div>
+</div>
+</div>
+</div>
+<div class="form-field">
+<label for="message">Tell us about your project</label>
+<textarea id="message" name="message" placeholder="What's on your mind?" required=""></textarea>
+</div>
+<button class="submit-btn" type="submit">SUBMIT</button>
+</form>
+</div><!-- end hook-right -->
+</div><!-- end hook-form-inner -->
 </section>
-
 <!-- ══════════════════════════════════════
      SECTION 1.5 — EMAIL ROW
 ══════════════════════════════════════ -->
 <section id="email-row">
-  <div class="email-row-outer">
-  <h2 class="email-row-heading">Drop us an email</h2>
-  <div class="email-row-inner">
-    <div class="email-col">
-      <div class="email-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7L22 6"/></svg>
-      </div>
-      <div class="email-col-text">
-        <h3 class="email-heading">Business Inquiries</h3>
-        <a class="email-link" href="mailto:info@tobcentertainment.com">info@tobcentertainment.com</a>
-      </div>
-    </div>
-    <div class="email-col">
-      <div class="email-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-      </div>
-      <div class="email-col-text">
-        <h3 class="email-heading">Music</h3>
-        <a class="email-link" href="mailto:music@tobcentertainment.com">music@tobcentertainment.com</a>
-      </div>
-    </div>
-    <div class="email-col">
-      <div class="email-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M2 7l3-4h4l-3 4M9 7l3-4h4l-3 4M16 7l3-4h3l-3 4"/></svg>
-      </div>
-      <div class="email-col-text">
-        <h3 class="email-heading">Casting</h3>
-        <a class="email-link" href="mailto:casting@tobcentertainment.com">casting@tobcentertainment.com</a>
-      </div>
-    </div>
-  </div>
-  </div>
+<div class="email-row-outer">
+<h2 class="email-row-heading">Drop us an email</h2>
+<div class="email-row-inner">
+<div class="email-col">
+<div class="email-icon">
+<svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="16" rx="2" width="20" x="2" y="4"></rect><path d="M2 6l10 7L22 6"></path></svg>
+</div>
+<div class="email-col-text">
+<h3 class="email-heading">Business Inquiries</h3>
+<a class="email-link" href="mailto:info@tobcentertainment.com">info@tobcentertainment.com</a>
+</div>
+</div>
+<div class="email-col">
+<div class="email-icon">
+<svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+</div>
+<div class="email-col-text">
+<h3 class="email-heading">Music</h3>
+<a class="email-link" href="mailto:music@tobcentertainment.com">music@tobcentertainment.com</a>
+</div>
+</div>
+<div class="email-col">
+<div class="email-icon">
+<svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="20" x="2" y="7"></rect><path d="M2 7l3-4h4l-3 4M9 7l3-4h4l-3 4M16 7l3-4h3l-3 4"></path></svg>
+</div>
+<div class="email-col-text">
+<h3 class="email-heading">Casting</h3>
+<a class="email-link" href="mailto:casting@tobcentertainment.com">casting@tobcentertainment.com</a>
+</div>
+</div>
+</div>
+</div>
 </section>
-
 <!-- ══════════════════════════════════════
      SECTION 3 — CTA + FOOTER REVEAL WRAPPER
 ══════════════════════════════════════ -->
@@ -614,329 +197,68 @@
 <h2 class="cta-h2">
     WORK WITH TOBC.<br/>
     CREATE THE MAGIC.<br/>
-    <span class="cta-h2-line3">PRESS THIS BUTTON.
-      <a href="#hook" class="cta-go-btn">GO →</a>
-    </span>
-  </h2>
+<span class="cta-h2-line3">PRESS THIS BUTTON.
+      <a class="cta-go-btn" href="#hook">GO →</a>
+</span>
+</h2>
 </section>
-
 <footer id="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div>
-        <div class="footer-logo-row">
-          <img src="assets/images/White logo.png" alt="TOBC Entertainment" />
-        </div>
-        <p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
-        <div class="footer-contact">
-          <a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span><span class="footer-link-text"> info@tobcentertainment.com</span></a>
-          <a href="tel:+919136668695"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 91366 68695</span></a>
-        </div>
-      </div>
-      <div class="footer-links-right">
-        <div class="footer-links-grid">
-          <a href="/">Home</a>
+<div class="footer-inner">
+<div class="footer-top">
+<div>
+<div class="footer-logo-row">
+<img alt="TOBC Entertainment" height="1500" loading="lazy" src="assets/images/White logo.webp" width="2100"/>
+</div>
+<p class="footer-tagline">India's Most Trusted Entertainment Production Partner</p>
+<div class="footer-contact">
+<a href="mailto:info@tobcentertainment.com"><span class="contact-icon">✉</span><span class="footer-link-text"> info@tobcentertainment.com</span></a>
+<a href="tel:+919136668695"><span class="contact-icon">📞</span><span class="footer-link-text"> +91 91366 68695</span></a>
+</div>
+</div>
+<div class="footer-links-right">
+<div class="footer-links-grid">
+<a href="/">Home</a>
 <a href="about">About</a>
-          <a href="our-work">Our Work</a>
-          <a href="blog">Blog</a>
-          <a href="privacy-policy">Privacy Policy</a>
-        </div>
-        <div style="margin-top: -20px;">
-          <p class="footer-address-title">Come say Hi!</p>
-          <p class="footer-address-text">
+<a href="our-work">Our Work</a>
+<a href="blog">Blog</a>
+<a href="privacy-policy">Privacy Policy</a>
+</div>
+<div style="margin-top: -20px;">
+<p class="footer-address-title">Come say Hi!</p>
+<p class="footer-address-text">
             9th Floor, SMARTWORKS,<br/>
             Wing A, Paradigm, Mindspace,<br/>
             Malad (W), Mumbai,<br/>
             Maharashtra 400064, India
           </p>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="social-icons">
-        <a href="https://www.instagram.com/tobcentertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
-        <a href="https://www.youtube.com/@tobcmusic" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-        </a>
-        <a href="https://www.twitter.com/CreativesOfTOBC" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter / X">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="https://www.facebook.com/TOBCEntertainment" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-      </div>
-      <p class="footer-copy">Copyright © 2026 TOBC Entertainment (OPC) Pvt. Ltd. All rights reserved.</p>
-      <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top ↑</button>
-    </div>
-  </div>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="social-icons">
+<a aria-label="Instagram" class="social-icon" href="https://www.instagram.com/tobcentertainment" rel="noopener" target="_blank">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a aria-label="YouTube" class="social-icon" href="https://www.youtube.com/@tobcmusic" rel="noopener" target="_blank">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"></path></svg>
+</a>
+<a aria-label="Twitter / X" class="social-icon" href="https://www.twitter.com/CreativesOfTOBC" rel="noopener" target="_blank">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<a aria-label="Facebook" class="social-icon" href="https://www.facebook.com/TOBCEntertainment" rel="noopener" target="_blank">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+</a>
+</div>
+<p class="footer-copy">Copyright © 2026 TOBC Entertainment (OPC) Pvt. Ltd. All rights reserved.</p>
+<button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top ↑</button>
+</div>
+</div>
 </footer>
 </div><!-- end cta-footer-wrapper -->
-
-<script>
-  const nav = document.getElementById('nav');
-  let prevScrollPos = window.pageYOffset;
-  window.addEventListener('scroll', () => {
-    const currentScrollPos = window.pageYOffset;
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-    if (currentScrollPos > 100) {
-      if (prevScrollPos < currentScrollPos) {
-        nav.style.transform = 'translateY(-100%)';
-      } else {
-        nav.style.transform = 'translateY(0)';
-      }
-    }
-    prevScrollPos = currentScrollPos;
-  }, { passive: true });
-
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-  });
-  document.querySelectorAll('.mob-link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    });
-  });
-
-  document.querySelector('#contact-form form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const form = e.target;
-    const submitBtn = form.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-
-    submitBtn.textContent = 'Submitting...';
-    submitBtn.disabled = true;
-
-    try {
-      const formData = new FormData(form);
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (response.ok) {
-        submitBtn.textContent = 'Message Sent';
-        submitBtn.disabled = true;
-
-        setTimeout(() => {
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-          form.reset();
-        }, 3000);
-      } else {
-        throw new Error('Submission failed');
-      }
-    } catch (error) {
-      submitBtn.textContent = '✗ Error. Try Again';
-      submitBtn.style.background = '#e74c3c';
-      submitBtn.style.color = '#fff';
-
-      setTimeout(() => {
-        submitBtn.textContent = originalText;
-        submitBtn.style.background = '';
-        submitBtn.style.color = '';
-        submitBtn.disabled = false;
-      }, 3000);
-    }
-  });
-
-
-  // Custom select dropdowns — portal dropdown to body to avoid GSAP stacking context issues
-  let activeDropdown = null;
-
-  function closeAllDropdowns() {
-    document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
-    if (activeDropdown) {
-      activeDropdown.style.display = 'none';
-    }
-    activeDropdown = null;
-  }
-
-  function positionDropdown(dropdown, trigger) {
-    const rect = trigger.getBoundingClientRect();
-    dropdown.style.position = 'fixed';
-    dropdown.style.top = (rect.bottom + 4) + 'px';
-    dropdown.style.left = rect.left + 'px';
-    dropdown.style.width = rect.width + 'px';
-    dropdown.style.right = 'auto';
-    dropdown.style.display = 'block';
-  }
-
-  document.querySelectorAll('.custom-select').forEach(sel => {
-    const trigger = sel.querySelector('.custom-select-trigger');
-    const dropdown = sel.querySelector('.custom-select-dropdown');
-    const label = trigger.querySelector('span');
-    const targetId = sel.dataset.target;
-    const hiddenSelect = document.getElementById(targetId);
-
-    // Move dropdown to body on first use
-    document.body.appendChild(dropdown);
-    dropdown.style.display = 'none';
-
-    trigger.addEventListener('click', e => {
-      e.stopPropagation();
-      if (sel.classList.contains('open')) {
-        sel.classList.remove('open');
-        closeAllDropdowns();
-      } else {
-        closeAllDropdowns();
-        sel.classList.add('open');
-        positionDropdown(dropdown, trigger);
-        activeDropdown = dropdown;
-      }
-    });
-
-    dropdown.querySelectorAll('.custom-select-option').forEach(opt => {
-      opt.addEventListener('click', e => {
-        e.stopPropagation();
-        const val = opt.dataset.value;
-        const text = opt.textContent;
-        label.textContent = text;
-        trigger.classList.add('has-value');
-        dropdown.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
-        opt.classList.add('selected');
-        sel.classList.remove('open');
-        closeAllDropdowns();
-        hiddenSelect.innerHTML = `<option value="${val}" selected>${text}</option>`;
-      });
-    });
-  });
-
-  window.addEventListener('scroll', () => {
-    if (activeDropdown) {
-      const openSel = document.querySelector('.custom-select.open');
-      if (openSel) positionDropdown(activeDropdown, openSel.querySelector('.custom-select-trigger'));
-    }
-  }, { passive: true });
-
-  document.addEventListener('click', closeAllDropdowns);
-</script>
-
+<script>const nav=document.getElementById("nav");let prevScrollPos=window.pageYOffset;window.addEventListener("scroll",()=>{const e=window.pageYOffset;nav.classList.toggle("scrolled",window.scrollY>40),e>100&&(nav.style.transform=prevScrollPos<e?"translateY(-100%)":"translateY(0)"),prevScrollPos=e},{passive:!0});const hamburger=document.getElementById("hamburger"),mobileMenu=document.getElementById("mobile-menu");hamburger.addEventListener("click",()=>{hamburger.classList.toggle("open"),mobileMenu.classList.toggle("open")}),document.querySelectorAll(".mob-link").forEach(e=>{e.addEventListener("click",()=>{hamburger.classList.remove("open"),mobileMenu.classList.remove("open")})}),document.querySelector("#contact-form form").addEventListener("submit",async e=>{e.preventDefault();const t=e.target,o=t.querySelector(".submit-btn"),s=o.textContent;o.textContent="Submitting...",o.disabled=!0;try{const e=new FormData(t);if(!(await fetch("https://api.web3forms.com/submit",{method:"POST",body:e})).ok)throw new Error("Submission failed");o.textContent="Message Sent",o.disabled=!0,setTimeout(()=>{o.textContent=s,o.disabled=!1,t.reset()},3e3)}catch(e){o.textContent="✗ Error. Try Again",o.style.background="#e74c3c",o.style.color="#fff",setTimeout(()=>{o.textContent=s,o.style.background="",o.style.color="",o.disabled=!1},3e3)}});let activeDropdown=null;function closeAllDropdowns(){document.querySelectorAll(".custom-select.open").forEach(e=>e.classList.remove("open")),activeDropdown&&(activeDropdown.style.display="none"),activeDropdown=null}function positionDropdown(e,t){const o=t.getBoundingClientRect();e.style.position="fixed",e.style.top=o.bottom+4+"px",e.style.left=o.left+"px",e.style.width=o.width+"px",e.style.right="auto",e.style.display="block"}document.querySelectorAll(".custom-select").forEach(e=>{const t=e.querySelector(".custom-select-trigger"),o=e.querySelector(".custom-select-dropdown"),s=t.querySelector("span"),n=e.dataset.target,l=document.getElementById(n);document.body.appendChild(o),o.style.display="none",t.addEventListener("click",s=>{s.stopPropagation(),e.classList.contains("open")?(e.classList.remove("open"),closeAllDropdowns()):(closeAllDropdowns(),e.classList.add("open"),positionDropdown(o,t),activeDropdown=o)}),o.querySelectorAll(".custom-select-option").forEach(n=>{n.addEventListener("click",c=>{c.stopPropagation();const r=n.dataset.value,i=n.textContent;s.textContent=i,t.classList.add("has-value"),o.querySelectorAll(".custom-select-option").forEach(e=>e.classList.remove("selected")),n.classList.add("selected"),e.classList.remove("open"),closeAllDropdowns(),l.innerHTML=`<option value="${r}" selected>${i}</option>`})})}),window.addEventListener("scroll",()=>{if(activeDropdown){const e=document.querySelector(".custom-select.open");e&&positionDropdown(activeDropdown,e.querySelector(".custom-select-trigger"))}},{passive:!0}),document.addEventListener("click",closeAllDropdowns);</script>
 <!-- GSAP + ScrollTrigger -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script>
-  gsap.registerPlugin(ScrollTrigger);
-
-  const spring = { ease: 'power2.out', duration: 1 };
-  const springFast = { ease: 'power3.out', duration: 0.8 };
-
-  // ── 1. HOOK: heading + subline slide up on load ──
-  gsap.from('.hook-h1', {
-    y: 60, opacity: 0, duration: 1.1, ease: 'power3.out', delay: 0.1
-  });
-  gsap.from('.hook-subline', {
-    y: 40, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.35
-  });
-
-  // ── 2. FORM: title + divider slide in ──
-  gsap.from('.form-section-title-row', {
-    x: 40, opacity: 0, duration: 0.9, ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '#contact-form',
-      start: 'top 80%',
-      once: true
-    }
-  });
-
-  // ── 3. FORM FIELDS: stagger reveal ──
-  gsap.from('.form-field, .pill-field', {
-    y: 30, opacity: 0, duration: 0.7, ease: 'power2.out',
-    stagger: 0.08,
-    scrollTrigger: {
-      trigger: '#contact-form',
-      start: 'top 75%',
-      once: true
-    }
-  });
-
-  // ── 4. SUBMIT BUTTON: scale in ──
-  gsap.from('.submit-btn', {
-    scale: 0.85, opacity: 0, duration: 0.7, ease: 'back.out(1.7)',
-    scrollTrigger: {
-      trigger: '.submit-btn',
-      start: 'top 90%',
-      once: true
-    }
-  });
-
-  // ── 5. EMAIL ROW: heading parallax + items stagger ──
-  gsap.from('.email-row-heading', {
-    y: 50, opacity: 0, duration: 1, ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '#email-row',
-      start: 'top 80%',
-      once: true
-    }
-  });
-
-  gsap.to('.email-row-heading', {
-    y: -30,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#email-row',
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 1.5
-    }
-  });
-
-  gsap.from('.email-col', {
-    y: 40, opacity: 0, duration: 0.7, ease: 'power2.out',
-    stagger: 0.15,
-    scrollTrigger: {
-      trigger: '#email-row',
-      start: 'top 75%',
-      once: true
-    }
-  });
-
-  // ── 6. CTA SECTION: parallax + text reveal ──
-  gsap.from('.cta-h2', {
-    y: 70, opacity: 0, duration: 1.1, ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#cta',
-      start: 'top 80%',
-      once: true
-    }
-  });
-
-  gsap.to('.cta-h2', {
-    y: -40,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#cta',
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 2
-    }
-  });
-
-  gsap.from('.cta-go-btn', {
-    scale: 0.7, opacity: 0, duration: 0.9, ease: 'back.out(1.7)',
-    scrollTrigger: {
-      trigger: '#cta',
-      start: 'top 75%',
-      once: true
-    }
-  });
-
-  // ── 7. FOOTER: stagger reveal ──
-  gsap.from('.footer-top, .footer-bottom', {
-    y: 40, opacity: 0, duration: 0.9, ease: 'power2.out',
-    stagger: 0.2,
-    scrollTrigger: {
-      trigger: '#footer',
-      start: 'top 85%',
-      once: true
-    }
-  });
-</script>
+<script>gsap.registerPlugin(ScrollTrigger);const spring={ease:"power2.out",duration:1},springFast={ease:"power3.out",duration:.8};gsap.from(".hook-h1",{y:60,opacity:0,duration:1.1,ease:"power3.out",delay:.1}),gsap.from(".hook-subline",{y:40,opacity:0,duration:1,ease:"power3.out",delay:.35}),gsap.from(".form-section-title-row",{x:40,opacity:0,duration:.9,ease:"power2.out",scrollTrigger:{trigger:"#contact-form",start:"top 80%",once:!0}}),gsap.from(".form-field, .pill-field",{y:30,opacity:0,duration:.7,ease:"power2.out",stagger:.08,scrollTrigger:{trigger:"#contact-form",start:"top 75%",once:!0}}),gsap.from(".submit-btn",{scale:.85,opacity:0,duration:.7,ease:"back.out(1.7)",scrollTrigger:{trigger:".submit-btn",start:"top 90%",once:!0}}),gsap.from(".email-row-heading",{y:50,opacity:0,duration:1,ease:"power2.out",scrollTrigger:{trigger:"#email-row",start:"top 80%",once:!0}}),gsap.to(".email-row-heading",{y:-30,ease:"none",scrollTrigger:{trigger:"#email-row",start:"top bottom",end:"bottom top",scrub:1.5}}),gsap.from(".email-col",{y:40,opacity:0,duration:.7,ease:"power2.out",stagger:.15,scrollTrigger:{trigger:"#email-row",start:"top 75%",once:!0}}),gsap.from(".cta-h2",{y:70,opacity:0,duration:1.1,ease:"power3.out",scrollTrigger:{trigger:"#cta",start:"top 80%",once:!0}}),gsap.to(".cta-h2",{y:-40,ease:"none",scrollTrigger:{trigger:"#cta",start:"top bottom",end:"bottom top",scrub:2}}),gsap.from(".cta-go-btn",{scale:.7,opacity:0,duration:.9,ease:"back.out(1.7)",scrollTrigger:{trigger:"#cta",start:"top 75%",once:!0}}),gsap.from(".footer-top, .footer-bottom",{y:40,opacity:0,duration:.9,ease:"power2.out",stagger:.2,scrollTrigger:{trigger:"#footer",start:"top 85%",once:!0}});</script>
 </body>
 </html>
