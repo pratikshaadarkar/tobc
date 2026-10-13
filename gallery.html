@@ -66,6 +66,23 @@
     }
     .nav-cta:hover { background: var(--red); border-color: var(--red); }
 
+    .nav-cta-mobile {
+      display: none;
+      align-items: center;
+      padding: 8px 16px;
+      border: 1.5px solid #fff;
+      border-radius: 999px;
+      background: transparent;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-right: 12px;
+    }
+    .nav-cta-mobile:hover { background: var(--red); border-color: var(--red); }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -290,6 +307,7 @@
       .nav-logo img { height: 60px !important; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
+      .nav-cta-mobile { display: inline-flex; }
 
       #gallery-hero { padding: 110px 20px 40px; }
       #gallery-grid { padding: 24px 20px 70px; }
@@ -328,6 +346,7 @@
     <li><a href="blog">Blog</a></li>
   </ul>
   <button class="nav-cta" onclick="window.location.href='contact'">Contact Us</button>
+  <a href="contact" class="nav-cta-mobile">Contact Us</a>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -366,48 +385,117 @@
     <!-- Left column — scrolls normally -->
     <div class="sg-scroll">
       <figure>
-        <img src="assets/images/650098014_17954566926086762_9109661174031083066_n.jpg" alt="TOBC Gallery 1" loading="lazy" />
+        <img src="assets/images/650098014_17954566926086762_9109661174031083066_n.jpg" alt="TOBC Gallery" loading="lazy" />
       </figure>
       <figure>
-        <img src="assets/images/653370038_17957624798929259_8156024378967285846_n.jpg" alt="TOBC Gallery 2" loading="lazy" />
+        <img src="assets/images/653370038_17957624798929259_8156024378967285846_n.jpg" alt="TOBC Gallery" loading="lazy" />
       </figure>
       <figure>
-        <img src="assets/images/653711018_18017867453818333_8289566552221711501_n.jpg" alt="TOBC Gallery 3" loading="lazy" />
+        <img src="assets/images/653711018_18017867453818333_8289566552221711501_n.jpg" alt="TOBC Gallery" loading="lazy" />
       </figure>
       <figure>
-        <img src="assets/images/655218884_18111368134806557_2524346955246326308_n.jpg" alt="TOBC Gallery 4" loading="lazy" />
+        <img src="assets/images/655218884_18111368134806557_2524346955246326308_n.jpg" alt="TOBC Gallery" loading="lazy" />
       </figure>
       <figure>
-        <img src="assets/images/655476600_18008303786698285_3652669362512887409_n.jpg" alt="TOBC Gallery 5" loading="lazy" />
+        <img src="assets/images/655476600_18008303786698285_3652669362512887409_n.jpg" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/1Z3A0689.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/1Z3A0755.JPG" alt="TOBC Gallery" loading="lazy" style="object-position: center 55%;" />
+      </figure>
+      <figure>
+        <img src="assets/images/1Z3A7382.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/1Z3A7448.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/035A9223.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC00360.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC00462.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC05724.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC07014.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC09125.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC09455.JPG" alt="TOBC Gallery" loading="lazy" />
       </figure>
     </div>
 
     <!-- Middle column — STICKY (stays fixed while sides scroll) -->
     <div class="sg-sticky">
-<figure>
-        <img src="assets/images/656246639_18061425710380218_5526042559910453152_n.jpg" alt="TOBC Gallery 7" loading="lazy" />
+      <figure>
+        <img src="assets/images/656246639_18061425710380218_5526042559910453152_n.jpg" alt="TOBC Gallery" loading="lazy" />
       </figure>
       <figure>
-        <img src="assets/images/656538411_18109295866828089_2280546396827278531_n.jpg" alt="TOBC Gallery 8" loading="lazy" />
+        <img src="assets/images/656538411_18109295866828089_2280546396827278531_n.jpg" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC00488.JPG" alt="TOBC Gallery" loading="lazy" />
       </figure>
     </div>
 
     <!-- Right column — scrolls normally -->
     <div class="sg-scroll">
       <figure>
-        <img src="assets/images/658745096_18111231838694195_8683736312536036382_n.jpg" alt="TOBC Gallery 9" loading="lazy" />
+        <img src="assets/images/658745096_18111231838694195_8683736312536036382_n.jpg" alt="TOBC Gallery" loading="lazy" />
       </figure>
       <figure>
-        <img src="assets/images/660269267_18208602877332303_2132908328391492676_n.jpg" alt="TOBC Gallery 10" loading="lazy" />
+        <img src="assets/images/660269267_18208602877332303_2132908328391492676_n.jpg" alt="TOBC Gallery" loading="lazy" />
       </figure>
       <figure>
-        <img src="assets/images/662014653_18387060007082894_621835770379554922_n.jpg" alt="TOBC Gallery 11" loading="lazy" />
+        <img src="assets/images/662014653_18387060007082894_621835770379554922_n.jpg" alt="TOBC Gallery" loading="lazy" />
       </figure>
       <figure>
-        <img src="assets/images/669738397_18229185112308790_9196874408964106903_n.jpg" alt="TOBC Gallery 12" loading="lazy" />
+        <img src="assets/images/669738397_18229185112308790_9196874408964106903_n.jpg" alt="TOBC Gallery" loading="lazy" />
       </figure>
       <figure>
-        <img src="assets/images/670354706_18575918983015818_3373559995714070994_n.jpg" alt="TOBC Gallery 13" loading="lazy" />
+        <img src="assets/images/670354706_18575918983015818_3373559995714070994_n.jpg" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC00492.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC00608.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC00698.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC00840.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC01460.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC02006.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC03235.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC03237.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC03625.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC04110.JPG" alt="TOBC Gallery" loading="lazy" />
+      </figure>
+      <figure>
+        <img src="assets/images/DSC04442.JPG" alt="TOBC Gallery" loading="lazy" />
       </figure>
     </div>
 
