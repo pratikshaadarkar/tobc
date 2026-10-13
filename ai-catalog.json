@@ -1,0 +1,86 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "TOBC Entertainment",
+  "url": "https://www.tobcentertainment.com",
+  "logo": "https://www.tobcentertainment.com/assets/images/White logo.png",
+  "description": "India's most trusted full-service entertainment production partner. Specialising in ad films, music videos, celebrity endorsements, brand campaigns, casting, and talent management.",
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Mumbai, India"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "9th Floor, SMARTWORKS, Wing A, Paradigm, Mindspace, Malad (W)",
+    "addressLocality": "Mumbai",
+    "addressRegion": "Maharashtra",
+    "postalCode": "400064",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "Business Inquiries",
+      "email": "info@tobcentertainment.com",
+      "telephone": "+91-91366-68695"
+    },
+    {
+      "@type": "ContactPoint",
+      "contactType": "Music",
+      "email": "music@tobcentertainment.com"
+    },
+    {
+      "@type": "ContactPoint",
+      "contactType": "Casting",
+      "email": "casting@tobcentertainment.com"
+    }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/tobcentertainment",
+    "https://www.youtube.com/@tobcmusic",
+    "https://www.facebook.com/TOBCEntertainment",
+    "https://www.twitter.com/CreativesOfTOBC"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Production Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Ad Film Production"
+      },
+      {
+        "@type": "Offer",
+        "name": "Music Video Production"
+      },
+      {
+        "@type": "Offer",
+        "name": "Celebrity Endorsement"
+      },
+      {
+        "@type": "Offer",
+        "name": "Influencer Management"
+      },
+      {
+        "@type": "Offer",
+        "name": "Brand Campaigns"
+      },
+      {
+        "@type": "Offer",
+        "name": "Casting & Talent Management"
+      },
+      {
+        "@type": "Offer",
+        "name": "Live Events"
+      },
+      {
+        "@type": "Offer",
+        "name": "OTT / Web Series"
+      },
+      {
+        "@type": "Offer",
+        "name": "Digital Marketing"
+      }
+    ]
+  }
+}
