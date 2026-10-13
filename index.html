@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
+    html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; max-width: 100%; }
 
     /* ─── DESIGN TOKENS ─── */
     :root {
@@ -758,6 +758,8 @@
         padding: 0 16px 24px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        width: 100%;
+        max-width: 100vw;
       }
       .portrait-strip::-webkit-scrollbar { display: none; }
 
@@ -802,6 +804,8 @@
         padding: 0 16px 16px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        width: 100%;
+        max-width: 100vw;
       }
       .portrait-strip::-webkit-scrollbar { display: none; }
       .portrait-card {
