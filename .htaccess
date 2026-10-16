@@ -14,6 +14,22 @@
   # Redirect .html URLs to clean URLs
   RewriteCond %{REQUEST_URI} ^(.*?)\.html$ [NC]
   RewriteRule ^(.+?)\.html$ /$1 [L,R=301,NE]
+
+  # Redirect missing/old URLs to homepage
+  RewriteRule ^work/advertisements/campaign-2/?$ / [L,R=301]
+  RewriteRule ^work/advertisements/campaign-3/?$ / [L,R=301]
+  RewriteRule ^work/advertisements/campaign-4/?$ / [L,R=301]
+  RewriteRule ^work/advertisements/campaign-7/?$ / [L,R=301]
+  RewriteRule ^work/advertisements/campaign-10/?$ / [L,R=301]
+  RewriteRule ^work/advertisements/campaign-11/?$ / [L,R=301]
+  RewriteRule ^work/advertisements/campaign-18/?$ / [L,R=301]
+  RewriteRule ^case-studies/awareness-campaign/?$ / [L,R=301]
+  RewriteRule ^case-studies/product-launch/?$ / [L,R=301]
+  RewriteRule ^case-studies/brand-relaunch/?$ / [L,R=301]
+  RewriteRule ^case-studies/?$ / [L,R=301]
+  RewriteRule ^work/advertisements/?$ / [L,R=301]
+  RewriteRule ^blog/1/?$ /blog [L,R=301]
+  RewriteRule ^service/?$ / [L,R=301]
 </IfModule>
 
 # Custom 404 page
